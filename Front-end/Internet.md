@@ -2,20 +2,27 @@
 sticker: lucide//spline
 ---
 # How does the Internet work?
-Internet is a network of networks. Network is to enable the communication among computers. The key is to **identify devices, connect devices and transmit data in between following certain protocols**.
+## What is Internet? And Network? Web?
+
+- Network is a general concept, imagine it as a wire to connect two dots.
+- Internet is a network of networks, a specific type of network, and a technical infrastructure connecting billions of computers.
+- Web is a service built upon the internet infrastructure. It's one of many services available on the internet, alongside others like email (using SMTP for sending messages) and IRC (Internet Relay Chat for live messaging)
+
+The essence of how the internet works involves uniquely identifying devices (via IP addresses), connecting them through various types of networks (like LANs, WANs), and transmitting data between them following specific protocols (TCP/IP).
 
 ## identify devices by IP address
 
-IP address is to identify devices on a network, and ports identify multiple services or applications to run on those devices and be accessed through the same IP. So in a sense, we can say IP is the main address while ports refer to its sub-addresses.
+IP address is to identify devices on a network.
+Compared with MAC address(hardware-specific), IP makes it easier to group subnets so that the source and target IP addresses remain unchanged during data transmission, making it faster.
+- **ping** and **telnet** to test internet connection
+	- ping: The term "ping" stands for Packet Internet Groper. It is a fundamental TCP/IP command used to test the reachability of a host on an Internet Protocol (IP) network. Ping operates by sending an ICMP (Internet Control Message Protocol) Echo Request to a target host and waits for an ICMP Echo Reply. This tool helps in troubleshooting connectivity, reachability, and name resolution issues.
+	- telnet: a network protocol used to provide a command-line interface for communication with a remote device or server. It can be used to test connectivity to specific services running on a host by connecting to the respective port.
+
+Under the same IP, there can be multiple ports to identify multiple services or applications running in this device. In a sense, IP is the main address while ports refer to its sub-addresses.
 *Imagine a country's addresses and the addresses of its cities in a map.*
 
-Compared with MAC address, IP makes it easier to group subnets and the source and target IP addresses remain unchanged during data transmission, making transmission faster.
-- **ping** and **telnet** to test internet connection
-	- ping to get an IP address: (Packet Internet or Inter-Network Groper) the primary TCP/IP command to verify if an IP address exists and can accept requests in computer network administration. It is used to troubleshoot connectivity, reachability, and name resolution by sending an Internet Control Message Protocol (ICMP) Echo Request to a specified interface on the network and waiting for an echo reply packet.
-	- telnet
-
-Sockets: combination of an IP address and a port number, representing a specific endpoint for communication. 
-DNS: translate domain names (a human-readable name) into IP addresses. Phonebook of the Internet.
+IP address ➕ a port number => socket to represent a specific endpoint for communication.
+However, humans need a more readable identifier for IP addresses —— DNS: translate domain names (a human-readable name) into IP addresses. Phonebook of the Internet.
 
 ## connect devices by wire
 
@@ -23,7 +30,7 @@ Connection is established between two sockets, and the devices negotiate various
 
 ## transmit data in packets through router
 
-data is typically transmitted in segments, with each segment containing a sequence number and other metadata to ensure reliable delivery.
+Data is typically transmitted in segments for performance, reliability and scalability. Each segment contains a sequence number and other metadata to ensure reliable delivery.
 - router: a signaler at a railway station, making sure that a message sent from a given computer arrives at the right destination computer. Wrap and unwrap layers to find out next destination.
 - modem: modulate and demodulate signals to enable the transfer of data between digital devices and across networks.
 - Internet Service Provider (ISP): a company to manage special routers that are all linked together and can also access other ISPs' routers.
@@ -72,51 +79,11 @@ data is typically transmitted in segments, with each segment containing a sequen
 
 😶‍🌫️: how these technologies and protocols work together to enable communication and data exchange? 
 
-The Internet is a technical infrastructure that allows billions of computers to be connected all together, whereas the Web is a service built on top of the infrastructure. It is worth noting there are several other services built on top of the Internet, such as email and IRC.
-
-
-
-
-
-
-
-# Internet
-## How does the Internet work?
 
   
 
-Network? Internet? Web?
+
+
+
 
   
-
-- Network is a general concept, imagine it as a wire.
-
-- Internet is a specific type of network, and a technical infrastructure connecting billions of computers.
-
-- Web is a service built upon the internet infrastructure.
-
-  
-
-The key of Internet is to identify devices, connect devices and transmit data in between following certain protocols. The goal is make sure information can be transmitted perfectly from one end to the other end.
-
-  
-
-(There should be a dot and when I click, it is a line and unfolds all the knowledge points)
-
-  
-
-### Identify devices by IP address
-
-  
-
-IP address is what computers need to identify each other. But for humans, we need a more readable identifier —— DNS
-
-  
-
-### Connect devices by wire
-
-  
-
-### Transmit data in packets through router
-
-[[Untitled.canvas|Untitled]]

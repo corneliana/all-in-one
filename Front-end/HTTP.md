@@ -1,0 +1,25 @@
+比如，成语就是中国人的超链接. But now server could send any content type to client, so “Hyper Text” became misnomer. HMTP or Hypermedia might have made more sense.
+	- a TCP/IP based application layer communication protocol to standardize how hosts (clients and servers) communicate. 
+	- a stateless protocol, so each command runs independent of any other command, and the server does not keep any data (state) between two requests. In the original spec, HTTP requests each created and closed a TCP connection. In newer versions of the HTTP protocol (HTTP 1.1 and above), persistent connection allows for multiple HTTP requests to pass over a persistent TCP connection, improving resource consumption. In the context of DoS or DDoS attacks, HTTP requests in large quantities can be used to mount an attack on a target device, and are considered part of application layer attacks or layer 7 attacks.
+	- follows the “Client-Server model” with a client opening a connection request, then waiting until it receives a response. 
+	- a typical HTTP request contains
+		- HTTP version type
+		- a URL
+		- an HTTP method
+		- HTTP request headers: communicate core information, such as what browser the client is using and what data is being requested.
+		- Optional HTTP body: contains the ‘body’ of information the request is transferring
+	- a typical HTTP response contains
+		- an HTTP status code: 3-digit codes most often used to indicate whether an HTTP request has been successfully completed.
+		- HTTP response headers: convey important information such as the language and format of the data being sent in the response body.
+		- optional HTTP body: contains the requested information. In most web requests, it is HTML data that a web browser will translate into a webpage.
+		- By default, TCP port 80 is used, but other ports can also be used. HTTPS, however, uses port 443. HTTPS: An encrypted version of HTTP for privacy(none can eavesdrop the message), integrity(avoid manipulation) and identification(a digital signature attached to a message can identify the sender).
+	- History
+		- HTTP/1.0- 1996: connectionless, couldn’t have multiple requests per connection. Whenever a client will need something from the server, it will have to open a new TCP connection and after that single request has been fulfilled, connection will be closed. This large number of connections results in a serious performance hit as requiring a new TCP connection imposes a significant performance penalty because of three-way handshake followed by slow-start.
+		- HTTP/1.1 - 1997: persist connections, i.e. connections weren’t closed by default and were kept open to allow multiple sequential requests. Clients usually send this header in the last request to safely close the connection. But when is the last and when to start next? => Content-Length header: present which clients can use to identify where the response ends and it can start waiting for the next response. Use Chunked Transfers In case of dynamic content, server may start sending the content in pieces (chunk by chunk) and add the Content-Length for each chunk when it is sent if fails to find out the Content-Length when the transmission starts. In order to notify the client about the chunked transfer, server includes the header Transfer-Encoding: chunked.
+		- SPDY - 2009: didn’t try to replace HTTP; it was a translation layer over HTTP existing at the application layer and modified the request before sending it over to the wire. It started to become a defacto standards and majority of browsers started implementing it.
+		- HTTP/2 - 2015: designed for low latency transport of content. The major building blocks are Frames and Streams: Frames are nothing but binary pieces of data. A collection of frames is called a Stream.
+		- Binary instead of Textual
+		- Multiplexing - Multiple asynchronous HTTP requests over a single connection
+		- Header compression using HPACK
+		- Server Push - Multiple responses for single request
+		- Request Prioritization: Client can send a PRIORITY frame to change the priority of a stream. Without any priority information, server processes the requests asynchronously i.e. without any order. If there is priority assigned to a stream, then based on this prioritization information, server decides how much of the resources need to be given to process which request.

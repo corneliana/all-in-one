@@ -1,2 +1,0 @@
-- **Hardware**: Servers, routers, switches, data centers, and the physical network connections including fiber optic cables, satellite links, and wireless networks.
-- **Network Topologies**: The layout patterns of network connections, such as star, mesh, and ring topologies, which influence the efficiency and resilience of data transmission.

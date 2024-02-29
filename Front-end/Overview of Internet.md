@@ -2,11 +2,12 @@
 sticker: lucide//spline
 ---
 The knowledge map of Internet:
+- [[Infrastructure and Administration]]
 - [[Protocols]]
+- [[Web Development]]
 - [[Security]]
 - [[Cloud Computing]]
 - [[Diagnostics and Troubleshooting]]
-- [[Administration]]
 The categorization reflects the layered and interconnected nature of the Internet. From the underlying protocols that enable communication to the cloud platforms that extend its capabilities, each aspect contributes to the functionality, security, and resilience of the global Internet so as to understand how the Internet operates, how it is managed, and how it can be protected and optimized.
 
 # How does the Internet work?
@@ -54,7 +55,7 @@ Data is typically transmitted in segments for performance, reliability and scala
 
 ### and it must be standardized for scalability, efficiency, reliability
 
-- [Hypertext Transfer Protocol (HTTP)](HTTP.md): Esperanto that everyone can understand so as to enable seamless communication, the foundation of any data exchange on the Web.
+- HTTP: Esperanto that everyone can understand so as to enable seamless communication, the foundation of any data exchange on the Web.
 - FTP (File Transfer Protocol)
 - SMTP (Simple Mail Transfer Protocol)
 

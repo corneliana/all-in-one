@@ -1,0 +1,5 @@
+AWS Fargate is a serverless, pay-as-you-go compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). Fargate lets you focus on building applications without managing servers.
+
+serverless means my application doesn't need to manage any servers directly (run serverless containers). In other words, Fargate provides the serverless experience by abstracting server management, but AWS manages servers and infrastructure behind the scenes to support Fargate's capabilities.
+
+"Fargate" suggests a gateway to a simpler, more streamlined method of running containerized applications, where the complexity of server management is kept far from the developer. It's well-suited for applications with variable traffic, microservices, and for companies looking to reduce operational complexities and focus on rapid development. However, applications with predictable, constant usage might find traditional cloud computing models more cost-effective.

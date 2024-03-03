@@ -1,0 +1,2 @@
+  
+YAML, which stands for YAML Ain't Markup Language (originally Yet Another Markup Language), is a human-readable data serialization standard that can be used for all programming languages. It is commonly used for configuration files and in data storage (e.g., in databases) or transmission scenarios (e.g., APIs). YAML is designed to be easy for humans to read and write and for machines to parse and generate.

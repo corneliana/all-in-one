@@ -3,8 +3,8 @@ sticker: lucide//spline
 ---
 The knowledge map of Internet:
 - [[Infrastructure and Administration]]
-- [[Protocols]]
-- [[Web Development]]
+- [[All in One/Internet/1 - Protocols and Standards/AAA Overview]]
+- [[All in One/Internet/2 - Web Development/AAA Overview]]
 - [[Security]]
 - [[Cloud Computing]]
 - [[Diagnostics and Troubleshooting]]

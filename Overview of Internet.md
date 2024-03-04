@@ -2,11 +2,11 @@
 sticker: lucide//spline
 ---
 The knowledge map of Internet:
-- [[Infrastructure and Administration]]
-- [[All in One/Internet/1 - Protocols and Standards/AAA Overview]]
-- [[All in One/Internet/2 - Web Development/AAA Overview]]
-- [[Security]]
+- [[Protocols and Standards]]
+- [[Web Development]]
 - [[Cloud Computing]]
+- [[Infrastructure and Administration]]
+- [[Security]]
 - [[Diagnostics and Troubleshooting]]
 The categorization reflects the layered and interconnected nature of the Internet. From the underlying protocols that enable communication to the cloud platforms that extend its capabilities, each aspect contributes to the functionality, security, and resilience of the global Internet so as to understand how the Internet operates, how it is managed, and how it can be protected and optimized.
 
@@ -36,6 +36,8 @@ However, humans need a more readable identifier for IP addresses —— DNS: tra
 ## connect devices by wire
 
 Connection is established between two sockets, and the devices negotiate various parameters such as the maximum segment size and window size, to determine how data will be transmitted over the connection. Yet building direct connection between two devices is neither practical nor feasible, so we use an intermediary: hub => switch => router.
+#### Why data is transmitted in segments?
+Data segmentation is a fundamental principle that underpins the design and operation of the internet, enhancing its performance, reliability, and scalability.
 
 ## transmit data in packets through router
 

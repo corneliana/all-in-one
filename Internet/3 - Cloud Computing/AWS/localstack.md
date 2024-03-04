@@ -1,0 +1,1 @@
+LocalStack is a popular open-source project that provides a fully functional local AWS cloud stack for developing and testing cloud applications offline.

@@ -143,13 +143,24 @@ try/catch statement
 
 
 ## Event handling
-- **event loop**: a loop that constantly checks if there are any tasks to be executed. If yes, execute them. If no, wait for new tasks to arrive.
-- **event bubbling**: events propagate/bubble up through the hierarchy of nested elements in the DOM.
-- event propagation: 
-	- event capturing/trickling: the first phase of event propagation. The event is captured by the outermost element and propagated to the inner elements. It is the opposite of event bubbling.
+### event loop
+a loop that constantly checks if there are any tasks to be executed. If yes, execute them. If no, wait for new tasks to arrive.
+- Callback Stack: a data structure that stores the tasks that need to be executed. LIFO (Last In, First Out) data structure
+- Callback Queue: a data structure that stores the tasks that have been completed and are ready to be executed. FIFO (First In, First Out) data structure.
+- Workflow: 
+	- Executes tasks from the Call Stack.
+	- For an async task, such as a timer, it runs in the background. JS proceeds to the next task without waiting.
+	- When the async task concludes, its callback function is added to the Callback Queue.
+	- If the Call Stack is empty and there are tasks in the Callback Queue, the Event Loop transfers the first task from the Queue to the Call Stack for execution.
+
+### **event bubbling**
+events propagate/bubble up through the hierarchy of nested elements in the DOM.
+
+### event propagation: 
+- event capturing/trickling: the first phase of event propagation. The event is captured by the outermost element and propagated to the inner elements. It is the opposite of event bubbling.
 - `event.preventDefault()`: prevent the default action of an event.
-- sub-sup model
-- create a custom event
+### sub-sup model
+### create a custom event
 	- create, listen, remove: `const event = new CustomEvent('roadmap-updated', { detail: { name: 'JavaScript' },})`, `addEventListner`, `removeEventListner`
 
 ## Debug

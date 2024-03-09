@@ -64,7 +64,6 @@ make an object immutable: `Object.freeze()`
 	- `prompt`: displays a dialog box that prompts the visitor for input.
 	- `confirm`: displays a dialog box with a specified message, along with an OK and a Cancel button.
 
-
 ##### Node.js Env objects
  Node.js is a JavaScript runtime built on Chrome's V8 JS engine. => Run JS outside the browser
 - **global**: Serves a similar purpose to the `window` object in browsers.
@@ -74,7 +73,6 @@ make an object immutable: `Object.freeze()`
 ### prototype chain
 The chain of objects linked by their prototypes. 
 When access a property or method on an object, JS first checks the object itself. If find nothing, looks up the object's prototype. This process continues until the property or method is found or the end of the chain is reached (typically the prototype of the base object, which is `null`). The prototype chain allows objects to inherit properties and methods from other objects.
-
 
 ### garbage collection
 JS automatically manages memory by freeing up space used by objects no longer needed. This algorithm is called Mark and Sweep, which is performed periodically by the JS engine.
@@ -87,11 +85,9 @@ JS automatically manages memory by freeing up space used by objects no longer ne
 - Heap: a large, mostly unstructured region of memory, store `objects`, `arrays`, and `functions`. 
 - Stack: a small, organized region of memory, store primitive values, function calls, local variables, and references to the address of items stored in Heap, and follows a "Last In, First Out" (LIFO) order. 
 
-
 ## Scope
 A scope is a set of variables, objects, and functions that you have access to. 
 There are Global Scope, Function Scope (Local Scope), and Block Scope.
-
 
 ## Operators
 - comma operator: evaluates each of its operands (from left to right) and returns the value of the last operand.
@@ -155,13 +151,14 @@ a loop that constantly checks if there are any tasks to be executed. If yes, exe
 
 ### **event bubbling**
 events propagate/bubble up through the hierarchy of nested elements in the DOM.
+- `stopPropagation`: prevent an event from bubbling up the DOM tree.
 
 ### event propagation: 
 - event capturing/trickling: the first phase of event propagation. The event is captured by the outermost element and propagated to the inner elements. It is the opposite of event bubbling.
 - `event.preventDefault()`: prevent the default action of an event.
 ### sub-sup model
 ### create a custom event
-	- create, listen, remove: `const event = new CustomEvent('roadmap-updated', { detail: { name: 'JavaScript' },})`, `addEventListner`, `removeEventListner`
+- create, listen, remove: `const event = new CustomEvent('roadmap-updated', { detail: { name: 'JavaScript' },})`, `addEventListner`, `removeEventListner`
 
 ## Debug
 - console.log
@@ -169,14 +166,10 @@ events propagate/bubble up through the hierarchy of nested elements in the DOM.
 - breakpoint
 - `debugger` statement
 - call stack and scope
+
 ## ES6
 [[ES6]], or ECMAScript 2015, represents a specific version of the ECMAScript standard that JavaScript follows.
 
 
-
-
-
-
 ## Class
 - inheritance: create a new `Class` from an existing `Class`
-- 

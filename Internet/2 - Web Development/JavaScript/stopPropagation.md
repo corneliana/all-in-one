@@ -1,1 +1,0 @@
-A method used in JavaScript to prevent an event from bubbling up the DOM (Document Object Model) tree.

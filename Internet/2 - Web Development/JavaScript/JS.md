@@ -170,6 +170,5 @@ events propagate/bubble up through the hierarchy of nested elements in the DOM.
 ## ES6
 [[ES6]], or ECMAScript 2015, represents a specific version of the ECMAScript standard that JavaScript follows.
 
-
 ## Class
 - inheritance: create a new `Class` from an existing `Class`

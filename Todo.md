@@ -8,3 +8,6 @@ Also a book reading and taking notes system, following `How to read a book` patt
 And how can I forget my todo list.
 
 Also write a fp-ts program. I don't know what to write, but let's do it.
+
+
+A tool to learning language through conversation. Haven't played the game yet. Maybe we will have some new ideas after playing the game.

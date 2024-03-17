@@ -57,11 +57,21 @@ Automatically adjusts the number of EC2 instances to match demand, like having a
 ### CodeDeploy, CodeBuild, CodePipeline
 These services automate code deployment, building, and integration process, akin to having a team of robots that continuously improve and fix your house without you lifting a finger.
 
-## ASG
 
-## Aurora
+### ELB
 
-## Elastic Cache
+### ASG
+
+### Aurora
+
+### Elastic Cache
+
+### SNS, SQS
+
+### Kinesis, Active MQ
+
+### Fargate, ECR, EKS
+
 
 ## Quiz
 

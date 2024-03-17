@@ -6,7 +6,7 @@ The platform is used in a specific region => **Availability Zones (AZ)**
 
 In a sense, the whole idea of AWS is like assembling a remote computer, along with its network, piece by piece according to the needs of users.
 
-## 1. Choose the right type of computers (the right service)
+## 1. Choose the right type of computers to compute and host
 ### EC2: Elastic Compute Cloud = Infrastructure as a Service
 An Amazon EC2 instance is like a virtual computer running in the cloud, similar to CPU and RAM of a computer. Choose its types and sizes based on computational power and memory requirements to determine the performance capabilities.
 - **Purchasing Options:** 
@@ -32,10 +32,16 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 - **AMI(Amazon Machine Image):** a customization of an EC2 instance, which is built for a specific region and can be copied across regions.
 	- Build an AMI - this will also create EBS snapshots.
 
+### Fargate
+A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
+### EKS: Elastic Kubernetes Service
+A managed container orchestration service for running Kubernetes on AWS without having to set up or maintain your own Kubernetes control plane.
 ### Lambda
 For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
 
-## 2. Setting up the hard drive (storage solutions)
+## 2. Set up the hard drive (storage solutions)
+Note: Storage is where data is kept long-term, and memory is where data is kept short-term for quick access by the computer's processor.
+
 ### EBS: Elastic Block Store
 Like a physical computer needs a hard drive to **store its operating system, applications, and data**, an EC2 instance requires a virtual hard drive. This is where EBS volumes come into play.
 EBS is a network drive, so uses the network to communicate the instance.
@@ -55,7 +61,7 @@ EBS is a network drive, so uses the network to communicate the instance.
 	- Achieve higher application availability in clustered Linux applications.
 	- Application must manage concurrent write operations.
 - **EBS encryption:** data inside the volume/in flight between the instance and volume/snapshots/volumes created from the snapshot are encrypted.
-	
+
 ### EC2 Instance Store 
 higher-performance hardware disk than EBS
 - Better I/O performance
@@ -63,21 +69,27 @@ higher-performance hardware disk than EBS
 - Good for buffer/cache/scratch data/temporary content
 - Risk of data loss if hardware fails
 - Backups and replication are your responsibility
-### S3: Simple Storage Service
-Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
 
-Note: Storage is where data is kept long-term, and memory is where data is kept short-term for quick access by the computer's processor.
+### Elastic Cache
+A special memory box for storing copies of the most frequently used items (data caching) so we can get them quickly without searching through the entire house.
 
-## 3. Organize and Access files (db and content delivery)
+## 3. Organize and Access data (db and content delivery)
 ### EFS: Elastic File System
 Managed NFS(network file system) that can be mounted on many EC2 instances in multi-AZ. Highly available, scalable, elastic, it allows multiple EC2 instances to access the file system at the same time, much like sharing files across different computers on the same network.
 - content management, web serving, data sharing, wordpress.
+
+### S3: Simple Storage Service
+Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
+
+### Aurora
+A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 ### RDS: Relational Database Service
 A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
 ### DynamoDB
 A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
 ### CloudFront
 A content delivery network that ensures website's content is delivered quickly to viewers, like having express delivery trucks ready to send your data wherever it needs to go.
+
 
 ## 4. Keep the remote computer safe (security and identity services)
 ### IAM: Identity and Access Management
@@ -86,29 +98,39 @@ A security system that ensures only the people you've given keys to can enter th
 Like setting up a security system for your home, deciding who can knock on the door (access your instances) and who can't.
 - Another layer of abstraction over IP so that don't need to think about IPs when using groups.
 - SSH
+### KMS: Key Management Service
+A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.
 
-## 5. Connecting Computer to the Internet (networking)
+## 5. Connect Computer to the Internet (networking and content delivery)
 
 ### VPC: Virtual Private Cloud
-Like setting up private Wi-Fi network for the remote computer by defining a virtual network in AWS cloud logically isolated from other virtual networks. It gives control over the network environment, including IP address range, subnets, routing tables, and network gateways.
+A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
+### ELB: Elastic Load Balancing
+The "smart mail sorting center" for directing internet traffic to different servers.
+### ASG: Auto Scaling Group
 ### Route 53
-A service that translates human-friendly website names (like [www.example.com](http://www.example.com/)) into IP addresses that computers use to identify each other.
+A managed DNS service, acting as the address book translating domain names into IP addresses.
 
-## 6. Management and Monitoring
+## 6. Application Integration and Messaging
+- **SNS (Simple Notification Service)**: The "town crier" for broadcasting messages or alerts.
+- **SQS (Simple Queue Service)**: The "post office line" for managing messages or tasks in a queue, ensuring they're processed in order.
+- **Kinesis**: A platform for collecting, processing, and analyzing real-time, streaming data, akin to monitoring and managing the flow of information.
+- **Active MQ**: A message broker service for communicating between different parts of your application, similar to a bus system for messages.
+
+## 7. Containers and Orchestration
+- **ECR (Elastic Container Registry)**: A Docker container registry for storing, managing, and deploying container images, similar to a photo album for your container snapshots.
+- **EKS (Elastic Kubernetes Service)**: Offers managed Kubernetes service for orchestrating containerized applications, acting as the event organizer for managing complex container setups.
+
+## 8. Management and Monitoring
+
 ### CloudWatch
 A monitoring tool that keeps an eye on the cloud resources and applications, like having a smart home system that alerts if anything unusual happens.
-### Auto Scaling
-Automatically adjusts the number of EC2 instances to match demand, like having a house that can magically expand or shrink based on guests' amount.
 
-## 7. Building and Deploying Application (Developer Tools)
+## 9. Building and Deploying Application (Developer Tools)
 
 ### CodeDeploy, CodeBuild, CodePipeline
 These services automate code deployment, building, and integration process, akin to having a team of robots that continuously improve and fix your house without you lifting a finger.
 
-
-### ELB
-
-### ASG
 
 ### Aurora
 

@@ -1,13 +1,34 @@
 ---
 sticker: emoji//2763-fe0f
 ---
-Build a tree roadmap tree, that you can edit and put your knowledge map tree. It is like a note-taking system. Remember the tree we drew when we were little.
 
-Also a book reading and taking notes system, following `How to read a book` pattern. We scrawl public book sources online, and automatically generate the outline and summarize the book's content. Maybe we should use AI here haha.
+## 3.19-4.6
+- Blog
+	- Apply a handy theme and post the first blog 👀
+		- comment? 👀
+	- Deploy the database that only I can edit. 👀
+	- An api to tell the weather. 👀
 
-And how can I forget my todo list.
+- Nit: Wanna my commit message automatically attach the SLAC-XXXX number 👀
 
-Also write a fp-ts program. I don't know what to write, but let's do it.
+- Redo my github page 👀
 
+- AWS course done 👀
+- Roadmap done 👀
+- ES6 done 👀
 
-A tool to learning language through conversation. Haven't played the game yet. Maybe we will have some new ideas after playing the game.
+- Build a tree roadmap tree
+	- can edit and put knowledge on. It is like a note-taking system. Remember the tree we drew when we were little 👀
+	
+- A book reading and taking notes system
+	- following `How to read a book` pattern. We scrawl public book sources online, and automatically generate the outline and summarize the book's content. Maybe we should use AI here haha.
+
+- A tool to learning language through conversation. 
+	- Haven't played the game yet. Maybe we will have new ideas after playing the game.
+
+- A fancy todo list. 👀
+	- Fanciest. Connect my phone and computer. Send reminders to my calendar automatically. Update the status.
+
+- An fp-ts program. 
+	- I don't know what to write, but let's do it.
+

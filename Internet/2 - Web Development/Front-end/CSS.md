@@ -51,3 +51,10 @@ Use CSS and HTML to resize, hide, shrink, enlarge, or move the content to make i
 The user's visible area of a web page.
 ### Media Query
 Introduced in CSS3, it uses the `@media` rule to include a block of CSS properties only if a certain condition is true.
+
+## Modern CSS
+### Tailwind
+A CSS Framework that provides atomic CSS classes to style components e.g. `flex`, `pt-4`, `text-center` and `rotate-90` that can be composed to build any design, directly in markup.
+
+### Radix UI
+### Shadcn UI

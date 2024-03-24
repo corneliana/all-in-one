@@ -1,4 +1,4 @@
-An HTTP proxy sidecar is a container that functions as an HTTP proxy within a microservices architecture. It is deployed alongside the main application containers (within the same network namespace, closely integrated with a single main application, rather than any intermediary in the network, hence the term "sidecar"), intercepting and managing HTTP traffic between the microservices without requiring changes to the application itself. It can do:
+A container that functions as an HTTP proxy within a microservices architecture. It is deployed alongside the main application containers (within the same network namespace, closely integrated with a single main application, rather than any intermediary in the network, hence the term "sidecar"), intercepting and managing HTTP traffic between the microservices without requiring changes to the application itself. It can do:
 
 ### Traffic Management
 - **Load Balancing:** Distributes incoming HTTP requests to different instances of the application to balance load and optimize resource utilization.

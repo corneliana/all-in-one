@@ -52,7 +52,11 @@ make an object immutable: `Object.freeze()`
 	- get the dimensions of element: `getBoundingClientRect` => `DOMRect { x: 8, y: 8, width: 784, height: 784, top: 8, right: 792, bottom: 792, left: 8 }
 - **Console**: Provides access to the browser's debugging console.
 - **LocalStorage** and **SessionStorage**: Provide mechanisms to store data on the client side.
-- **XMLHttpRequest** and **Fetch API**: Enable making HTTP requests to servers from web pages.
+- **XMLHttpRequest** and **Fetch API**: Enable making HTTP requests to servers from web pages. Fetch API is a more powerful and flexible replacement for [`XMLHttpRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest).
+	- **Fetch API:** An interface that asynchronously request a resource in making HTTP requests to servers from web browsers. It uses [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) method to return a Promise that resolves into a Response object. `fetch` is a global method in both [`Window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) and [`Worker`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope "Worker") contexts.
+		- To get the actual data, call the methods of the Response object: `text()`, `json()`.
+		- To get the status and status text of the response, use the `status` and `statusText` properties of the `Response` object.
+		- To handle a failure request, use the `catch()` method or `try...catch` statement.
 
 ##### Browser objects
 - **global/window**: an open window in the browser and serves as the global execution environment for JS code running in that window. It's a part of the Browser Object Model (BOM).

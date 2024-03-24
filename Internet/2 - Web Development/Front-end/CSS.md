@@ -79,3 +79,15 @@ const Button = ({ children, variant }) => {
 
 **Example:** Tailwind, Radix UI, Shadcn UI
 - Tailwind: CSS Framework providing atomic CSS classes to style components e.g. `flex`, `pt-4`, `text-center`, `rotate-90` that can be composed to build any design, directly in markup.
+
+
+## CSS Architecture
+Manage CSS in large, complex systems.
+- **Object-Oriented CSS (OOCSS):** Separates structure from skin, focusing on reusing patterns.
+- **BEM:** The Block, Element, Modifier methodology: Encourages a structured naming convention for classes in HTML and CSS, enhancing readability and reusability.
+- **Scalable and Modular Architecture for CSS (SMACSS):** A modular architecture, categorizing CSS rules for better flexibility and maintainability.
+- **SUIT CSS:** Provides a naming convention and methodology focused on component-based development.
+- **Atomic CSS:** Advocates for single-purpose classes based on visual functionality.
+
+
+

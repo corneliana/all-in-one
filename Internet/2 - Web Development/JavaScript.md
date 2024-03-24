@@ -1,12 +1,9 @@
 ## What is JavaScript
 
-A high-level and versatile language primarily known for its role in web development. It enables interactive and dynamic behavior on websites.
-
-JS is an interpreted language. The code is not compiled before it is executed. Instead, JS engine interprets the code at runtime.
-
-JS is a single-threaded language, which can only execute one line of code at a time. But it is possible to run 2 lines of code at the same time using asynchronous code.
-
-JS runs in various environments, and each environment provides its own global objects that serve as the root context for JavaScript execution. In the web browser, the `window` object is the global context. The global variables and functions are properties of the `window` object. When define a global variable or function, you're actually defining a property of the `window` object.
+A high-level and versatile language that enables interactive and dynamic behavior on web pages.
+- An interpreted/script language. JS engine interprets the code at runtime.
+- A single-threaded language that one line of code is executed at a time. But it is possible to run 2 lines of code at the same time using asynchronous code.
+- Runs in various environments, and each env provides its own global objects as the root context for JS execution, such as the the `window` object in web browser. When define a global variable or functioavan, it is defining a property of the `window` object.
 
 ## Data
 `parse.JSON()`
@@ -19,15 +16,16 @@ JS runs in various environments, and each environment provides its own global ob
 - **hoisting**: variables and function declarations are moved to the top of their scope before code execution.
 - **assignment**: 
 	- for primitive types, reference is copied by value. A new variable creates a new value.
-	- for non-primitive types, reference is not copied by value. The variables all point to the same value.
-- binding:
+	- for non-primitive, reference is not copied by value. Variables all point to the same value.
+- **binding:**
 	- explicit binding: `this`
 - `null` v.s. `undefined`: `null` is an assignment value, and can be assigned to a variable as a representation of no value. `undefined` is a primitive value that represents the absence of a value, or a variable that has not been assigned a value.
 
 ### type
 #### primitive types
 - `string`: template literals
-- `type casting`: from one data type from another. Implicit conversion happens when the compiler (for compiled languages) or runtime (for script languages like `JavaScript`) automatically converts data types.
+- `type casting`: from one data type from another. 
+	- Implicit: the compiler (for compiled languages) or runtime (for script languages like JS) automatically converts data types.
 #### non-primitive types (objects)
 make an object immutable: `Object.freeze()`
 ##### Core JS objects
@@ -46,7 +44,7 @@ make an object immutable: `Object.freeze()`
 	- callback hell: 层层嵌套的callback function
 
 ##### Web API objects
-- **Document**: Represents any web page loaded in the browser and serves as an entry point into the web page's content (the DOM). The Document Object Model is a programming interface for HTML and XML documents. It represents the document as nodes and objects so that programs can change the document structure, style, and content.
+- **Document**: Represents any web page loaded in browser and serves as an entry point into the web page's content (the DOM). The Document Object Model is a programming interface for HTML and XML documents. It represents the document as nodes and objects so that programs can change the document structure, style, and content.
 	- create a new element: `createElement`, `setAttributes`
 	- select elements: `querySelector`, `querySelectorAll
 	- add new elements: `appendChild`, `insertBefore`

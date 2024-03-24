@@ -52,9 +52,30 @@ The user's visible area of a web page.
 ### Media Query
 Introduced in CSS3, it uses the `@media` rule to include a block of CSS properties only if a certain condition is true.
 
-## Modern CSS
-### Tailwind
-A CSS Framework that provides atomic CSS classes to style components e.g. `flex`, `pt-4`, `text-center` and `rotate-90` that can be composed to build any design, directly in markup.
+## Modern CSS / Utility CSS
+Utility first, which is to apply styles directly in HTML using utility classes. 
+- More flexible compared with the traditional CSS.
+- A giant CSS design system that can maintain consistency through the project.
 
-### Radix UI
-### Shadcn UI
+| class | properties        |
+| ----- | ----------------- |
+| p-4   | padding: 1rem;    |
+| p-5   | padding: 1.25rem; |
+
+```html
+// React example with Tailwind CSS
+const Button = ({ children, variant }) => {
+  return (
+    <button className={`px-4 py-2 border-0 cursor-pointer ${variant}`}>
+      {children}
+    </button>
+  );
+};
+
+// Usage
+<Button variant="bg-blue-500 text-white">Click me</Button>
+
+```
+
+**Example:** Tailwind, Radix UI, Shadcn UI
+- Tailwind: CSS Framework providing atomic CSS classes to style components e.g. `flex`, `pt-4`, `text-center`, `rotate-90` that can be composed to build any design, directly in markup.

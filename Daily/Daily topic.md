@@ -6,6 +6,7 @@ Owner-Lead-Notifier
 Lambda
 Dockerfile
 docker-compose
+localstack
 
 Split the SQL query with condition check. The newly added filter is actually a toggle for the new function.
 

@@ -32,3 +32,6 @@ sticker: emoji//2763-fe0f
 - An fp-ts program. 
 	- I don't know what to write, but let's do it.
 
+
+- Plugin to identify which table the acronym refers to in BQ
+- Plugin to prompt if a certain package is deprecated

@@ -1,3 +1,5 @@
+a common issue in web development where navigation changes (like going forward and back in a browser) don’t automatically reset component states in single-page applications (SPAs)
+
 SSR v.c CSR
 
 Owner-Lead-Notifier

@@ -107,7 +107,26 @@ A highly secure vault to keep all the encryption keys for resources. Only those 
 A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
 ### ELB: Elastic Load Balancing
 The "smart mail sorting center" for directing internet traffic to different servers.
+Only Network Load Balancer provides **both static DNS name and static IP**. Application Load Balancer provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants your ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
+
+ELB Sticky Session feature ensures traffic for the same client is always redirected to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
+
+The following cookie names are reserved by the ELB (AWSALB, AWSALBAPP, AWSALBTG).
+
+When using an Application Load Balancer to distribute traffic to EC2 instances, the IP address you'll receive requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" contains the client's IP address.
+Application Load Balancers support HTTP, HTTPS and WebSocket.
+ALBs can route traffic to different Target Groups based on URL Path, Hostname, HTTP Headers, and Query Strings.
+
+Network Load Balancer provides the highest performance and lowest latency if the app needs it.
+Network Load Balancer has one static IP address per AZ and you can attach an Elastic IP address to it. Application Load Balancers and Classic Load Balancers have a static DNS name.
+NLB supports HTTP health checks as well as TCP and HTTPS
+
+Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
 ### ASG: Auto Scaling Group
+
+The Auto Scaling Group can't go over the maximum capacity (you configured) during scale-out events.
+When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
+There's no CloudWatch Metric for "requests per minute" for backend-to-database connections. You need to create a CloudWatch Custom Metric, then create a CloudWatch Alarm.
 ### Route 53
 A managed DNS service, acting as the address book translating domain names into IP addresses.
 

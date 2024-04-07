@@ -85,6 +85,14 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 ### RDS: Relational Database Service
 A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
+
+Backup for better performance and avoid disaster.
+
+Read replica v.s. RDS in multi-AZ
+
+take a snapshot
+restore to point in time
+what is the difference then?
 ### DynamoDB
 A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
 ### CloudFront

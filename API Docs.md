@@ -1,5 +1,15 @@
 To achieve re-use of capability and share data, self-service discoverability is encouraged, it is the responsibility of the system providing the contract to ensure it is well-defined, i.e. specification of the API's endpoints, I/O payload and the schema.
 
+
+- [ ] scope checking
+- [ ] Thinking about having a function that extract description by each endpoint's name.
+- [ ] typing is too redundant now? What the difference of two ways of enum definition
+- [ ] api-test
+- [ ] is it necessary to split each endpoint into a single file
+- [ ] check the input and output of each endpoint
+- [ ] readme.md
+
+
 ## airtasker/spot v.s. Swagger
 ### Spot
 - TS as the foundation to define API contracts
@@ -45,6 +55,7 @@ What should Spot do to auto generate the validation rules?
 	=> so a generation command for Swagger YAML will generate schema based on:
 	- API contracts defined by Spot
 	- Validation rules defined by turnstile files
+	Check the validation rules of other endpoints and see if we can find any similarities.
 
 
 Solution:

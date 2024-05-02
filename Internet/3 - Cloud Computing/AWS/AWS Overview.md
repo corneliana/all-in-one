@@ -1,4 +1,4 @@
-## [[OSI (Open Systems Interconnection) model]]
+# [[OSI (Open Systems Interconnection) model]]
 
 1. **Physical Layer (OSI Layer 1)**:
     - AWS Direct Connect: Establishes a dedicated network connection between AWS and an on-premises data center, bypassing the public internet.
@@ -8,8 +8,8 @@
     - Amazon VPC (Virtual Private Cloud): Provides a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network.
 	- Amazon Route 53: DNS web service for routing end users to Internet applications.
 4. **Transport Layer (OSI Layer 4)**:
-    - AWS Global Accelerator: Improves the availability and performance of your applications with local and global traffic management.
-	- AWS Network Load Balancer: Distributes incoming application traffic across multiple targets, such as EC2 instances.
+    - Global Accelerator: Improves the availability and performance of your applications with local and global traffic management.
+	- Network Load Balancer: Distributes incoming application traffic across multiple targets, such as EC2 instances.
 5. **Session Layer (OSI Layer 5)**:
     - N/A
 6. **Presentation Layer (OSI Layer 6)**:
@@ -38,9 +38,12 @@ The platform is used in a specific region => **Availability Zones (AZ)**
 
 In a sense, the whole idea of AWS is like assembling a remote computer, along with its network, piece by piece according to the needs of users.
 
+
+# The steps of building a remote network
 ## 1. Choose the right type of computers to compute and host
 ### EC2: Elastic Compute Cloud = Infrastructure as a Service
 An Amazon EC2 instance is like a virtual computer running in the cloud, similar to CPU and RAM of a computer. Choose types and sizes based on computational power and memory requirements to determine the performance capabilities.
+
 - **Purchasing Options:** 
 	- On-Demand: pay the full price for what you use at any time
 	- Reserved: 1-3 year for a discount
@@ -49,18 +52,21 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 	- Dedicated Hosts / Instance: EC2 instance capacity fully dedicated to your use
 	- Capacity Reservations: Regional reserved instance + saving plans (pay full price for a period even you don't use it)
 	- spot fleets = set of Spot instances + (optional) On-demand instances
+
 - **Address => IP: Public / Private / Elastic** 
 	- Private v.s. Public IP(IPv4): whether the machine can be identified on the public network
 	- Elastic IPs: a fixed public IPv4 IP for the instance. 
 		- Efficient backup by remapping the address to another instance if failure occurs.
-		- Try not use it as it often refl
-		- ects poor architecture. Instead, use a random public IP and register a DNS name to it. Or, use a Load Balancer and don't use a public IP. In other words, a flexible, dynamic addressing system to the cloud-based system with scalability, resilience, and efficient traffic management.
+		- Try not use it as it often reflects poor architecture. Instead, use a random public IP and register a DNS name to it. Or, use a Load Balancer and don't use a public IP. In other words, a flexible, dynamic addressing system to the cloud-based system with scalability, resilience, and efficient traffic management.
 	 - Elastic Network Interfaces (ENI): a virtual network card that gives EC2 instance access to the network.
+	
 - **Organization / Orchestration => Placement Groups**: put the instances in
 	- Cluster: in the same rack of the same AZ. => big data job, low latency and high network throughput.
 	- Spread: across underlying hardware (max 7 instances per group per AZ)  => maximize high availability as each instance is isolated from failure from each other.
 	- Partition: across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of EC2 instances per group (Hadoop, Cassandra, Kafka)
+	
 - **Hibernate:** preserve in-memory(RAM) state so as to accelerate booting. Under the hood, the RAM state is written to a file in the root EBS volume which must be encrypted. Available for On-demand, Reserved and Spot instances, and can't be hibernated more than 60 days.
+
 - **AMI(Amazon Machine Image):** a customization of an EC2 instance, which is built for a specific region and can be copied across regions.
 	- Build an AMI - this will also create EBS snapshots.
 
@@ -185,6 +191,35 @@ A highly secure vault to keep all the encryption keys for resources. Only those 
 
 ## 5. Connect Computer to the Internet (networking and content delivery)
 
+### Route 53
+A managed DNS service, acting as the address book translating domain names into IP addresses. The core is how to do the routing?
+
+Route 53 is DNS service, GoDaddy is Domain Registrar. 
+
+#### Routing policies
+- DNS records
+	-  A
+	- AAAA
+	- CNAME
+	- NS
+	- Alias v.s. CNAME
+- Based on
+	- Simple
+	- Weighted: redirect part of the traffic based on weight (e.g. percentage). It's a common use case to send part of traffic to a new version of application.
+	- Latency: evaluate the latency between users and AWS Regions, and help them get a DNS response that will minimize their latency (e.g. response time)
+	- Failover: instance 1 not healthy, route to instance 2
+	- Geolocation:
+	- Geoproximity
+	- IP
+	- Multi-value
+- TTL
+	Each DNS record has a TTL (Time To Live) which orders clients for how long to cache these values and not overload the DNS Resolver with DNS requests. The TTL value should be set to strike a balance between how long the value should be cached vs. how many requests should go to the DNS Resolver.
+
+#### Health checks
+- Monitor an endpoint
+- Calculated Health checks
+- Private Hosted Zones
+
 ### VPC: Virtual Private Cloud
 A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
 ### ELB: Elastic Load Balancing
@@ -204,32 +239,11 @@ Network Load Balancer has one static IP address per AZ and you can attach an Ela
 NLB supports HTTP health checks as well as TCP and HTTPS
 
 Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
-### ASG: Auto Scaling Group
 
+### ASG: Auto Scaling Group
 The Auto Scaling Group can't go over the maximum capacity (you configured) during scale-out events.
 When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
 There's no CloudWatch Metric for "requests per minute" for backend-to-database connections. You need to create a CloudWatch Custom Metric, then create a CloudWatch Alarm.
-### Route 53
-A managed DNS service, acting as the address book translating domain names into IP addresses. Counterpart of GoDaddy.
-
-#### TTL
-Each DNS record has a TTL (Time To Live) which orders clients for how long to cache these values and not overload the DNS Resolver with DNS requests. The TTL value should be set to strike a balance between how long the value should be cached vs. how many requests should go to the DNS Resolver.
-
-#### Routing policies
-- Simple
-- Weighted: redirect part of the traffic based on weight (e.g. percentage). It's a common use case to send part of traffic to a new version of application.
-- Latency: evaluate the latency between users and AWS Regions, and help them get a DNS response that will minimize their latency (e.g. response time)
-- Failover: instance 1 not healthy, route to instance 2
-- Geolocation:
-- Geoproximity
-- IP
-- Multi-value
-
-#### Health checks
-- Monitor an endpoint
-- Calculated Health checks
-- Private Hosted Zones
-
 
 
 ## 6. Application Integration and Messaging

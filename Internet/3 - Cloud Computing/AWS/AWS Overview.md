@@ -83,16 +83,58 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
+
+Aurora Serverless
+
+Up to 15 Aurora Read Replicas in a single Aurora DB Cluster
+
+Use Perform on Demond backups to store long-term backups for your Aurora database for disaster recovery and audit purposes
+
+Aurora cloning
 ### RDS: Relational Database Service
 A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
+RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.
 
 Backup for better performance and avoid disaster.
 
-Read replica v.s. RDS in multi-AZ
+RDS Proxy vs multi-AZ in terms of re-connecting to DB.
+
+#### Read replica
+RDS database can have up to 15 Read Replicas.
+Read Replicas have Asynchronous Replication, therefore it's likely users will only read Eventual Consistency.
+
+#### RDS in multi-AZ
+Multi-AZ keeps the same connection string regardless of which database is up.
+Multi-AZ won't help when a disaster happens at the AWS region level. Multi-AZ helps when a disaster happens at the AZ level.
+
+#### ElastiCache
+ElastiCache and RDS Read Replicas do indeed help with scaling reads.
+
+- Redis
+	- Sorted sets
+- Memcached
+
+
+Multi-AZ helps when plan a disaster recovery for an entire AZ going down. If plan against an entire AWS Region going down, use backups and replication across AWS Regions.
+
+#### Security
+Encrypt an unencrypted RDS DB instance
+- Create a snapshot of the unencrypted RDS DB instance, copy the snapshot and tick "Enable encryption", then restore the RDS DB instance from the encrypted snapshot
+
+Oracle does **NOT** support IAM Database Authentication
+
+Can not create encrypted Read Replicas from an unencrypted RDS DB instance.
+
+Your application running on a fleet of EC2 instances managed by an Auto Scaling Group behind an Application Load Balancer. Users have to constantly log back in and you don't want to enable Sticky Sessions on your ALB as fear it will overload some EC2 instances. What should you do?
+- Storing Session Data in ElastiCache is a common pattern to ensuring different EC2 instances can retrieve user's state if needed.
+
+Aurora Global Databases allows you to have an Aurora Replica in another AWS Region, with up to 5 secondary regions.
 
 take a snapshot
 restore to point in time
 what is the difference then?
+
+
 ### DynamoDB
 A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
 ### CloudFront
@@ -136,7 +178,9 @@ The Auto Scaling Group can't go over the maximum capacity (you configured) durin
 When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
 There's no CloudWatch Metric for "requests per minute" for backend-to-database connections. You need to create a CloudWatch Custom Metric, then create a CloudWatch Alarm.
 ### Route 53
-A managed DNS service, acting as the address book translating domain names into IP addresses.
+A managed DNS service, acting as the address book translating domain names into IP addresses. Counterpart of GoDaddy.
+
+
 
 ## 6. Application Integration and Messaging
 - **SNS (Simple Notification Service)**: The "town crier" for broadcasting messages or alerts.
@@ -161,7 +205,6 @@ These services automate code deployment, building, and integration process, akin
 
 ### Aurora
 
-### Elastic Cache
 
 ### SNS, SQS
 
@@ -184,3 +227,20 @@ You can run a database on an EC2 instance that uses an Instance Store, but you'l
 
 
 
+List of Ports to be familiar with
+
+**Be able to differentiate between an Important (HTTPS - port 443) and a database port (PostgreSQL - port 5432)** 
+**Important ports:**
+- FTP: 21
+- SSH: 22
+- SFTP: 22 (same as SSH)
+- HTTP: 80
+- HTTPS: 443
+    
+**vs RDS Databases ports:**
+- PostgreSQL: 5432
+- MySQL: 3306
+- Oracle RDS: 1521
+- MSSQL Server: 1433
+- MariaDB: 3306 (same as MySQL)
+- Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)

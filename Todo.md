@@ -35,3 +35,6 @@ sticker: emoji//2763-fe0f
 
 - Plugin to identify which table the acronym refers to in BQ
 - Plugin to prompt if a certain package is deprecated
+
+suppress screenshot
+- how to detect the screenshots

@@ -69,6 +69,7 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 
 - **AMI(Amazon Machine Image):** a customization of an EC2 instance, which is built for a specific region and can be copied across regions.
 	- Build an AMI - this will also create EBS snapshots.
+	Golden AMI is an image that contains all your software installed and configured so that future EC2 instances can boot up quickly from that AMI.
 
 ### Fargate
 A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
@@ -100,6 +101,8 @@ EBS is a network drive, so uses the network to communicate the instance.
 	- Application must manage concurrent write operations.
 - **EBS encryption:** data inside the volume/in flight between the instance and volume/snapshots/volumes created from the snapshot are encrypted.
 
+EBS volumes are created in a specific AZ and can only be attached to one EC2 instance at a time.
+
 ### EC2 Instance Store 
 higher-performance hardware disk than EBS
 - Better I/O performance
@@ -116,8 +119,26 @@ A special memory box for storing copies of the most frequently used items (data 
 Managed NFS(network file system) that can be mounted on many EC2 instances in multi-AZ. Highly available, scalable, elastic, it allows multiple EC2 instances to access the file system at the same time, much like sharing files across different computers on the same network.
 - content management, web serving, data sharing, wordpress.
 
+EFS is a network file system (NFS) that allows mounting the same file system to 100s of EC2 instances. Storing software updates on an EFS allows each EC2 instance to access them.
+
 ### S3: Simple Storage Service
 Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
+
+S3 pre-signed URL: contains a signature that verifies my credentials.
+Public URL: 
+
+#### Security
+- User-based
+	- IAM Policies
+- Resource-based
+	- Bucket Polices
+		- JSON based policies: Resource, Effect, Actions, Principal
+		- Use it to grant access to buckets/accounts, encrypt objects at upload
+		- Use cases
+	- Object ACL(Access Control List)
+	- Bucket ACL
+- Encryption: encrypt the object using encryption keys
+- Note
 
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
@@ -194,26 +215,30 @@ A highly secure vault to keep all the encryption keys for resources. Only those 
 ### Route 53
 A managed DNS service, acting as the address book translating domain names into IP addresses. The core is how to do the routing?
 
-Route 53 is DNS service, GoDaddy is Domain Registrar. 
+Route 53 is DNS service, GoDaddy is Domain Registrar. We purchase the domain from GoDaddy and use Route 53 to manage DNS records.
 
-#### Routing policies
-- DNS records
+#### Routing policies: define a DNS record (key-value pair with attributes)
+- **DNS record types**
 	-  A
 	- AAAA
 	- CNAME
 	- NS
 	- Alias v.s. CNAME
-- Based on
+		- CNAME: points a hostname to any other hostnames
+		- Alias: points a hostname to an AWS resource. Free of charge. Native health check.
+- **Based on**
 	- Simple
 	- Weighted: redirect part of the traffic based on weight (e.g. percentage). It's a common use case to send part of traffic to a new version of application.
 	- Latency: evaluate the latency between users and AWS Regions, and help them get a DNS response that will minimize their latency (e.g. response time)
 	- Failover: instance 1 not healthy, route to instance 2
 	- Geolocation:
-	- Geoproximity
+	- Geoproximity: bias
 	- IP
 	- Multi-value
-- TTL
+- **TTL**
 	Each DNS record has a TTL (Time To Live) which orders clients for how long to cache these values and not overload the DNS Resolver with DNS requests. The TTL value should be set to strike a balance between how long the value should be cached vs. how many requests should go to the DNS Resolver.
+	- High TTL: Less traffic on Route 53; possibly outdated records
+	- Low TTL: More traffic on Route 53; records are outdated for less time; easy to change records so users will experience less downtime.
 
 #### Health checks
 - Monitor an endpoint
@@ -223,19 +248,20 @@ Route 53 is DNS service, GoDaddy is Domain Registrar.
 ### VPC: Virtual Private Cloud
 A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
 ### ELB: Elastic Load Balancing
-The "smart mail sorting center" for directing internet traffic to different servers.
-Only Network Load Balancer provides **both static DNS name and static IP**. Application Load Balancer provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants your ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
+The `smart mail sorting center` for directing internet traffic to different servers.
+Only NLB(Network) provides **both static DNS name and static IP**. ALB(Application) provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
 
+#### Stickiness / Session affinity
 ELB Sticky Session feature ensures traffic for the same client is always redirected to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
 
 The following cookie names are reserved by the ELB (AWSALB, AWSALBAPP, AWSALBTG).
 
-When using an Application Load Balancer to distribute traffic to EC2 instances, the IP address you'll receive requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" contains the client's IP address.
+When using an ALB to distribute traffic to EC2 instances, the IP address that receives requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" contains the client's IP address.
 Application Load Balancers support HTTP, HTTPS and WebSocket.
 ALBs can route traffic to different Target Groups based on URL Path, Hostname, HTTP Headers, and Query Strings.
 
-Network Load Balancer provides the highest performance and lowest latency if the app needs it.
-Network Load Balancer has one static IP address per AZ and you can attach an Elastic IP address to it. Application Load Balancers and Classic Load Balancers have a static DNS name.
+NLB provides the highest performance and lowest latency if the app needs it.
+NLB has one static IP address per AZ and you can attach an Elastic IP address to it. ALB and Classic Load Balancers have a static DNS name.
 NLB supports HTTP health checks as well as TCP and HTTPS
 
 Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
@@ -314,4 +340,4 @@ List of Ports to be familiar with
 How these technologies fit together?
 
 ### Whatisthetime.com
-Stateless web app:
+[[State]] Apps

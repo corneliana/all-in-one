@@ -130,6 +130,7 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 #### Security
 - **pre-signed URL v.s. public URL**
 	- The former contains a signature that carries the user's credentials in the URL, which is inherited from the permissions of the user that generated the URL for GET/PUT.
+	- S3 Pre-Signed URLs are temporary URLs that you generate to grant time-limited access to some actions in your S3 bucket.
 - **Policies
 	- Explicit DENY in an IAM Policy will take precedence over an S3 bucket policy.
 	- User-based
@@ -152,6 +153,7 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 		- **SSE-KMS
 			- key is from KMS
 			- May be impacted by the KMS limits
+			- The encryption keys are managed by AWS but you have full control over the rotation policy of the encryption key.
 		- **SSE-C
 			- keys managed by the customer outside of AWS
 			- HTTPS is mandatory
@@ -161,9 +163,9 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 		- HTTPS
 		- Force encryption => use the bucket policy of aws:SecureTransport
 - **CORS
-	- Cross-Origin Resource Sharing
+	- Cross-Origin Resource Sharing: defines a way for client web applications that are loaded in one domain to interact with resources in a different domain
 - **MFA Delete
-	- Extra protection against permanent deletion.
+	- Extra protection against permanent deletion, which forces users to use MFA codes before deleting S3 objects. It's an extra level of security to prevent accidental deletions.
 	- `aws s3api put-bucket-versioning --bucket demo-stephane-mfa-delete-2020 --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "arn:aws:iam::XXXXXXXXXX:mfa/root-account-mfa-device XXXXXX --profile root-mfa-delete-demo(this is the profile)`
 - **Glacier Valut Lock & S3 Object Lock
 	Adopt a WORM model (Write Once Read Many)
@@ -178,8 +180,9 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 		- Legal Hold: protect the object indefinitely, independent from retention period
 - **Access Logs
 	- Log all access to S3 buckets
+	- Amazon Athena can then be used to run serverless analytics on top of the log files.
 - **Access Points
-	- To avoid unmanageable policies.
+	- To avoid unmanageable policies and manage security at scale.
 	- Specific points to access corresponding resources.
 #### Storage
 - **Services provided: Static website hosting**
@@ -237,6 +240,10 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 - Payment
 	- Free Metrics: 28
 	- Advanced Metrics
+
+#### S3 lambda
+- Use lambda to change the object before it is being retrieved.
+- E.g. redact PII data, convert data format, resize and watermark images, etc.
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 
@@ -293,14 +300,32 @@ what is the difference then?
 
 ### DynamoDB
 A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
-### CloudFront & AWS Global Accelerator
+### CloudFront(CDN)
 A content delivery network that ensures website's content is delivered quickly to viewers, like having express delivery trucks ready to send your data wherever it needs to go.
-- With S3
-- ALB as an Origin
-- Geo Restrictions
-- Price Classes
-- Cache Invalidation
-- Global Accelerator
+- **Overview
+	- Improve read performance, content is cached at the edge(the outer reaches of the global network).
+	- 216 Point of Presence(PoP) globally => Global Edge network
+	- DDoS protection(because worldwide), integration with Shield, AWS web app firewall.
+- **Origins
+	- **S3
+		- distribute files and cache them at the edge
+		- Enhanced security with Origin Access Control(OAC), replacing OAI(Identity)
+		- CloudFront v.s. S3 Cross Region Replications
+			- CloudFront great for static content that must be available everywhere
+			- S3 Cross Region Replication: Great for dynamic content that needs to be available at low-latency in few regions.
+	- **Custom Origin(HTTP)
+		- ALB
+		- EC2 instance
+		- S3 website
+		- Any HTTP backend
+- **Geo Restrictions
+	- Allowlist & Blocklist
+- **Price Classes
+- **Cache Invalidation
+	- In case update the back-end, use this to force an entire or partial cache refresh
+
+### AWS Global Accelerator
+- User => Anycast IP => Edge locations => ALB => application
 
 ### Storage Extras
 - Snow Family
@@ -386,12 +411,24 @@ There's no CloudWatch Metric for "requests per minute" for backend-to-database c
 
 
 ## 6. Application Integration and Messaging
-Decoupling applications: SQS, SNS, Kinesis, Active MQ
+Decoupling applications while enable internal communications: SQS, SNS, Kinesis, Active MQ
+- Sync: app to app. Can be overwhelmed in terms of sudden spikes of traffic.
+- Async/Event-based: app to queue to app
+### SNS: Simple Notification Service => pub/sub model
+The "town crier" for broadcasting messages or alerts.
+SNS is a fully managed pub/sub (publish/subscribe) messaging service, enabling publish messages to topics, which are logical channels or categories.
 
-- **SNS (Simple Notification Service)**: The "town crier" for broadcasting messages or alerts.
-- **SQS (Simple Queue Service)**: The "post office line" for managing messages or tasks in a queue, ensuring they're processed in order.
-- **Kinesis**: A platform for collecting, processing, and analyzing real-time, streaming data, akin to monitoring and managing the flow of information.
-- **Active MQ**: A message broker service for communicating between different parts of your application, similar to a bus system for messages.
+### SQS: Simple Queue Service => queue model
+The "post office line" to manage messages/tasks in a queue, ensuring they're processed in order.
+SQS is a fully managed message queuing service, providing a distributed queue for storing messages as they travel between different components of a system.
+
+SNS facilitates the broadcasting of messages to multiple subscribers through topics, SQS enables the reliable and scalable queuing of messages between different components of a system, helping to decouple components and manage asynchronous communication. These services are often used together in AWS architectures to build scalable and resilient distributed applications.
+
+### Kinesis => real-time streaming model
+A platform for collecting, processing, and analyzing real-time, streaming data, akin to monitoring and managing the flow of information.
+
+### Active MQ
+A message broker service for communicating between different parts of your application, similar to a bus system for messages.
 
 ## 7. Containers and Orchestration
 - **ECR (Elastic Container Registry)**: A Docker container registry for storing, managing, and deploying container images, similar to a photo album for your container snapshots.

@@ -71,9 +71,11 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 	- Build an AMI - this will also create EBS snapshots.
 	Golden AMI is an image that contains all your software installed and configured so that future EC2 instances can boot up quickly from that AMI.
 
-### Fargate
+
+### Containers on AWS: ECS, Fargate, ECR & EKS
+#### Fargate
 A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
-### EKS: Elastic Kubernetes Service
+#### EKS: Elastic Kubernetes Service
 A managed container orchestration service for running Kubernetes on AWS without having to set up or maintain your own Kubernetes control plane.
 ### Lambda
 For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
@@ -123,23 +125,64 @@ EFS is a network file system (NFS) that allows mounting the same file system to 
 
 ### S3: Simple Storage Service
 Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
-
-S3 pre-signed URL: contains a signature that verifies my credentials.
-Public URL: 
-
+#### Versioning the buckets
+- Enabled at the bucket level
 #### Security
-- User-based
-	- IAM Policies
-- Resource-based
-	- Bucket Polices
-		- JSON based policies: Resource, Effect, Actions, Principal
-		- Use it to grant access to buckets/accounts, encrypt objects at upload
-		- Use cases
+- **pre-signed URL v.s. public URL**
+	- The former contains a signature that verifies the user's credentials in the URL.
+
+- **Policies
+	- Explicit DENY in an IAM Policy will take precedence over an S3 bucket policy.
+	- User-based
+		- IAM Policies
+	- Resource-based
+		- Bucket Polices
+			- JSON based policies: Resource, Effect, Actions, Principal
+			- Use it to grant access to buckets/accounts, encrypt objects at upload
+			- Use cases
 	- Object ACL(Access Control List)
 	- Bucket ACL
-- Encryption: encrypt the object using encryption keys
-- Note
 
+- **Encryption: encrypt the object using encryption keys
+	- DSSE-KMS
+	- Default Encryption
+
+- **CORS
+
+- MFA Delete
+
+- Glacier Valut Lock & S3 Object Lock
+
+- Access Logs
+
+- Access Points
+#### Storage
+- **Services provided: Static website hosting**
+	- S3 can host static websites and have them accessible on the Internet. If 403, makes sure the bucket policy allows public reads.
+- **Storage classes: Durability and Availability
+	- **Types and Payment
+		- Standard
+		- Standard-Infrequent: but requires rapid access when needed.
+		- One Zone-Infrequent: High durability in a single AZ; data lost when AZ is destroyed.
+		- Glacier
+			- Instant Retrieval
+			- Flexible Retrieval: Expedited, Standard, Bulk => wait to retrieve data
+			- Deep Archive
+		- Intelligent-Tiering
+			- Frequent
+			- InFrequent
+			- Archive Instant Access
+			- Archive Access
+			- Deep Archive
+	- **Moving between storage classes: manually or use class lifecycle configuration
+		- Lifecycle rules
+	- Replications: CRR(Cross-Region) & SRR(Same-Region)
+		- Enable a one-time Batch Operations job from this replication configuration to replicate objects that already exist in the bucket and to synchronize the source and destination buckets.
+
+#### Event notifications
+
+
+#### Performance
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 
@@ -196,8 +239,24 @@ what is the difference then?
 
 ### DynamoDB
 A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
-### CloudFront
+### CloudFront & AWS Global Accelerator
 A content delivery network that ensures website's content is delivered quickly to viewers, like having express delivery trucks ready to send your data wherever it needs to go.
+- With S3
+- ALB as an Origin
+- Geo Restrictions
+- Price Classes
+- Cache Invalidation
+- Global Accelerator
+
+### Storage Extras
+- Snow Family
+- Architecture: Snowball into Glacier
+- FSx
+- Storage Gateway
+- Transfer family
+- DataSync
+
+### All storage options compared
 
 
 ## 4. Keep the remote computer safe (security and identity services)
@@ -273,6 +332,8 @@ There's no CloudWatch Metric for "requests per minute" for backend-to-database c
 
 
 ## 6. Application Integration and Messaging
+Decoupling applications: SQS, SNS, Kinesis, Active MQ
+
 - **SNS (Simple Notification Service)**: The "town crier" for broadcasting messages or alerts.
 - **SQS (Simple Queue Service)**: The "post office line" for managing messages or tasks in a queue, ensuring they're processed in order.
 - **Kinesis**: A platform for collecting, processing, and analyzing real-time, streaming data, akin to monitoring and managing the flow of information.
@@ -292,13 +353,6 @@ A monitoring tool that keeps an eye on the cloud resources and applications, lik
 ### CodeDeploy, CodeBuild, CodePipeline
 These services automate code deployment, building, and integration process, akin to having a team of robots that continuously improve and fix your house without you lifting a finger.
 
-
-### Aurora
-
-
-### SNS, SQS
-
-### Kinesis, Active MQ
 
 ### Fargate, ECR, EKS
 

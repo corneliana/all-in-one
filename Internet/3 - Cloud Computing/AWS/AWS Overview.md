@@ -129,8 +129,7 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 - Enabled at the bucket level
 #### Security
 - **pre-signed URL v.s. public URL**
-	- The former contains a signature that verifies the user's credentials in the URL.
-
+	- The former contains a signature that carries the user's credentials in the URL, which is inherited from the permissions of the user that generated the URL for GET/PUT.
 - **Policies
 	- Explicit DENY in an IAM Policy will take precedence over an S3 bucket policy.
 	- User-based
@@ -142,20 +141,46 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 			- Use cases
 	- Object ACL(Access Control List)
 	- Bucket ACL
-
-- **Encryption: encrypt the object using encryption keys
-	- DSSE-KMS
-	- Default Encryption
-
+- **Encryption
+	- **Default Encryption v.s. Bucket polices
+		- Default Encryption is auto applied and bucket polices are added.
+		- Bucket policies are evaluated before Default Encryption
+	- **In objects
+		- **Server-Side Encryption(SSE)
+			- Using keys handled, managed and owned by AWS, using AES-256
+			- Enabled by default for new buckets / objects
+		- **SSE-KMS
+			- key is from KMS
+			- May be impacted by the KMS limits
+		- **SSE-C
+			- keys managed by the customer outside of AWS
+			- HTTPS is mandatory
+		- **[DSSE-KMS(Dual-Layer SSE with Keys Stored in Key Management Service)](https://aws.amazon.com/blogs/aws/new-amazon-s3-dual-layer-server-side-encryption-with-keys-stored-in-aws-key-management-service-dsse-kms/)
+		- **Client-Side Encryption(CSE)
+	- **In transit/flight: SSL/TLS
+		- HTTPS
+		- Force encryption => use the bucket policy of aws:SecureTransport
 - **CORS
-
-- MFA Delete
-
-- Glacier Valut Lock & S3 Object Lock
-
-- Access Logs
-
-- Access Points
+	- Cross-Origin Resource Sharing
+- **MFA Delete
+	- Extra protection against permanent deletion.
+	- `aws s3api put-bucket-versioning --bucket demo-stephane-mfa-delete-2020 --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "arn:aws:iam::XXXXXXXXXX:mfa/root-account-mfa-device XXXXXX --profile root-mfa-delete-demo(this is the profile)`
+- **Glacier Valut Lock & S3 Object Lock
+	Adopt a WORM model (Write Once Read Many)
+	- **Glacier
+		- Create a Vault Lock Policy
+		- Lock the Policy for future edits
+	- **Object
+		- Block an object version deletion
+		- Retention mode
+			- Compliance
+			- Governance: more lenient than compliance
+		- Legal Hold: protect the object indefinitely, independent from retention period
+- **Access Logs
+	- Log all access to S3 buckets
+- **Access Points
+	- To avoid unmanageable policies.
+	- Specific points to access corresponding resources.
 #### Storage
 - **Services provided: Static website hosting**
 	- S3 can host static websites and have them accessible on the Internet. If 403, makes sure the bucket policy allows public reads.
@@ -176,13 +201,42 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 			- Deep Archive
 	- **Moving between storage classes: manually or use class lifecycle configuration
 		- Lifecycle rules
-	- Replications: CRR(Cross-Region) & SRR(Same-Region)
+		- Use S3 Analytics to analyze the optimal number of days to move objects between different storage tiers
+	- **Replications: CRR(Cross-Region) & SRR(Same-Region)
 		- Enable a one-time Batch Operations job from this replication configuration to replicate objects that already exist in the bucket and to synchronize the source and destination buckets.
 
+#### Payment
+- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
+- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.
 #### Event notifications
-
-
+- Event: CRUD operations on the objects in S3
+	- Events => S3 => SNS / SQS / Lambda
+	- Events => EventBridge (Advanced filtering options with JSON rules) => over 18 services as destinations
+	- IAM Permissions: Resource access policy
+	
 #### Performance
+- **Store
+	- Baseline
+	- Multi-Part upload
+	- Transfer acceleration
+- **Read
+	- S3 Byte-Range Fetches
+	- S3 Select & Glacier Select
+- **Batch Operations
+
+#### Storage Lens
+- Metrics
+	- Summary Metrics: general insights about storage, objects
+	- Cost-Optimization Metrics
+	- Data-Protection Metrics
+	- Access-management Metrics
+	- Event Metrics
+	- Performance Metrics: transfer acceleration
+	- Activity: how the storage is requested
+	- Detailed Status Code: HTTP status code
+- Payment
+	- Free Metrics: 28
+	- Advanced Metrics
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 

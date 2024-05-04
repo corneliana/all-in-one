@@ -39,6 +39,6 @@ sticker: emoji//2763-fe0f
 suppress screenshot
 - how to detect the screenshots
 
-Maybe a page being the source truth of the world news / events happening everyday, being updated everyday. All I need is just to check one page. With an AI tool to summarize, I can easily capture the world events. And it would be better:
+Maybe a page being the source truth of the world news / events happening everyday (timeline maybe), being updated everyday. All I need is just to check one page. With an AI tool to summarize, I can easily capture the world events. And it would be better:
 - Analyze where I get stuck in trying understanding the events.
 - Tracing back to history or some unchanged rules in world to help me understand.

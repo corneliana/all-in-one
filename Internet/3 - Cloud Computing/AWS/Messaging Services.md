@@ -17,5 +17,3 @@ The flow in Kafka: producing events (as data messages) to topics, where each eve
 
 Apache Kafka, Apache Pulsar and Google Pub/Sub
 Complete offerings like Apache Kafka, Apache Pulsar and Google Pub/Sub provide a variety of rich capabilities beyond just storage of the event payload ranging from distributed transaction management, geo-replication, keyed-ordering, tiered storage, partitioning, idempotency, etc. which greatly simplify working in an evented paradigm.
-
-SQS and SNS

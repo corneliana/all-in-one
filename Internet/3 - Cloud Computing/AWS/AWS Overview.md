@@ -73,12 +73,36 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 
 
 ### Containers on AWS: ECS, Fargate, ECR & EKS
-#### Fargate
-A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
-#### EKS: Elastic Kubernetes Service
-A managed container orchestration service for running Kubernetes on AWS without having to set up or maintain your own Kubernetes control plane.
-### Lambda
-For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
+- **Docker
+	- Docker is software development platform to deploy apps. Apps are packaged in containers that can be run on any OS. Docker images are stored in Docker repos.
+	- v.s. Virtual Machines
+		- Resources are shared with the host. Many containers on one server.
+	- Dockerfile => Docker Repository => use
+- **Docker Containers Management on AWS
+	- **ECS Elastic Container Service: auto deployment, scaling and management of containerized applications
+		- Mechanism
+			- Cluster management: a grouping of container instances (EC2 instances or Fargate tasks) that are managed together as a single unit
+			- Resource allocation
+			- Task Scheduling
+			- Scaling and availability: AWS Application Auto Scaling (task level, not instance level)
+		- launch type
+			- EC2 launch type: Launch Docker containers on AWS = **Launch ECS Tasks on ECS clusters**. Each EC2 instance must run the ECS agent to register in the ECS cluster.
+				- Scaling: ASG or ECS Cluster Capacity Probider
+			- Fargate launch type: Serverless, no EC2 instance instances to manage.
+		- IAM roles 
+			- EC2 instance profile
+			- ECS task role
+		- LB integrations: ALB, NLB
+		- Data Volumes(EFS): Fargate + EFS = Serverless
+	- Fargate: A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
+	- ECR Elastic Container Registry: Store and manage Docker images on AWS
+	- **EKS Elastic Kubernetes Service**: An alternative to ECS and open-source. A managed container orchestration service for running Kubernetes on AWS. EKS nodes => EKS pods = ECS tasks.
+		- Node types
+			- Managed Node Groups
+			- Self-Managed Nodes
+			- Fargate: no nodes
+		- Data volumes
+- **AWS App Runner
 
 ## 2. Set up the hard drive (storage solutions)
 Note: Storage is where data is kept long-term, and memory is where data is kept short-term for quick access by the computer's processor.
@@ -523,7 +547,9 @@ A monitoring tool that keeps an eye on the cloud resources and applications, lik
 These services automate code deployment, building, and integration process, akin to having a team of robots that continuously improve and fix your house without you lifting a finger.
 
 
-### Fargate, ECR, EKS
+## Serverless Overviews from a Solution Architect Perspective
+### Lambda
+For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
 
 
 ## Quiz

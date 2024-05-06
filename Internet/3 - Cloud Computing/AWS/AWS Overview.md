@@ -88,14 +88,16 @@ An Amazon EC2 instance is like a virtual computer running in the cloud, similar 
 		- launch type
 			- EC2 launch type: Launch Docker containers on AWS = **Launch ECS Tasks on ECS clusters**. Each EC2 instance must run the ECS agent to register in the ECS cluster.
 				- Scaling: ASG or ECS Cluster Capacity Probider
-			- Fargate launch type: Serverless, no EC2 instance instances to manage.
+			- Fargate launch type: run containers on AWS without managing any servers.
 		- IAM roles 
 			- EC2 instance profile
-			- ECS task role
+			- ECS task role: IAM Role used by the ECS task itself. Use when container wants to call other AWS services like S3, SQS, etc.
 		- LB integrations: ALB, NLB
 		- Data Volumes(EFS): Fargate + EFS = Serverless
-	- Fargate: A serverless compute engine for containers, allowing you to run containers without managing servers or clusters.
+			- EFS volume can be shared between different EC2 instances and different ECS Tasks. It can be used as a persistent multi-AZ shared storage for containers.
+	- Fargate: A serverless compute engine for containers, running containers without managing servers or clusters.
 	- ECR Elastic Container Registry: Store and manage Docker images on AWS
+		- A fully managed container registry that makes it easy to store, manage, share, and deploy container images. ECR is fully integrated with ECS, allowing easy retrieval of container images from ECR while managing and running containers using ECS.
 	- **EKS Elastic Kubernetes Service**: An alternative to ECS and open-source. A managed container orchestration service for running Kubernetes on AWS. EKS nodes => EKS pods = ECS tasks.
 		- Node types
 			- Managed Node Groups
@@ -546,8 +548,19 @@ A monitoring tool that keeps an eye on the cloud resources and applications, lik
 ### CodeDeploy, CodeBuild, CodePipeline
 These services automate code deployment, building, and integration process, akin to having a team of robots that continuously improve and fix your house without you lifting a finger.
 
-
 ## Serverless Overviews from a Solution Architect Perspective
+Serverless: don't need to manage/provision servers anymore, just deploy code and functions.
+- in AWS
+	- Lambda
+	- DynamoDB
+	- Cognito
+	- API Gateway
+	- S3
+	- SNS & SQS
+	- Kinesis Data Firehose
+	- Aurora Serverless
+	- Step Functions
+	- Fargate
 ### Lambda
 For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
 

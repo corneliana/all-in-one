@@ -1,3 +1,6 @@
+---
+sticker: emoji//2601-fe0f
+---
 # [[OSI (Open Systems Interconnection) model]]
 
 1. **Physical Layer (OSI Layer 1)**:
@@ -564,6 +567,10 @@ Serverless: don't need to manage/provision servers anymore, just deploy code and
 ### Lambda
 For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
 
+### API Gateway
+A centralized server that manages, secures, and optimizes communication between clients and backend services in a microservices architecture.
+
+Microservices: an architectural approach where a software application is composed of small, independently deployable services that are organized around specific business capabilities and communicate with each other through well-defined APIs.
 
 ## Quiz
 

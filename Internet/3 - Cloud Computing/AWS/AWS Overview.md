@@ -2,36 +2,33 @@
 sticker: emoji//2601-fe0f
 ---
 # [[OSI (Open Systems Interconnection) model]]
-
-1. **Physical Layer (OSI Layer 1)**:
-    - AWS Direct Connect: Establishes a dedicated network connection between AWS and an on-premises data center, bypassing the public internet.
-2. **Data Link Layer (OSI Layer 2)**:
-    - N/A
-3. **Network Layer (OSI Layer 3)**:
-    - Amazon VPC (Virtual Private Cloud): Provides a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network.
-	- Amazon Route 53: DNS web service for routing end users to Internet applications.
+Here it involves the 7 layers of Internet.
+1. **Physical Layer (OSI Layer 1)**: AWS Direct Connect, establishes a dedicated network connection between AWS and an on-premises data center, bypassing the public internet.
+2. **Data Link Layer (OSI Layer 2)**: N/A
+3. **Network Layer (OSI Layer 3)**: 
+	- VPC: provide a logically isolated section to launch AWS resources in a virtual network.
+	- Route 53: DNS web service for routing end users to Internet applications.
 4. **Transport Layer (OSI Layer 4)**:
-    - Global Accelerator: Improves the availability and performance of your applications with local and global traffic management.
+    - Global Accelerator: Improves availability and performance of apps with local and global traffic management.
 	- Network Load Balancer: Distributes incoming application traffic across multiple targets, such as EC2 instances.
-5. **Session Layer (OSI Layer 5)**:
-    - N/A
-6. **Presentation Layer (OSI Layer 6)**:
-    - N/A
+5. **Session Layer (OSI Layer 5)**: N/A
+6. **Presentation Layer (OSI Layer 6)**: N/A
 7. **Application Layer (OSI Layer 7)**:
     - Compute Services:
-	    - EC2 (Elastic Compute Cloud): Provides resizable compute capacity in the cloud.
+	    - EC2: Provides resizable compute capacity in the cloud.
 	    - Lambda: Runs code without provisioning or managing servers.
 	- Storage Services:
-	    - S3 (Simple Storage Service): Object storage service designed to store and retrieve any amount of data.
-	    - EBS (Elastic Block Store): Provides block-level storage volumes for use with EC2 instances.
+	    - S3: Object storage service designed to store and retrieve any amount of data.
+	    - EBS: Provides block-level storage volumes for use with EC2 instances.
 	- Database Services:
-	    - RDS (Relational Database Service): Managed relational database service supporting various database engines like MySQL, PostgreSQL, etc.
+	    - RDS: Managed relational database service supporting various database engines like MySQL, PostgreSQL, etc.
 	    - DynamoDB: Fully managed NoSQL database service.
 	- Networking Services:
 	    - API Gateway: Fully managed service for creating, publishing, maintaining, monitoring, and securing APIs at any scale.
-	    - CloudFront: Content delivery network (CDN) service for fast and secure delivery of data, videos, applications, and APIs.
-	    - Elastic Load Balancing (ELB): Automatically distributes incoming application traffic across multiple targets.
+	    - CloudFront: CDN for fast and secure delivery of data, videos, apps, and APIs.
+	    - ELB: Automatically distributes incoming application traffic across multiple targets.
 	    - Route 53: Scalable DNS web service for routing end users to Internet applications.
+
 
 AWS: Amazon Web Services, a cloud computing platform. Cloud computing is a new layer of abstraction over physical computing resources, which transforms them into scalable, on-demand services that can be used without managing the underlying hardware directly.
 
@@ -246,16 +243,6 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 	- Events => EventBridge (Advanced filtering options with JSON rules) => over 18 services as destinations
 	- IAM Permissions: Resource access policy
 	
-#### Performance
-- **Store
-	- Baseline
-	- Multi-Part upload
-	- Transfer acceleration
-- **Read
-	- S3 Byte-Range Fetches
-	- S3 Select & Glacier Select
-- **Batch Operations
-
 #### Storage Lens
 - Metrics
 	- Summary Metrics: general insights about storage, objects
@@ -569,8 +556,6 @@ For tasks that don't need a dedicated computer running all the time. It's like h
 
 ### API Gateway
 A centralized server that manages, secures, and optimizes communication between clients and backend services in a microservices architecture.
-
-Microservices: an architectural approach where a software application is composed of small, independently deployable services that are organized around specific business capabilities and communicate with each other through well-defined APIs.
 
 ## Quiz
 

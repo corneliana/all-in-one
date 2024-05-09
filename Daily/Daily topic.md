@@ -1,3 +1,10 @@
+GPG, KMS
+
+MSW
+Better than jest.mock? 
+- More real, as it is in the internet layer. Not in code like jest.mock.
+- Less aggressive to the code.
+
 git 
 / search is to use index that generated over a period of time. So it is may not be the main branch, but in a snapshot of the previous work.
 

@@ -1,0 +1,3 @@
+- **API Gateway**: Fully managed service for creating, publishing, maintaining, monitoring, and securing APIs.
+- **Route 53**: Domain Name System (DNS) web service.
+- **VPC (Virtual Private Cloud)**: Virtual network in the cloud.

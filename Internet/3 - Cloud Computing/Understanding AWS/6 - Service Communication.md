@@ -1,0 +1,4 @@
+- **SQS (Simple Queue Service)**: Fully managed message queuing service.
+- **SNS (Simple Notification Service)**: Fully managed pub/sub messaging service.
+- **Kinesis**: Collect, process, and analyze real-time, streaming data.
+- **Active MQ**: Managed message broker service.

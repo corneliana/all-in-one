@@ -1,0 +1,6 @@
+- **IAM (Identity and Access Management)**: Secure control access to AWS services and resources.
+- **Security groups**: Act as a virtual firewall for your EC2 instances.
+- **KMS (Key Management Service)**: Manage encryption keys.
+- **SSM Parameter Store**: Securely store parameters and secrets.
+- **Shield**: Managed Distributed Denial of Service (DDoS) protection service.
+- **WAF (Web Application Firewall)**: Protect web applications from common web exploits.

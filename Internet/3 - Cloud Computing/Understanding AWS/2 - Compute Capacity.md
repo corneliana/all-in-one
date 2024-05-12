@@ -1,0 +1,2 @@
+- **EC2 (Elastic Compute Cloud)**: Provides scalable virtual servers in the cloud.
+- **Lambda**: Serverless compute service for running code without provisioning or managing servers.

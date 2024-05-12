@@ -1,0 +1,7 @@
+- **SES (Simple Email Service)**: Email sending and receiving service.
+- **Pinpoint**: Targeted user engagement service.
+- **SSM Session Manager**: Provides interactive shell access to instances in your VPC.
+- **Cost Explorer**: Analyze AWS costs and usage.
+- **Batch**: Run batch computing workloads.
+- **AppFlow**: Securely transfer data between AWS services and SaaS applications.
+- **Amplify**: Platform for building scalable mobile and web applications.

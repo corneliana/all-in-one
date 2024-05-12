@@ -1,0 +1,2 @@
+- **EBS (Elastic Block Store)**: Provides block storage volumes for EC2 instances.
+- **EC2 Instance Store**: Provides temporary block-level storage for EC2 instances.

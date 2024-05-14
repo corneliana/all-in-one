@@ -59,6 +59,17 @@ S3 File Gateway: a type of AWS Storage Gateway that extends on-premises file sto
 
 With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
 
+
+## **DynamoDB**: Fully managed NoSQL database.
+DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain or operate. It auto scales tables up and down to adjust for capacity and maintain performance. It provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes.
+
+RCU stands for “Read Capacity Units,” and WCU stands for “Write Capacity Units." RCU and WCU are decoupled, so you can increase/decrease each value separately.
+
+DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory **cache** for DynamoDB that delivers up to 10x performance improvement. It caches the most frequently used data, thus offloading the heavy reads on hot keys off your DynamoDB table, hence preventing the `ProvisionedThroughputExceededException` exception.
+
+DynamoDB Streams allows you to capture a time-ordered sequence of item-level modifications in a DynamoDB table. It's integrated with AWS Lambda so that you create triggers that automatically respond to events in real-time.
+
+The maximum size of an item in a DynamoDB table is 400kb.
 ## ElastiCache
 ElastiCache automatically scales the cache cluster size based on the workload, handling varying levels of demand without manual intervention.
 

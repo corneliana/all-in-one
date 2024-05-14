@@ -7,3 +7,4 @@ Edge Locations are strategically distributed around the world, often located in 
 - They leverage Amazon's highly redundant and low-latency network infrastructure, allowing for efficient data transfer. 
 - Edge Locations cache frequently accessed content, further reducing latency for subsequent requests.
 
+Lambda@Edge is a feature of CloudFront that lets you run code closer to users, which improves performance and reduces latency.

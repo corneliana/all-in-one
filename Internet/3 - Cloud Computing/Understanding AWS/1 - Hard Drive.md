@@ -8,7 +8,6 @@ Block-level storage offers fine-grained control over data storage and retrieval 
 
 Note: Storage is where data is kept long-term, and memory is where data is kept short-term for quick access by the computer's processor.
 
-
 ## EBS: Elastic Block Store
 EBS is a network drive, so uses the network to communicate the instance.
 

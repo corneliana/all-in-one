@@ -92,6 +92,9 @@ To build it, we will need:
 - **AppFlow**: Securely transfer data between AWS services and SaaS applications.
 - **Amplify**: Platform for building scalable mobile and web applications.
 
+[[13 - Solution Architecture]]
+
+
 ## Terms
 Elastic: The ability to scale resources seamlessly and adapt to changing demands, whether it's storage capacity, performance, caching capacity, or IP address management.
 

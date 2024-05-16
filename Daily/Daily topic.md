@@ -1,3 +1,7 @@
+关系型数据库的设计模式：
+- put all fields as json in the payload
+- and extract some of them outside as separate columns to do the filtering
+
 TerraForm
 
 GPG, KMS

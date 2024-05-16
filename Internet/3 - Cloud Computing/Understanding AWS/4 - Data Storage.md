@@ -6,8 +6,17 @@
 - Lifecycle
 - Event notifications/log
 
+- **Relational Databases v.s. Non-Relational Databases**
+	- Relational databases organize data into **structured tables** with **predefined schemas**, and they use SQL (Structured Query Language) for querying and manipulating data. They are suitable for applications with complex data relationships and transactions, such as e-commerce platforms, financial systems, and customer relationship management (CRM) applications.
+	    - RDS (Relational Database Service), which supports various engines like MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB
+	    - Amazon Aurora, which is a high-performance, fully managed relational database engine compatible with MySQL and PostgreSQL.
+    
+	- Non-relational databases, also known as NoSQL databases, store and retrieve data in formats other than traditional row-column tables used in relational databases. They are designed for scalability, flexibility, and performance, and they are suitable for applications with large volumes of unstructured or semi-structured data, such as social media platforms, IoT (Internet of Things) systems, and real-time analytics.
+	    - DynamoDB, a fully managed NoSQL database service offering low-latency, high-throughput storage for applications that require single-digit millisecond latency at any scale
+	    - Amazon DocumentDB (with MongoDB compatibility), a fully managed document database service compatible with MongoDB workloads.
+
 ## EFS: Elastic File System
-File system that can 
+Fully managed file system for EC2 instances that can:
 - be mounted on many EC2 instances in multi-AZ
 - allow multiple EC2 instances to access the file system at the same time
 - content management, web serving, data sharing, wordpress.
@@ -17,7 +26,8 @@ vs Google Drive
 - serve similar purposes in providing file storage and access, but use different technologies and architectures. Google Drive is a cloud-based storage service with its own protocols, while NFS is a network file system protocol designed for sharing files over a local or wide area network. Google Drive is a cloud-based service designed for personal and collaborative file storage and sharing, while NFS is a network file system protocol primarily used for centralized file storage and sharing within traditional IT environments.
 
 ## S3: Simple Storage Service
-An infinitely large **external hard drive** or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. Great for data backup, archiving, and serving web content.
+An infinitely large **external hard drive** or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web.
+S3 is commonly used for storing large amounts of data in a scalable and cost-effective manner, great for data backup, archiving, and serving web content. 
 
 ### Keys
 - **Buckets** (dictionaries) to store objects (files) **at regional level**.
@@ -37,8 +47,36 @@ An infinitely large **external hard drive** or cloud storage service to store an
 		- S3 Byte-Range Fetches
 		- S3 Select & Glacier Select
 	- **Batch Operations
-	
 - **Security**
+	- Object Encryption
+		- Server-Side Encryption
+			- S3-Managed Keys - Enabled by default. AES-256
+			- ![[SSE-S3.png]]
+			- KMS keys stored in KMS (SSE-KMS): use KMS to manage encryption keys
+			- ![[S3-KMS.png]]
+				- KMS limits
+					- Upload calls the GenerateDataKey KMS API
+					- Download calls the Decrypt KMS API
+					- Count towards the KMS quota per second (5500, 10000, 30000 req/s based on region)
+					- You can request a quota increase using the Service Quotas Console
+			- Customer-provided keys (SSE-C): manage your own encryption keys outside of AWS. HTTPS must be used.
+			- ![[S3-SSE-Customer-provided-key.png]]
+		- Client-Side Encryption
+			- Use client libraries such as Amazon S3 Client-Side Encryption Library
+			- Clients must encrypt data themselves before sending to Amazon S3  
+			- Clients must decrypt data themselves when retrieving from Amazon S3
+			- Customer fully manages the keys and encryption cycle
+			- ![[S3-CSE.png]]
+		- Encryption in transit(SSL/TLS)
+			- S3 exposes two endpoints:
+				- HTTP Endpoint – non encrypted  
+				- HTTPS Endpoint – encryption in flight, recommended and mandatory for SSE-C 
+			- Most clients would use the HTTPS endpoint by default
+			- ![[S3-Force-encryption.png]]
+		- Note
+			- SSE-S3 encryption is automatically applied to new objects stored in S3 bucket
+			- Optionally, you can “force encryption” using a bucket policy and refuse any API call to PUT an S3 object without encryption headers (SSE-KMS or SSE-C)
+			- Bucket Policies are evaluated before “Default Encryption”
 	- **pre-signed URL v.s. public URL**
 		- pre-signed URL contains a signature that carries the user's credentials, inherited from the permissions of the user that generated the URL. They are temporary URLs that you can grant time-limited access to some actions.
 	- **Policies
@@ -47,7 +85,6 @@ An infinitely large **external hard drive** or cloud storage service to store an
 		- **Resource-based**: grant access to buckets/accounts, encrypt objects at upload
 			- Bucket Policies
 				- JSON based policies: Resource, Effect, Actions, Principal
-				- 
 				- Use cases
 			- Object ACL(Access Control List): finer grain
 			- Bucket ACL: less common
@@ -55,10 +92,30 @@ An infinitely large **external hard drive** or cloud storage service to store an
 			- The user IAM permissions ALLOW it OR the resource policy ALLOWS it
 			- AND there’s no explicit DENY
 
+	- Using S3 as a secure transfer point: a location or service within a system where data can be transferred securely between different entities. It often involves a service or mechanism that ensures the confidentiality, integrity, and availability of data during its transfer. This can include encryption of data in transit, authentication mechanisms to verify the identity of parties involved in the transfer, and protection against unauthorized access or interception. 
+
 S3 File Gateway: a type of AWS Storage Gateway that extends on-premises file storage to the cloud, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block).
 
 With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
 
+
+## Aurora
+MySQL and PostgreSQL-compatible relational database that offers the performance and availability of commercial-grade databases at little cost.
+It is fully managed by AWS, meaning AWS handles administrative tasks such as provisioning, patching, and backups, allowing users to focus on apps rather than database management.
+
+It achieves high performance by using a distributed architecture that separates compute and storage, allowing it to scale out horizontally across multiple nodes. It also provides instant scalability with auto-scaling capabilities, adjusting resources based on workload demand.
+
+Compared to traditional relational database options like MySQL or PostgreSQL running on EC2 instances, Aurora offers **significantly higher performance, automatic failover, and continuous backup and replication across multiple Availability Zones, ensuring data durability and high availability.**
+
+
+
+## RDS: Relational Database Service
+A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
+RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.
+
+Backup for better performance and avoid disaster.
+
+RDS Proxy vs multi-AZ in terms of re-connecting to DB.s
 
 ## **DynamoDB**: Fully managed NoSQL database.
 DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain or operate. It auto scales tables up and down to adjust for capacity and maintain performance. It provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes.
@@ -67,11 +124,20 @@ RCU stands for “Read Capacity Units,” and WCU stands for “Write Capacity U
 
 DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory **cache** for DynamoDB that delivers up to 10x performance improvement. It caches the most frequently used data, thus offloading the heavy reads on hot keys off your DynamoDB table, hence preventing the `ProvisionedThroughputExceededException` exception.
 
+Amazon DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement – from milliseconds to microseconds – even at millions of requests per second. DAX does all the heavy lifting required to add in-memory acceleration to your DynamoDB tables, without requiring developers to manage cache invalidation, data population, or cluster management.
+
 DynamoDB Streams allows you to capture a time-ordered sequence of item-level modifications in a DynamoDB table. It's integrated with AWS Lambda so that you create triggers that automatically respond to events in real-time.
+DynamoDB Streams enable DynamoDB to get a changelog and use that changelog to replicate data across replica tables in other AWS Regions.
+
+It has an out-of-the-box caching feature.
 
 The maximum size of an item in a DynamoDB table is 400kb.
+
+Amazon DynamoDB provides the on-demand backup capability to create full backups of your tables for long-term retention and archival for regulatory compliance needs.
 ## ElastiCache
 ElastiCache automatically scales the cache cluster size based on the workload, handling varying levels of demand without manual intervention.
 
-## Snowball Edge Storage Optimized device jobs
+## Storage Extras
+### Snowball Edge Storage Optimized device jobs
 - AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations**. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
+

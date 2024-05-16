@@ -41,15 +41,6 @@ In a sense, the whole idea of AWS is like assembling a remote computer, along wi
 
 # The steps of building a remote network
 
-### Elastic Cache
-A special memory box for storing copies of the most frequently used items (data caching) so we can get them quickly without searching through the entire house.
-
-## 3. Organize and Access data (db and content delivery)
-### EFS: Elastic File System
-File system that can 
-- be mounted on many EC2 instances in multi-AZ
-- allow multiple EC2 instances to access the file system at the same time
-
 ### S3: Simple Storage Service
 Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
 #### Versioning the buckets
@@ -171,13 +162,7 @@ Up to 15 Aurora Read Replicas in a single Aurora DB Cluster
 Use Perform on Demond backups to store long-term backups for your Aurora database for disaster recovery and audit purposes
 
 Aurora cloning
-### RDS: Relational Database Service
-A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
-RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.
 
-Backup for better performance and avoid disaster.
-
-RDS Proxy vs multi-AZ in terms of re-connecting to DB.
 
 #### Read replica
 RDS database can have up to 15 Read Replicas.

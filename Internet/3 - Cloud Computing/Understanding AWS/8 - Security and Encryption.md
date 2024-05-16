@@ -82,3 +82,24 @@ In this example, the S3 bucket policy allows `s3:GetObject` action for objects i
 Amazon Cognito can be used to federate mobile user accounts and provide them with their own IAM permissions, so they can be able to access their own personal space in the S3 bucket.
 
 Amazon Cognito lets you add user sign-up, sign-in, and access control to web and mobile apps quickly and easily. It scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.
+
+
+## Data Security
+
+### AWS Secrets Manager
+storing and managing sensitive information such as database credentials.
+specifica
+lly designed for managing secrets like database credentials. It provides additional features tailored for secret management, such as integration with RDS for automatic rotation, and it's generally considered the best practice for managing credentials securely.
+
+### AWS Systems Manager Parameter Store
+storing and managing sensitive information such as database credentials.
+a versatile service primarily used for storing configuration data and secrets. While it does support automatic rotation of parameters, it's not specifically tailored for secret management like AWS Secrets Manager. Parameter Store may be suitable for managing other types of configuration data but may lack some of the advanced features and integrations provided by Secrets Manager for managing secrets like database credentials.
+
+### Macia
+A security service to help organizations discover, classify, and protect sensitive data stored in AWS. It uses machine learning and pattern matching techniques to automatically identify and classify sensitive data such as personally identifiable information (PII), intellectual property, and financial data. Macie can analyze data stored in various AWS services, including S3 buckets, Amazon RDS databases, and AWS Glue Data Catalogs.
+
+## GuardDuty
+Amazon GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior in AWS accounts and workloads. It is not specifically designed for traffic inspection or filtering within a VPC. GuardDuty focuses on identifying threats and anomalies based on network traffic, AWS API calls, and DNS data.
+
+## Firewall Manager
+AWS Firewall Manager is a security management service that allows you to centrally configure and manage firewall rules across multiple AWS accounts and resources. While it can help enforce security policies and manage firewall rules, it is not specifically designed for traffic inspection and filtering within a single VPC.

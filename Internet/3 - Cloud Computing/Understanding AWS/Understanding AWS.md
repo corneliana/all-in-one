@@ -24,6 +24,7 @@ To build it, we will need:
 - **Lambda**: Serverless compute service for running code without provisioning or managing servers.
 
 **[[3 - Containers and Orchestration]]**
+- **EFS (Elastic File System)**: Fully managed file system for EC2 instances.
 - **ECS (Elastic Container Service)**: Manages containers using Docker.
 - **Fargate**: Serverless compute engine for containers.
 - **ECR (Elastic Container Registry)**: Docker container registry.
@@ -31,7 +32,6 @@ To build it, we will need:
 - **CloudFormation**: Infrastructure as Code (IaC) service for provisioning AWS resources.
 
 **[[4 - Data Storage]]**
-- **EFS (Elastic File System)**: Fully managed file system for EC2 instances.
 - **S3 (Simple Storage Service)**: Object storage service.
 - **Aurora**: MySQL and PostgreSQL-compatible relational database.
 - **RDS (Relational Database Service)**: Managed relational database service.

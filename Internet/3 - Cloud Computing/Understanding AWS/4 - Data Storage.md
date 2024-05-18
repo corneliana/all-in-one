@@ -18,10 +18,18 @@ RDS
 	    - Amazon DocumentDB (with MongoDB compatibility), a fully managed document database service compatible with MongoDB workloads.
 
 ## EFS: Elastic File System
-Fully managed file system for EC2 instances that can:
-- be mounted on many EC2 instances in multi-AZ
-- allow multiple EC2 instances to access the file system at the same time
-- content management, web serving, data sharing, wordpress.
+- **What is EFS? v.s EBS?**
+	- Managed NFS (network file system) that can be mounted **on many EC2 in multi-AZ**
+	- allow multiple EC2 instances to access the file system at the same time
+	- use cases: content management, web serving, data sharing, wordpress.
+
+- **Storage Classes**
+	- Storage Tiers (lifecycle management feature – move file after N days)
+		- Standard: for frequently accessed files
+		- Infrequent access (EFS-IA): cost to retrieve files, lower price to store. **Enable EFS-IA with a Lifecycle Policy**
+	- Availability and durability
+		- Standard: Multi-AZ, great for prod
+		- One Zone: One AZ, great for dev, backup enabled by default, compatible with IA (EFS One Zone-IA)
 
 NFS: Network File System, a distributed file system protocol that allows a user on a client computer to access files over a network as if they were stored locally on the client's own hard drive.
 vs Google Drive

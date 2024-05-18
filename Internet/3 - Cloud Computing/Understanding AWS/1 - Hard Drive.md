@@ -25,10 +25,11 @@ Like a physical computer needs a hard drive to **store its operating system, app
 	- Recycle Bin: Set up rules to retain deleted snapshots so they can be recovered.
 	- Fast snapshot restore(FSR): Force full initialization to have no latency on the first use.
 
-- **EBS Volume Types:*
+- **EBS Volume Types*
 	- **General Purpose SSD:** cost-effective usage, **system boot volumes, virtual backups, development and test environments**. gp2/gp3
 	- **Provisioned IOPS(PIOPS) SSD:** sustained IOPS performance(6000), database workloads. **Supports EBS Multi-attach**. io1/io2, io3 Block Express.
-	- **Hard Disk Drives(HDD): Cannot be a boot volume**
+	- **Hard Disk Driv
+	- es(HDD): Cannot be a boot volume**
 		- Throughput Optimized HDD(stl): big data, data warehouse, log processing.
 		- Cold HDD(scl): for data that is frequently accessed, lowest cost.
 	- **Only gp2/gp3 and io1/io2 can be used as boot volumes**

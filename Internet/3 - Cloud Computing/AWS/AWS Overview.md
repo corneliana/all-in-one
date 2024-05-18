@@ -30,15 +30,6 @@ Here it involves the 7 layers of Internet.
 	    - Route 53: Scalable DNS web service for routing end users to Internet applications.
 
 
-AWS: Amazon Web Services, a cloud computing platform. Cloud computing is a new layer of abstraction over physical computing resources, which transforms them into scalable, on-demand services that can be used without managing the underlying hardware directly.
-
-The platform is used in a specific region => **Availability Zones (AZ)**
-- global services: IAM, Route 53(DNS Service), CloudFront(Content Delivery Network), WAF(Web Application Firewall)
-- regional services: EC2(IaaS), Elastic Beanstalk(PaaS), Lambda(FaaS), Rekognition(SaaS)
-
-In a sense, the whole idea of AWS is like assembling a remote computer, along with its network, piece by piece according to the needs of users.
-
-
 # The steps of building a remote network
 
 ### S3: Simple Storage Service

@@ -42,24 +42,7 @@ In a sense, the whole idea of AWS is like assembling a remote computer, along wi
 # The steps of building a remote network
 
 ### S3: Simple Storage Service
-Think of S3 as an infinitely large external hard drive or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web. It's great for data backup, archiving, and serving web content.
-#### Versioning the buckets
-- Enabled at the bucket level
-#### Security
-- **pre-signed URL v.s. public URL**
-	- The former contains a signature that carries the user's credentials in the URL, which is inherited from the permissions of the user that generated the URL for GET/PUT.
-	- S3 Pre-Signed URLs are temporary URLs that you generate to grant time-limited access to some actions in your S3 bucket.
-- **Policies
-	- Explicit DENY in an IAM Policy will take precedence over an S3 bucket policy.
-	- User-based
-		- IAM Policies
-	- Resource-based
-		- Bucket Polices
-			- JSON based policies: Resource, Effect, Actions, Principal
-			- Use it to grant access to buckets/accounts, encrypt objects at upload
-			- Use cases
-	- Object ACL(Access Control List)
-	- Bucket ACL
+
 - **Encryption
 	- **Default Encryption v.s. Bucket polices
 		- Default Encryption is auto applied and bucket polices are added.
@@ -80,28 +63,7 @@ Think of S3 as an infinitely large external hard drive or cloud storage service 
 	- **In transit/flight: SSL/TLS
 		- HTTPS
 		- Force encryption => use the bucket policy of aws:SecureTransport
-- **CORS
-	- Cross-Origin Resource Sharing: defines a way for client web applications that are loaded in one domain to interact with resources in a different domain
-- **MFA Delete
-	- Extra protection against permanent deletion, which forces users to use MFA codes before deleting S3 objects. It's an extra level of security to prevent accidental deletions.
-	- `aws s3api put-bucket-versioning --bucket demo-stephane-mfa-delete-2020 --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "arn:aws:iam::XXXXXXXXXX:mfa/root-account-mfa-device XXXXXX --profile root-mfa-delete-demo(this is the profile)`
-- **Glacier Valut Lock & S3 Object Lock
-	Adopt a WORM model (Write Once Read Many)
-	- **Glacier
-		- Create a Vault Lock Policy
-		- Lock the Policy for future edits
-	- **Object
-		- Block an object version deletion
-		- Retention mode
-			- Compliance
-			- Governance: more lenient than compliance
-		- Legal Hold: protect the object indefinitely, independent from retention period
-- **Access Logs
-	- Log all access to S3 buckets
-	- Amazon Athena can then be used to run serverless analytics on top of the log files.
-- **Access Points
-	- To avoid unmanageable policies and manage security at scale.
-	- Specific points to access corresponding resources.
+
 #### Storage
 - **Services provided: Static website hosting**
 	- S3 can host static websites and have them accessible on the Internet. If 403, makes sure the bucket policy allows public reads.
@@ -164,13 +126,7 @@ Use Perform on Demond backups to store long-term backups for your Aurora databas
 Aurora cloning
 
 
-#### Read replica
-RDS database can have up to 15 Read Replicas.
-Read Replicas have Asynchronous Replication, therefore it's likely users will only read Eventual Consistency.
 
-#### RDS in multi-AZ
-Multi-AZ keeps the same connection string regardless of which database is up.
-Multi-AZ won't help when a disaster happens at the AWS region level. Multi-AZ helps when a disaster happens at the AZ level.
 
 #### ElastiCache
 ElastiCache and RDS Read Replicas do indeed help with scaling reads.

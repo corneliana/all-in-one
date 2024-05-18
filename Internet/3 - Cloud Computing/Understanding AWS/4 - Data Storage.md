@@ -1,10 +1,12 @@
 **Keys:**
-- Storage method
-- I/O performance
-- Availability
+- Storage: how much data and for how long? Will it grow? Average object size? How are they accessed? Data durability? Source of truth for the data?
+- Performance: I/O and throughput needs? Will it change, does it need to scale or fluctuate during the day?
+- Availability: Latency requirements? Concurrent users?
 - Security
 - Lifecycle
 - Event notifications/log
+
+RDS
 
 - **Relational Databases v.s. Non-Relational Databases**
 	- Relational databases organize data into **structured tables** with **predefined schemas**, and they use SQL (Structured Query Language) for querying and manipulating data. They are suitable for applications with complex data relationships and transactions, such as e-commerce platforms, financial systems, and customer relationship management (CRM) applications.
@@ -93,6 +95,28 @@ S3 is commonly used for storing large amounts of data in a scalable and cost-eff
 			- AND there’s no explicit DENY
 
 	- Using S3 as a secure transfer point: a location or service within a system where data can be transferred securely between different entities. It often involves a service or mechanism that ensures the confidentiality, integrity, and availability of data during its transfer. This can include encryption of data in transit, authentication mechanisms to verify the identity of parties involved in the transfer, and protection against unauthorized access or interception. 
+- **CORS
+	- Cross-Origin Resource Sharing: defines a way for client web applications that are loaded in one domain to interact with resources in a different domain
+- **MFA Delete
+	- Extra protection against permanent deletion, which forces users to use MFA codes before deleting S3 objects. It's an extra level of security to prevent accidental deletions.
+	- `aws s3api put-bucket-versioning --bucket demo-stephane-mfa-delete-2020 --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "arn:aws:iam::XXXXXXXXXX:mfa/root-account-mfa-device XXXXXX --profile root-mfa-delete-demo(this is the profile)`
+- **Glacier Valut Lock & S3 Object Lock
+	Adopt a WORM model (Write Once Read Many)
+	- **Glacier
+		- Create a Vault Lock Policy
+		- Lock the Policy for future edits
+	- **Object
+		- Block an object version deletion
+		- Retention mode
+			- Compliance
+			- Governance: more lenient than compliance
+		- Legal Hold: protect the object indefinitely, independent from retention period
+- **Access Logs
+	- Log all access to S3 buckets
+	- Amazon Athena can then be used to run serverless analytics on top of the log files.
+- **Access Points
+	- To avoid unmanageable policies and manage security at scale.
+	- Specific points to access corresponding resources.
 
 S3 File Gateway: a type of AWS Storage Gateway that extends on-premises file storage to the cloud, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block).
 
@@ -107,8 +131,6 @@ It achieves high performance by using a distributed architecture that separates 
 
 Compared to traditional relational database options like MySQL or PostgreSQL running on EC2 instances, Aurora offers **significantly higher performance, automatic failover, and continuous backup and replication across multiple Availability Zones, ensuring data durability and high availability.**
 
-
-
 ## RDS: Relational Database Service
 A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
 RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.
@@ -116,6 +138,14 @@ RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Auror
 Backup for better performance and avoid disaster.
 
 RDS Proxy vs multi-AZ in terms of re-connecting to DB.s
+
+- Read replica
+	- RDS database can have up to 15 Read Replicas.
+	- Read Replicas have Asynchronous Replication, therefore it's likely users will only read Eventual Consistency.
+
+- RDS in multi-AZ
+	- Multi-AZ keeps the same connection string regardless of which database is up.
+	- Multi-AZ won't help when a disaster happens at the AWS region level. Multi-AZ helps when a disaster happens at the AZ level.
 
 ## **DynamoDB**: Fully managed NoSQL database.
 DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain or operate. It auto scales tables up and down to adjust for capacity and maintain performance. It provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes.

@@ -1,1 +1,1 @@
-![![all-in-one/Internet/3 - Cloud Computing/Understanding AWS/#^Table1]]
+![![all-in-one/Internet/3 - Cloud Computing/Understanding AWS/#^Table1]]Use Kinesis Data Analytics with Kinesis Data Streams as the underlying source of data.

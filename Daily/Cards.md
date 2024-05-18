@@ -1,4 +1,7 @@
 Persist Owner Leads
+
+When persist data a new schema, think about how will affect old data?
+
 What about realtair? The newly added fields will affect them if we set the key to be required while its value can be null.
 
 Realtair offers a price update to help agents send emails to consumers to see if they are interested in the house in the email. If the consumer click and open the email, the agent knows who might be interested in buying or selling a house and can follow up with them.

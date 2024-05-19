@@ -13,3 +13,5 @@
 	- Regions, like "ap-southeast," represent large geographic areas that contain multiple Availability Zones. Each Availability Zone within a region, such as "ap-southeast-1a," "ap-southeast-1b," etc., represents an isolated data center with its own infrastructure, facilities, and redundancy measures. Deploying resources across multiple Availability Zones within the same region ensures high availability and fault tolerance for applications by protecting against failures at the data center level.
 
 AWS API Gateway is like a bouncer at a club, managing access to your backend services and APIs, while AWS Route 53 is like a GPS for the internet, directing traffic to your web applications using domain names.
+
+AWS EventBridge events are like notifications about things happening in your AWS environment, while CloudWatch alarms are like alerts that trigger based on specific conditions you define. EventBridge events are broader and can trigger actions based on various events, while CloudWatch alarms focus on monitoring specific metrics and triggering alerts when thresholds are exceeded.

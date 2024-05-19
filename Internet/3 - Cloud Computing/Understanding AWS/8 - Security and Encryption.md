@@ -2,7 +2,7 @@
 ## Encryption
 - **In flight(SSL)**
 	- Data is encrypted before sending and decrypted after receiving 
-	- SSL certificates help with encryption (HTTPS)
+	- SSL certificates help with encryption **(HTTPS)**
 	- Encryption in flight ensures no MITM (man in the middle attack) can happen
 - SSE at rest
 	- Data is exncrypted after being received by the server, and decrypted before sent
@@ -10,11 +10,13 @@
 - CSE
 	- Data is encrypted by client and never decrypted by the server but by a receiving client
 	- Could leverage Envelope Encryption
+	- With Client-Side Encryption, the server doesn't need to know any information about the encryption scheme being used, as the server will not perform any encryption or decryption operations.
 
 - KMS: Manage encryption keys
 	- Fully integrated with IAM for authorization
 	- Able to audit KMS Key usage using CloudTrail
 	- Seamlessly integrated into most AWS services (EBS, S3, RDS, SSM...)
+	- Automatic Rotation on your KMS Key, the backing key is rotated every 1 year
 	- Never ever store your secrets in plaintext, especially in your code!
 		- KMS Key Encryption also available through API calls (SDK, CLI)
 		- Encrypted secrets can be stored in the code / environment variables
@@ -57,7 +59,7 @@
 	- Secure storage for configuration and secrets
 	- Optional Seamless Encryption using KMS
 	- Serverless, scalable, durable, easy SDK
-	- Version tracking of configurations / secrets
+	- **Version tracking of configurations / secrets**
 	- Security through IAM
 	- Notifications with Amazon EventBridge
 	- Integration with CloudFormation
@@ -140,7 +142,20 @@
 	- DDoS: Distributed Denial of Service – many requests at the same time
 	- Shield standard: Free service that is activated for every AWS customer. Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer3/4 attacks.
 	- Shield Advanced: Optional DDoS mitigation service ($3,000 per month per organization). Protect against more sophisticated attack on Amazon EC2, Elastic Load Balancing (ELB), Amazon CloudFront, AWS Global Accelerator, and Route 53
-	
+
+- **DDoS Resiliency**
+	- If we are at the edge, we can have a better DDoS protection
+		- Use CloudFront or Global Accelerator, the edge-locations are auto DDoS protected.
+		- Use Route 53, Domain Name Resolution at the edge also has a DDoS Protection mechanism.
+	- Avoid high traffic so as to avoid DDoS
+		- Infrastructure layer defense: CloudFront/Global Accelerator, Route 53, ELB
+		- EC2 with Auto Scaling: in case of sudden traffic surges including a flash crowd or a DDoS attack
+		- ELB: scales with traffic increases and will distribute traffic to many EC2 instances
+	- Detect and filter malicious web requests (BP1, BP2) + Shield Advanced (BP1, 2, 6)
+	- Obfuscating AWS resources(BP1, BP4, BP6)
+		- Using CloudFront, API Gateway, Elastic Load Balancing to hide your backend resources (Lambda functions, EC2 instances)
+	- ![[Best-practice-for-DDoS-resiliency attach-surface-reduction.png]]
+
 - **Firewall Manager**
 	- A security management service that **centrally configure and manage firewall rules across multiple AWS accounts and resources**. But is not specifically designed for traffic inspection and filtering within a single VPC.
 	- Rules are applied to new resources as they are created (good for compliance) across all and future accounts in your Organization
@@ -151,11 +166,12 @@
 	- A threat detection service that continuously monitors for **malicious activity and unauthorized behavior in AWS accounts and workloads**. It is not specifically designed for traffic inspection or filtering within a VPC. It focuses on identifying threats and anomalies based on network traffic, AWS API calls, and DNS data.
 	- Input data includes:  
 		- CloudTrail Events Logs – unusual API calls, unauthorized deployments
-		- CloudTrailManagementEvents–createVPCsubnet,createtrail,...
-		- CloudTrailS3DataEvents–getobject,listobjects,deleteobject,...
+		- CloudTrailManagementEvents–create VPC subnet, create trail,...
+		- CloudTrailS3DataEvents–get object, list objects, delete object,...
 		- VPC Flow Logs – unusual internal traffic, unusual IP address  
 		- DNS Logs – compromised EC2 instances sending encoded data within DNS queries
 		- Optional Features – EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events...
+	- Then generate findings.
 	- Can setup EventBridge rules to be notified in case of findings
 	- Can protect against CryptoCurrency attacks (has a dedicated “finding” for it)
 	
@@ -170,7 +186,7 @@
 		- Identifies software vulnerabilities in function code and package dependencies
 		- Assessment of functions as they are deployed
 	- Reporting & Integration with AWS Security Hub
-	- Send findings to Amazon Event Bridge
+	- **Send findings to Amazon Event Bridge**
 
 - Macia
 	- A fully managed data security and data privacy service that **uses machine learning and pattern matching to discover and protect sensitive data** in AWS.

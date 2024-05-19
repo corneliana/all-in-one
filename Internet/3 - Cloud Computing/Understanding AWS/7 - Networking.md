@@ -3,11 +3,6 @@ Virtual network in the cloud.
 A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 ![[VPC-components-diagram.png]]
 
-- Default VPC Walkthrough
-	- All new AWS accounts have a default VPC
-	- New EC2 instances are launched into the default VPC if no subnet is specified
-	- Default VPC has Internet connectivity and all EC2 instances inside it have public IPv4 addresses
-	- We also get a public and a private IPv4 DNS names
 - VPC in AWS - IPv4
 	- You can have multiple VPCs in an AWS region (max. 5 per region – soft limit)
 	- Max. CIDR per VPC is 5, for each CIDR: • Min. size is /28 (16 IP addresses)  
@@ -85,7 +80,13 @@ VPC - Traffic Mirroring
 IPv6
 
 ### VPC Summary
+- Default VPC
+	- All new AWS accounts have a default VPC
+	- New EC2 instances are launched into the default VPC if no subnet is specified
+	- Default VPC has Internet connectivity and all EC2 instances inside it have public IPv4 addresses
+	- We also get a public and a private IPv4 DNS names
 - CIDR – IP Range
+	- Classless Inter-Domain Routing – a method for allocating IP addresses
 - VPC – Virtual Private Cloud => we define a list of IPv4 & IPv6 CIDR
 - Subnets – tied to an AZ, we define a CIDR
 - Internet Gateway – at the VPC level, provide IPv4 & IPv6 Internet Access

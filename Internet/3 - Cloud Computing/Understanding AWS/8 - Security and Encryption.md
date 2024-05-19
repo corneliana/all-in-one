@@ -1,3 +1,54 @@
+
+## Encryption
+- **In flight(SSL)**
+	- Data is encrypted before sending and decrypted after receiving 
+	- SSL certificates help with encryption (HTTPS)
+	- Encryption in flight ensures no MITM (man in the middle attack) can happen
+- SSE at rest
+	- Data is encrypted after being received by the server, and decrypted before sent
+	- The encryption / decryption keys must be managed somewhere and the server must have access to it
+- CSE
+	- Data is encrypted by client and never decrypted by the server but by a receiving client
+	- Could leverage Envelope Encryption
+
+- KMS: Manage encryption keys
+	- Fully integrated with IAM for authorization
+	- Able to audit KMS Key usage using CloudTrail
+	- Seamlessly integrated into most AWS services (EBS, S3, RDS, SSM...)
+	- Never ever store your secrets in plaintext, especially in your code!
+		- KMS Key Encryption also available through API calls (SDK, CLI)
+		- Encrypted secrets can be stored in the code / environment variables
+	- Keys type
+		- Symmetric(AES-256 keys)
+			- AWS services that are integrated with KMS use Symmetric CMKs
+			- You never get access to the KMS Key unencrypted (must call KMS API to use)
+		- Asymmetric
+			- Public (Encrypt) and Private Key (Decrypt) pair
+			- Used for Encrypt/Decrypt, or Sign/Verify operations
+			- The public key is downloadable, but can’t access the Private Key unencrypted
+			- Use case: encryption outside of AWS by users who can’t call the KMS API
+		- Types
+			- AWS owned/managed, customer managed keys created/imported
+		- Polices
+			- Similar to S3 bucket policies
+	
+- Multi-Region Keys
+- Secrets Manager
+- Certificate Manager(ACM)
+	- Requesting Public Certificates
+- API Gateway
+- WAF: Web Application Firewall
+	- Protect web applications from common web exploits.
+- Shield: Managed Distributed Denial of Service (DDoS) protection service.
+- Firewall Manager
+	- A security management service that centrally configure and manage firewall rules across multiple AWS accounts and resources. While it can help enforce security policies and manage firewall rules, it is not specifically designed for traffic inspection and filtering within a single VPC.
+- GuardDuty
+	- A threat detection service that continuously monitors for malicious activity and unauthorized behavior in AWS accounts and workloads. It is not specifically designed for traffic inspection or filtering within a VPC. It focuses on identifying threats and anomalies based on network traffic, AWS API calls, and DNS data.
+- Inspector
+	- 
+- Macia
+	- A fully managed data security and data privacy service that **uses machine learning and pattern matching to discover and protect sensitive data** in AWS.
+
 ## IAM: Identity and Access Management
 Secure control access to AWS services and resources.
 
@@ -70,12 +121,33 @@ In this example, the S3 bucket policy allows `s3:GetObject` action for objects i
 ```
 In this example, the S3 bucket policy allows `s3:GetObject` action for objects in the `example-bucket` bucket only if the requester's principal has the tag `Department:Marketing` attached to it. This condition ensures that only principals with the specified tag can access the objects in the bucket.
 
+- Organizations
+	- Global service to manage multiple AWS accounts
 
-- **Security groups**: Act as a virtual firewall for your EC2 instances.
-- **KMS (Key Management Service)**: Manage encryption keys.
-- **SSM Parameter Store**: Securely store parameters and secrets.
-- **Shield**: Managed Distributed Denial of Service (DDoS) protection service.
-- **WAF (Web Application Firewall)**: Protect web applications from common web exploits.
+- IAM roles v.s. Resource-based policies
+	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
+	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
+	- IAM role: Kinesis stream, Systems Manager Run Command, ECS task...
+
+- Permission boundaries
+	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
+
+- Identity Center(successor to AWS single sign-on): Fine grained Permissions and Assignments
+	- One login (single sign-on) for all your  
+		- AWS accounts in AWS Organizations  
+		- Business cloud applications (e.g., Salesforce, Box, Microsoft 365, ...) 
+		- SAML2.0-enabled applications  
+		- EC2 Windows Instances
+
+- Control Tower
+	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+
+## Security groups
+Act as a virtual firewall for your EC2 instances.
+
+
+## SSM Parameter Store
+Securely store parameters and secrets.
 
 
 ## Cognito
@@ -98,8 +170,5 @@ a versatile service primarily used for storing configuration data and secrets. W
 ### Macia
 A security service to help organizations discover, classify, and protect sensitive data stored in AWS. It uses machine learning and pattern matching techniques to automatically identify and classify sensitive data such as personally identifiable information (PII), intellectual property, and financial data. Macie can analyze data stored in various AWS services, including S3 buckets, Amazon RDS databases, and AWS Glue Data Catalogs.
 
-## GuardDuty
-Amazon GuardDuty is a threat detection service that continuously monitors for malicious activity and unauthorized behavior in AWS accounts and workloads. It is not specifically designed for traffic inspection or filtering within a VPC. GuardDuty focuses on identifying threats and anomalies based on network traffic, AWS API calls, and DNS data.
 
-## Firewall Manager
-AWS Firewall Manager is a security management service that allows you to centrally configure and manage firewall rules across multiple AWS accounts and resources. While it can help enforce security policies and manage firewall rules, it is not specifically designed for traffic inspection and filtering within a single VPC.
+

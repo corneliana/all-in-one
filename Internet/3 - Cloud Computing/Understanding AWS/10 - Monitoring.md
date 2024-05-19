@@ -1,6 +1,58 @@
+- **CloudWatch v.s. CloudTrail v.s. Config**
+	- CloudWatch  
+		- Performance monitoring (metrics, CPU, network, etc...) & dashboards
+		- Events & Alerting  
+		- Log Aggregation & Analysis
+	- CloudTrail  
+		- Record API calls made within your Account by everyone
+		- Can define trails for specific resources  
+		- Global Service
+	- Config
+		- Record configuration changes
+		- Evaluate resources against compliance rules
+		- Get timeline of changes and compliance
+
+- **For an Elastic Load Balancer**
+	- CloudWatch:  
+		- Monitoring Incoming connections metric
+		- Visualize error codes as % over time  
+		- Make a dashboard to get an idea of your load balancer performance
+	- Config:  
+		- Track security group rules for the Load Balancer  
+		- Track configuration changes for the Load Balancer  
+		- Ensure an SSL certificate is always assigned to the Load Balancer (compliance)
+	- CloudTrail:  
+		- Track who made any changes to the Load Balancer with API calls
+
+## CloudWatch
+Monitoring and observability service.
 
 ## CloudTrail
+Record a history of AWS API calls.
+You can use the CloudTrail Console to view the last 90 days of recorded API activity. For events older than 90 days, use Athena to analyze CloudTrail logs stored in S3.
 
-- **CloudWatch**: Monitoring and observability service.
-- **CloudTrail**: Record AWS API calls for your account.
-- **Config**: Assess, audit, and evaluate the configurations of your AWS resources.
+## Config
+- What is Config?
+	- Assess, audit, and evaluate the compliances and configurations of the AWS resources.
+	- Questions that can be solved by AWS Config:  
+		- Is there unrestricted SSH access to my security groups?
+		- Do my buckets have any public access?  
+		- How has my ALB configuration changed over time?
+	- You can receive alerts (SNS notifications) for any changes  
+	- AWS Config is a per-region service  
+	- Can be aggregated across regions and accounts  
+	- Possibility of storing the configuration data into S3 (analyzed by Athena)
+
+- Config rules
+	- Creation
+		- AWS managed rules
+		- Customized rules
+		- AWS Config Rules does not prevent actions from happening (no deny)
+		- Pricing: no free tier, $0.003 per configuration item recorded per region, $0.001 per config rule evaluation per region
+	- Remediations of non-compliant resources using SSM/custom Automation docs
+		- Tip: can create custom Automation Documents that invokes Lambda function
+		- Can set Remediation Retries if resource still non-compliant after auto-remediation
+	- Notifications
+		- Use EventBridge to trigger notifications when AWS resources are non- compliant
+		- Ability to send configuration changes and compliance state notifications to SNS (all events – use SNS Filtering or filter at client-side)
+	

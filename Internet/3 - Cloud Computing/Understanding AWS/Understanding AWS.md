@@ -98,7 +98,6 @@ To build it, we will need:
 
 [[13 - Solution Architecture]]
 
-
 [[Terms and Key words]]
 
 

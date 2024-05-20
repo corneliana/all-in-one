@@ -48,3 +48,18 @@
 	- Our ASG will not scale as much, and we’ll save tremendously in EC2
 	- We’ll also save in availability, network bandwidth cost, etc  
 	- Easy way to make an existing application more scalable and cheaper! if it's mostly static content just using some caching at the edges all around the world.
+
+## Event Processing
+
+
+## Caching Strategies
+
+
+## Blocking an IP Address
+
+
+## High Performance Computing(HPC)
+
+
+## EC2 Instance High Availability
+

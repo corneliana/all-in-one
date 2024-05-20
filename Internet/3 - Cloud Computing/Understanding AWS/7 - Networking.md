@@ -81,21 +81,36 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 
 - VPC Peering – connect two VPCs with non overlapping CIDR, non-transitive
 - VPC Endpoints – provide private access to AWS Services (S3, DynamoDB, CloudFormation, SSM) within a VPC
+	- S3 and DynamoDB have a VPC Gateway Endpoint (remember it), all the other ones have an Interface endpoint (powered by Private Link - means a private IP).
+	
 - VPC Flow Logs – can be setup at the VPC / Subnet / ENI Level, for ACCEPT and REJECT traffic, helps identifying attacks, analyze using Athena or CloudWatch Logs Insights
+	- VPC Flow Logs is a VPC feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC.
 
 - Site-to-Site VPN – setup a Customer Gateway on DC, a Virtual Private Gateway on VPC, and site-to-site VPN over public Internet
 - AWS VPN CloudHub – hub-and-spoke VPN model to connect your sites
+	- It allows you to securely communicate with multiple sites using AWS VPN. It operates on a simple hub-and-spoke model that you can use with or without a VPC.
+	
 - Direct Connect – setup a Virtual Private Gateway on VPC, and establish a direct private connection to an AWS Direct Connect Location
 - Direct Connect Gateway – setup a Direct Connect to many VPCs in different AWS regions
 - AWS PrivateLink / VPC Endpoint Services:  
 	- Connect services privately from your service VPC to customers VPC
 	- Doesn’t need VPC Peering, public Internet, NAT Gateway, Route Tables • Must be used with Network Load Balancer & ENI
 - ClassicLink – connect EC2-Classic EC2 instances privately to your VPC
-- Transit Gateway – transitive peering connections forVPC,VPN & DX
+
+- Transit Gateway – transitive peering connections for VPC, VPN & DX
+
 - Traffic Mirroring – copy network traffic from ENIs for further analysis
+	- Use cases include content inspection, threat monitoring, and troubleshooting.
+	
 - Egress-only Internet Gateway – like a NAT Gateway, but for IPv6
 	- Allows only outbound traffic
 ![[NAT-gateway-vs-Egress-only-Internet-gateway.png]]
+
+
+### Networking Costs in AWS per GB
+
+### Security
+Referencing by security groups in rules is an extremely powerful rule and many questions at the exam rely on it. Make sure you fully master the concepts behind it!
 
 ## API Gateway
 API Gateway is a fully managed service that makes it easy to create, publish, maintain, monitor, and secure APIs at any scale

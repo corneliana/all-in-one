@@ -26,8 +26,6 @@ CloudFront uses origins to cache and distribute content globally across its netw
 
 Origins play a crucial role in determining where CloudFront fetches content from and how it delivers that content to users efficiently. By configuring origins appropriately, you can optimize performance, reduce latency, and ensure high availability for your distributed content.
 
-
-
 ## Global Accelerator
 -AWS Global Accelerator is a networking service designed to improve the availability and performance of applications by intelligently routing non-cacheable TCP and UDP traffic to the nearest healthy endpoint. It optimizes the delivery of dynamic content, such as gaming, IoT, and real-time communications applications, by leveraging the AWS global network infrastructure.
 
@@ -35,9 +33,10 @@ Improve global application availability and performance by directing traffic to 
 
 ![![all-in-one/Internet/3 - Cloud Computing/Understanding AWS/#^Table2]]Global Accelerator focuses on optimizing the delivery of non-cacheable TCP and UDP traffic to applications, while CloudFront accelerates the delivery of web content by caching it at edge locations.
 
-
 ## Disaster Recovery
 AWS provides various services and features to support disaster recovery strategies.
+- RPO: Recovery Point Objective
+- RTO: Recovery Time Objective
 
 ## Migration
 AWS offers services and tools to migrate workloads to the cloud.

@@ -288,12 +288,13 @@ In this example, the S3 bucket policy allows `s3:GetObject` action for objects i
 ## Security groups
 Act as a virtual firewall for your EC2 instances.
 
+## KMS: Key Management Service
+A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.
 
 ## Cognito
 Amazon Cognito can be used to federate mobile user accounts and provide them with their own IAM permissions, so they can be able to access their own personal space in the S3 bucket.
 
 Amazon Cognito lets you add user sign-up, sign-in, and access control to web and mobile apps quickly and easily. It scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.
-
 
 ## Data Security
 

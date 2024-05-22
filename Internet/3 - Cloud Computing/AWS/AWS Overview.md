@@ -194,8 +194,7 @@ A security system that ensures only the people you've given keys to can enter th
 Like setting up a security system for your home, deciding who can knock on the door (access your instances) and who can't.
 - Another layer of abstraction over IP so that don't need to think about IPs when using groups.
 - SSH
-### KMS: Key Management Service
-A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.
+
 
 ## 5. Connect Computer to the Internet (networking and content delivery)
 

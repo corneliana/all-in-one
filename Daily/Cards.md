@@ -19,13 +19,29 @@ roll back unhealthy service deployments
 the new deployment didn't pass the health checks defined in your ECS service configuration
 
 
-
 ## API Swagger Docs
-
-
-
+Better way to write swagger docs for fp-ts
 
 ## Notifier lambda
+### KMS
+Create a KMS key with alias `XXX`
+
+After we've created the KMS key, we need to use [shush](https://github.com/realestate-com-au/shush) to encrypt the secrets.
+#### Encrypt
+
+```bash
+
+rio-as okta AWSRole shush --region ap-southeast-2 encrypt -t kms-key-alias <YOUR_SECRET_TXT>
+
+```
+
+#### Decrypt
+
+```bash
+
+rio-as okta AWSRole shush --region ap-southeast-2 decrypt <YOUR_ENCRYPTED_SECRET_TXT>
+
+```
 
 
 ## Filter

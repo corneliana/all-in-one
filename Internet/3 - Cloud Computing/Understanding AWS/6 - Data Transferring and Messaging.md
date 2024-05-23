@@ -60,6 +60,10 @@ Push once in SNS, receive in all SQS queues that are subscribers. This is a comm
 
 SNS facilitates the broadcasting of messages to multiple subscribers through topics, SQS enables the reliable and scalable queuing of messages between different components of a system, helping to decouple components and manage async communication. These two are often used together in AWS architectures to build scalable and resilient distributed applications.
 ### Kinesis => real-time streaming model
+
+- streaming data v.s. data
+	- streaming data is the data generated at this very now. Static/batch data stored and processed in discrete chunks or batches.
+
 A platform for collecting, processing, and analyzing real-time, streaming data, akin to monitoring and managing the flow of information.
 - **Data streams
 	- Performance

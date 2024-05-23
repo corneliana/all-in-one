@@ -15,3 +15,7 @@
 AWS API Gateway is like a bouncer at a club, managing access to your backend services and APIs, while AWS Route 53 is like a GPS for the internet, directing traffic to your web applications using domain names.
 
 AWS EventBridge events are like notifications about things happening in your AWS environment, while CloudWatch alarms are like alerts that trigger based on specific conditions you define. EventBridge events are broader and can trigger actions based on various events, while CloudWatch alarms focus on monitoring specific metrics and triggering alerts when thresholds are exceeded.
+
+- Data warehouse: 让大量数据便于管理
+Think of data warehousing as a big organized storage unit for your data. In the context of AWS, data warehousing means storing and managing large volumes of data in a way that makes it easy to analyze and extract insights from.
+

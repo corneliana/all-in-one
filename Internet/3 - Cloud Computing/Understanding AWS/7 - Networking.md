@@ -42,7 +42,10 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 	- if you need 29 IP addresses for EC2 instances:  
 		- You can’t choose a subnet of size /27 (32 IP addresses, 32 – 5 = 27 < 29)  
 		- You need to choose a subnet of size /26 (64 IP addresses, 64 – 5 = 59 > 29)
-	
+
+- **Gateway v.s. Endpoints**
+	- While both facilitate connectivity in AWS networking, **gateways typically provide connectivity between your VPC and external networks**, while **endpoints provide access points for interacting with specific AWS services within your VPC.**
+
 - Internet Gateway(IGW) – at the VPC level, provide IPv4 & IPv6 Internet Access
 	- Allows resources (e.g., EC2 instances) in a VPC connect to the Internet
 	- It scales horizontally and is highly available and **redundant**  
@@ -80,8 +83,13 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
  ![[Pasted image 20240517000800.png]]
 
 - VPC Peering – connect two VPCs with non overlapping CIDR, non-transitive
-- VPC Endpoints – provide private access to AWS Services (S3, DynamoDB, CloudFormation, SSM) within a VPC
-	- S3 and DynamoDB have a VPC Gateway Endpoint (remember it), all the other ones have an Interface endpoint (powered by Private Link - means a private IP).
+
+- VPC Endpoints – **provide private access to AWS Services (S3, DynamoDB, CloudFormation, SSM) within a VPC**
+	- **S3 and DynamoDB have a VPC Gateway Endpoint (remember it), all the other ones have an Interface endpoint (powered by Private Link - means a private IP).**
+	- Gateway Endpoint v.s. Interface Endpoint
+		- Both facilitate private connectivity to AWS services within a VPC, they have different implementations
+		- **Gateway endpoints** are specific to certain AWS services like S3 and DynamoDB. They are implemented using VPC route tables and provide a direct, targeted route for traffic destined to these services.
+		- **Interface endpoints** are powered by AWS PrivateLink and support a broader range of AWS services. They use Elastic Network Interfaces (ENIs) within your VPC to establish private connections to the service endpoints. They offer more flexibility and are integrated with AWS PrivateLink's service discovery and endpoint policies.
 	
 - VPC Flow Logs – can be setup at the VPC / Subnet / ENI Level, for ACCEPT and REJECT traffic, helps identifying attacks, analyze using Athena or CloudWatch Logs Insights
 	- VPC Flow Logs is a VPC feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC.
@@ -92,9 +100,11 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 	
 - Direct Connect – setup a Virtual Private Gateway on VPC, and establish a direct private connection to an AWS Direct Connect Location
 - Direct Connect Gateway – setup a Direct Connect to many VPCs in different AWS regions
+
 - AWS PrivateLink / VPC Endpoint Services:  
 	- Connect services privately from your service VPC to customers VPC
 	- Doesn’t need VPC Peering, public Internet, NAT Gateway, Route Tables • Must be used with Network Load Balancer & ENI
+	
 - ClassicLink – connect EC2-Classic EC2 instances privately to your VPC
 
 - Transit Gateway – transitive peering connections for VPC, VPN & DX

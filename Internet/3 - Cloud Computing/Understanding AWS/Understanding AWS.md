@@ -58,7 +58,7 @@ To build it, we will need:
 - **Route 53**: Domain Name System (DNS) web service.
 - **VPC (Virtual Private Cloud)**: Virtual network in the cloud.
 
-**[[8 - Security and Encryption]]**
+**[[8 - Identity, Encryption and Security]]**
 - **IAM (Identity and Access Management)**: Secure control access to AWS services and resources.
 - **Security groups**: Act as a virtual firewall for your EC2 instances.
 - **KMS (Key Management Service)**: Manage encryption keys.

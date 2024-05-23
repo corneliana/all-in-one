@@ -29,34 +29,38 @@ RDS
 		- Infrequent access (EFS-IA): cost to retrieve files, lower price to store. **Enable EFS-IA with a Lifecycle Policy**
 	- Availability and durability
 		- Standard: Multi-AZ, great for prod
-		- One Zone: One AZ, great for dev, backup enabled by default, compatible with IA (EFS One Zone-IA)
+		- One Zone: **One AZ, great for dev, backup enabled by default, compatible with IA (EFS One Zone-IA)**
 
 NFS: Network File System, a distributed file system protocol that allows a user on a client computer to access files over a network as if they were stored locally on the client's own hard drive.
 vs Google Drive
 - serve similar purposes in providing file storage and access, but use different technologies and architectures. Google Drive is a cloud-based storage service with its own protocols, while NFS is a network file system protocol designed for sharing files over a local or wide area network. Google Drive is a cloud-based service designed for personal and collaborative file storage and sharing, while NFS is a network file system protocol primarily used for centralized file storage and sharing within traditional IT environments.
 
-## S3: Simple Storage Service
-An infinitely large **external hard drive** or cloud storage service to store and retrieve any amount of data, at any time, from anywhere on the web.
-S3 is commonly used for storing large amounts of data in a scalable and cost-effective manner, great for data backup, archiving, and serving web content. 
 
-### Keys
+## S3: Simple Storage Service
+An **infinitely scaling storage service** to store and retrieve any amount of data, at any time, from anywhere on the web.
+
+**Use cases:** Backup and storage, Disaster Recovery, Archive, Hybrid Cloud Storage, Application Hosting, Media Hosting, Data Lakes & big data analytics, Software delivery, Static website
+
 - **Buckets** (dictionaries) to store objects (files) **at regional level**.
 - **Versioning** files at bucket level. Must enable versioning in source and destination buckets.
-- **Replication** enables automatic, asynchronous copying of objects across buckets.
+- **Replication** enables **automatic, asynchronous copying of objects across buckets.**
 	- Cross-region replication
+	
 - **Lifecycle**: move between storage classes or using S3 Lifecycle configurations
 	- ![[s3-storage-classes.png]]
+
 - **Performance:**
 	- **Store
 		- Baseline
 		- Multi-Part upload: big files divided into parts
 		- **Transfer acceleration** 
-			- transfer files to AWS Edge Location(part of CloudFront) that are are optimized for fast content delivery by leveraging AWS's global network infrastructure, routing data through Edge Locations closest to the uploader.
+			- **transfer files to AWS Edge Location(part of CloudFront)** that are are optimized for fast content delivery by leveraging AWS's global network infrastructure, routing data through Edge Locations closest to the uploader.
 			- then forward file to the S3 bucket in the target region within the AWS network backbone.
 	- **Read
 		- S3 Byte-Range Fetches
 		- S3 Select & Glacier Select
 	- **Batch Operations
+
 - **Security**
 	- Object Encryption
 		- Server-Side Encryption
@@ -89,7 +93,7 @@ S3 is commonly used for storing large amounts of data in a scalable and cost-eff
 			- Bucket Policies are evaluated before “Default Encryption”
 	- **pre-signed URL v.s. public URL**
 		- pre-signed URL contains a signature that carries the user's credentials, inherited from the permissions of the user that generated the URL. They are temporary URLs that you can grant time-limited access to some actions.
-	- **Policies
+	- **Policies: define the inbound and outbound traffic for a bucket
 		- Explicit `DENY` in an IAM Policy will take precedence over an S3 bucket policy.
 		- **User-based:** IAM Policies, API calls should be allowed for a specific user from IAM.
 		- **Resource-based**: grant access to buckets/accounts, encrypt objects at upload
@@ -103,6 +107,8 @@ S3 is commonly used for storing large amounts of data in a scalable and cost-eff
 			- AND there’s no explicit DENY
 
 	- Using S3 as a secure transfer point: a location or service within a system where data can be transferred securely between different entities. It often involves a service or mechanism that ensures the confidentiality, integrity, and availability of data during its transfer. This can include encryption of data in transit, authentication mechanisms to verify the identity of parties involved in the transfer, and protection against unauthorized access or interception. 
+
+
 - **CORS
 	- Cross-Origin Resource Sharing: defines a way for client web applications that are loaded in one domain to interact with resources in a different domain
 - **MFA Delete
@@ -126,10 +132,7 @@ S3 is commonly used for storing large amounts of data in a scalable and cost-eff
 	- To avoid unmanageable policies and manage security at scale.
 	- Specific points to access corresponding resources.
 
-S3 File Gateway: a type of AWS Storage Gateway that extends on-premises file storage to the cloud, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block).
-
-With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
-
+- **S3 File Gateway**: a type of AWS Storage Gateway that **extends on-premises file storage to the cloud**, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block). With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
 
 ## Aurora
 MySQL and PostgreSQL-compatible relational database that offers the performance and availability of commercial-grade databases at little cost.
@@ -177,5 +180,5 @@ ElastiCache automatically scales the cache cluster size based on the workload, h
 
 ## Storage Extras
 ### Snowball Edge Storage Optimized device jobs
-- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations**. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
+- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations** without consuming excessive network bandwidth. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
 

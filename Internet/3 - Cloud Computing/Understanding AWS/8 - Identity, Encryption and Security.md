@@ -1,3 +1,52 @@
+## Identity
+```
+         AWS Organization
+              |
+     +-------------------+
+     |       OU 1        |
+     |    (Department)   |
+     |                    |
++----+----+        +------+-----+
+| Account 1 |      | Account 2  |
++-----------+      +------------+
+   |      |              |      |
+  IAM    Resources     IAM    Resources
+
+```
+
+- Organization: Global service to manage multiple AWS accounts, representing your entire AWS environment.
+- OU: Organization Unit. Logical groupings within the organization, such as departments or business units.
+- Accounts within the organization: Each account operates independently and can have its own resources and IAM users/groups/roles.
+- **IAM**: Identity and Access Management. Secure control access to AWS services and resources.
+- Resources: Services and infrastructure within each AWS account, such as EC2 instances, S3 buckets, and databases.
+
+
+
+- **Condition keys**
+	- `aws:PrincipalOrgID`: check if the requester is a member of an organization.
+	- `aws:PrincipalOrgPaths`: check if the requester's account in located within the OU path in the organization.
+	- `aws:PrincipalTag`: check tags attached to the principal making the request.
+
+- IAM roles v.s. Resource-based policies
+	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
+	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
+	- IAM role: Kinesis stream, Systems Manager Run Command, ECS task...
+
+- Permission boundaries
+	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
+
+- Identity Center(successor to AWS single sign-on): Fine grained Permissions and Assignments
+	- One login (single sign-on) for all your  
+		- AWS accounts in AWS Organizations  
+		- Business cloud applications (e.g., Salesforce, Box, Microsoft 365, ...) 
+		- SAML2.0-enabled applications  
+		- EC2 Windows Instances
+
+- Control Tower
+	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+
+## Security groups
+Act as a virtual firewall for your EC2 instances.
 
 ## Encryption
 - **In flight(SSL)**
@@ -191,102 +240,6 @@
 - Macia
 	- A fully managed data security and data privacy service that **uses machine learning and pattern matching to discover and protect sensitive data** in AWS.
 	- Identify and alert you to sensitive data, such as personally identifiable information (PII)
-
-## IAM: Identity and Access Management
-Secure control access to AWS services and resources.
-
-- **Condition keys**
-	- `aws:PrincipalOrgID` control access based on the organization ID of the AWS account making the request. 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowGetObjectForOrgMembers",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::example-bucket/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:PrincipalOrgID": "o-1234567890"
-        }
-      }
-    }
-  ]
-}
-
-```
-For example, the S3 bucket policy allows `s3:GetObject` action for objects in the `example-bucket` bucket only if the requester's AWS account is a member of the organization with the ID `o-1234567890`. This ensures that only users or roles from accounts within the specified organization can access the objects in the bucket.
-
-- `aws:PrincipalOrgPaths`: control access based on the organizational unit (OU) path of the AWS account making the request within the AWS Organization.
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowGetObjectForOrgMembers",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::example-bucket/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:PrincipalOrgPaths": "ou-abc123/ou-def456"
-        }
-      }
-    }
-  ]
-}
-```
-In this example, the S3 bucket policy allows `s3:GetObject` action for objects in the `example-bucket` bucket only if the requester's AWS account is located within the OU path `ou-abc123/ou-def456` within the AWS Organization.
-
-- `aws:PrincipalTag`: control access based on the tags attached to the principal making the request.
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowAccessBasedOnPrincipalTag",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::example-bucket/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:PrincipalTag/Department": "Marketing"
-        }
-      }
-    }
-  ]
-}
-
-```
-In this example, the S3 bucket policy allows `s3:GetObject` action for objects in the `example-bucket` bucket only if the requester's principal has the tag `Department:Marketing` attached to it. This condition ensures that only principals with the specified tag can access the objects in the bucket.
-
-- Organizations
-	- Global service to manage multiple AWS accounts
-
-- IAM roles v.s. Resource-based policies
-	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
-	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
-	- IAM role: Kinesis stream, Systems Manager Run Command, ECS task...
-
-- Permission boundaries
-	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
-
-- Identity Center(successor to AWS single sign-on): Fine grained Permissions and Assignments
-	- One login (single sign-on) for all your  
-		- AWS accounts in AWS Organizations  
-		- Business cloud applications (e.g., Salesforce, Box, Microsoft 365, ...) 
-		- SAML2.0-enabled applications  
-		- EC2 Windows Instances
-
-- Control Tower
-	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
-
-## Security groups
-Act as a virtual firewall for your EC2 instances.
 
 ## KMS: Key Management Service
 A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.

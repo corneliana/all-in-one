@@ -1,7 +1,6 @@
 ## VPC: Virtual Private Cloud
 A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
 
-A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 ![[VPC-components-diagram.png]]
 
 Public & private IP 
@@ -89,7 +88,7 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 	- **S3 and DynamoDB have a VPC Gateway Endpoint (remember it), all the other ones have an Interface endpoint (powered by Private Link - means a private IP).**
 	- Gateway Endpoint v.s. Interface Endpoint
 		- Both facilitate private connectivity to AWS services within a VPC, they have different implementations
-		- **Gateway endpoints** are specific to certain AWS services like S3 and DynamoDB. They are implemented using VPC route tables and provide a direct, targeted route for traffic destined to these services.
+		- **Gateway endpoints** are specific to certain AWS services like S3 and DynamoDB. They are implemented using VPC route tables and provide a direct, targeted route for traffic destined to these services. A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 		- **Interface endpoints** are powered by AWS PrivateLink and support a broader range of AWS services. They use Elastic Network Interfaces (ENIs) within your VPC to establish private connections to the service endpoints. They offer more flexibility and are integrated with AWS PrivateLink's service discovery and endpoint policies.
 	
 - VPC Flow Logs – can be setup at the VPC / Subnet / ENI Level, for ACCEPT and REJECT traffic, helps identifying attacks, analyze using Athena or CloudWatch Logs Insights
@@ -123,11 +122,22 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 ### Security
 Referencing by security groups in rules is an extremely powerful rule and many questions at the exam rely on it. Make sure you fully master the concepts behind it!
 
+An "inspection VPC" refers to a Virtual Private Cloud (VPC) configuration within the context of network security and traffic inspection architectures. In this setup, the inspection VPC is specifically designed to analyze and monitor network traffic passing through it for security or compliance purposes.
+
 ## API Gateway
+
 - A **fully managed service** to create, publish, maintain, monitor, and secure APIs at any scale. 
 - A front door for applications to access data, business logic, or functionality hosted on backend services, such as Lambda functions, EC2 instances, or HTTP endpoints. 
 - provides features like API creation, versioning, deployment, security, monitoring, and throttling.
-- An Edge-Optimized API Gateway is best for geographically distributed clients. API requests are routed to the nearest CloudFront Edge Location which improves latency. The API Gateway still lives in one AWS Region.
+- Edge-Optimized(default): For global clients
+	- Requests are routed through the CloudFront Edge locations (improves latency)
+	- The API Gateway still lives in only one region
+- Regional
+	- For clients within the same region
+	- Could manually combine with CloudFront (more control over the caching strategies and the distribution)
+- Private
+	- Can only be accessed from your VPC using an interface VPC endpoint (ENI)
+	- Use a resource policy to define access
 
 Key features of API Gateway include:
 - **API Creation and Management**: You can define APIs using API Gateway's RESTful interface or WebSocket APIs for real-time communication.

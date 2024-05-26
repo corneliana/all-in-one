@@ -28,7 +28,10 @@
 - IAM roles v.s. Resource-based policies
 	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
 	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
-	- IAM role: Kinesis stream, Systems Manager Run Command, ECS task...
+	- IAM role: the recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
+		- IAM group is typically used for managing permissions for multiple users
+		- IAM users are meant for individual human users or applications
+		- IAM policies are used in combination with IAM roles, users, and groups to define permissions within AWS environments. They allow for granular access control, centralized management of permissions, and flexibility in defining security policies.
 
 - Permission boundaries
 	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
@@ -61,7 +64,8 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 	- Could leverage Envelope Encryption
 	- With Client-Side Encryption, the server doesn't need to know any information about the encryption scheme being used, as the server will not perform any encryption or decryption operations.
 
-- KMS: Manage encryption keys
+- **KMS: Manage encryption keys
+	- A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.
 	- Fully integrated with IAM for authorization
 	- Able to audit KMS Key usage using CloudTrail
 	- Seamlessly integrated into most AWS services (EBS, S3, RDS, SSM...)
@@ -104,7 +108,7 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 		- The IAM Role/User in the target account must have the permissions to DescribeKey, ReEncrypted, CreateGrant, Decrypt
 		- When launching an EC2 instance from the AMI, optionally the target account can specify a new KMS key in its own account to re-encrypt the volumes
 	
-- SSM Parameter Store: Securely store parameters and secrets in an organized way
+- **SSM Parameter Store: Securely store parameters and secrets in an organized way**
 	- Secure storage for configuration and secrets
 	- Optional Seamless Encryption using KMS
 	- Serverless, scalable, durable, easy SDK
@@ -118,10 +122,10 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 
 - **Secrets Manager**
 	- Newer service to store secrets(encrypted using KMS)
-	- Force rotation of secrets every X days and automate generating secrets on rotation using lambda
-	- Integration with RDS(MySQL, PostgreSQL, Aurora) and **mostly meant for RDS and Aurora integration**
+	- **Force rotation of secrets every X days** and automate generating secrets on rotation using **lambda**
+	- **Integration with RDS(MySQL, PostgreSQL, Aurora)** and **mostly meant for RDS and Aurora integration**
 	- Multi-Region Secrets
-		- Replicate Secrets across multiple AWS Regions
+		- **Replicate Secrets across multiple AWS Regions**
 		- Secrets Manager keeps read replicas in sync with the primary Secret
 		- Ability to promote a read replica Secret to a standalone Secret
 		- Use cases: multi-region apps, disaster recovery strategies, multi-region DB...
@@ -158,17 +162,6 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 				- For clients within the same region
 				- The TLS certificate must be imported on API Gateway, in the same region as the API Stage
 				- Then setup CNAME or (better) A-Alias record in Route 53
-	
-- API Gateway
-	- Edge-Optimized(default): For global clients
-		- Requests are routed through the CloudFront Edge locations (improves latency)
-		- The API Gateway still lives in only one region
-	- Regional
-		- For clients within the same region
-		- Could manually combine with CloudFront (more control over the caching strategies and the distribution)
-	- Private
-		- Can only be accessed from your VPC using an interface VPC endpoint (ENI)
-		- Use a resource policy to define access
 	
 - WAF: Web Application Firewall
 	- Protects web applications from common web exploits **(Layer 7: HTTP v.s. Lay 4 TCP/UDP)**
@@ -208,6 +201,7 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 - **Firewall Manager**
 	- A security management service that **centrally configure and manage firewall rules across multiple AWS accounts and resources**. But is not specifically designed for traffic inspection and filtering within a single VPC.
 	- Rules are applied to new resources as they are created (good for compliance) across all and future accounts in your Organization
+	- **v.s. Network FireWall: AWS Network Firewall focuses on providing network traffic filtering and protection for individual VPCs, Firewall Manager is designed for centralized management and enforcement of firewall policies across multiple AWS accounts and resources, including Network Firewall.**
 
 ![[WAF-Firewall-manager-Shield.png]]
 
@@ -240,9 +234,6 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 - Macia
 	- A fully managed data security and data privacy service that **uses machine learning and pattern matching to discover and protect sensitive data** in AWS.
 	- Identify and alert you to sensitive data, such as personally identifiable information (PII)
-
-## KMS: Key Management Service
-A highly secure vault to keep all the encryption keys for resources. Only those with permission can access these keys to unlock or secure the valuable information.
 
 ## Cognito
 Amazon Cognito can be used to federate mobile user accounts and provide them with their own IAM permissions, so they can be able to access their own personal space in the S3 bucket.

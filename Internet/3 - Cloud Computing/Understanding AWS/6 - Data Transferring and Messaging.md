@@ -1,11 +1,11 @@
-Decoupling applications while enable internal communications: SQS, SNS, Kinesis, Active MQ
+**Decoupling applications while enable internal communications:** SQS, SNS, Kinesis, Active MQ
 - Sync: app to app. Can be overwhelmed in terms of sudden spikes of traffic.
 - Async/Event-based: app to queue to app
 
 Amazon Kinesis Data Streams (KDS) is a massively scalable and durable real-time data streaming service. It can continuously capture gigabytes of data per second from hundreds of sources such as website clickstreams, database event streams, financial transactions, social media feeds, IT logs, and location-tracking events.
 
 ### SQS: Simple Queue Service => queue model
-A fully managed message queuing service. Producer sends messages to SQS queue, and Consumers poll messages from the queue.
+A **fully managed message** queuing service. Producer sends messages to SQS queue, and Consumers poll messages from the queue.
 Amazon SQS allows you to retain messages for days and process them later.
 - **Mechanism
 	- **Produce and send**: The message will be sent again if not processed in time.
@@ -96,7 +96,6 @@ A platform for collecting, processing, and analyzing real-time, streaming data, 
 	- With GroupID, the number of consumers can be scaled.
 
 #### SQS v.s. SNS v.s. Kinesis
-
 
 ### MQ
 A message broker service for communicating between different parts of your application. RabbitMQ, ActiveMQ

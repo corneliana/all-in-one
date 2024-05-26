@@ -98,6 +98,8 @@ To build it, we will need:
 
 [[13 - Solution Architecture]]
 
+[[14 - Billing and Costs Management]]
+
 [[Terms and Key words]]
 
 List of Ports to be familiar with:

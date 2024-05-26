@@ -153,7 +153,7 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 - S3 lambda
 	- Use lambda to change the object before it is being retrieved.
 	- E.g. redact PII data, convert data format, resize and watermark images, etc.
-- **S3 File Gateway**: a type of AWS Storage Gateway that **extends on-premises file storage to the cloud**, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block). With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
+- **S3 File Gateway**: a type of AWS Storage Gateway that **extends on-premises file storage to the cloud**, i.e. access and store files in S3 using standard file protocols such as **NFS (Network File System) and SMB (Server Message Block**). With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
 - **Payment**
 	- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
 	- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.

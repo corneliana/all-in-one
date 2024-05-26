@@ -6,8 +6,6 @@
 - Lifecycle
 - Event notifications/log
 
-RDS
-
 - **Relational Databases v.s. Non-Relational Databases**
 	- Relational databases organize data into **structured tables** with **predefined schemas**, and they use SQL (Structured Query Language) for querying and manipulating data. They are suitable for applications with complex data relationships and transactions, such as e-commerce platforms, financial systems, and customer relationship management (CRM) applications.
 	    - RDS (Relational Database Service), which supports various engines like MySQL, PostgreSQL, Oracle, SQL Server, and MariaDB
@@ -34,7 +32,6 @@ RDS
 NFS: Network File System, a distributed file system protocol that allows a user on a client computer to access files over a network as if they were stored locally on the client's own hard drive.
 vs Google Drive
 - serve similar purposes in providing file storage and access, but use different technologies and architectures. Google Drive is a cloud-based storage service with its own protocols, while NFS is a network file system protocol designed for sharing files over a local or wide area network. Google Drive is a cloud-based service designed for personal and collaborative file storage and sharing, while NFS is a network file system protocol primarily used for centralized file storage and sharing within traditional IT environments.
-
 
 ## S3: Simple Storage Service
 An **infinitely scaling storage service** to store and retrieve any amount of data, at any time, from anywhere on the web.
@@ -161,20 +158,19 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 	- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
 	- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.
 ## Aurora
-MySQL and PostgreSQL-compatible relational database that offers the performance and availability of commercial-grade databases at little cost.
-It is fully managed by AWS, meaning AWS handles administrative tasks such as provisioning, patching, and backups, allowing users to focus on apps rather than database management.
+**MySQL and PostgreSQL-compatible relational database** that offers the performance and availability of commercial-grade databases at little cost.
+It is **fully managed** by AWS, meaning AWS handles administrative tasks such as provisioning, patching, and backups, allowing users to focus on apps rather than database management.
 
 It achieves high performance by using a distributed architecture that separates compute and storage, allowing it to scale out horizontally across multiple nodes. It also provides instant scalability with auto-scaling capabilities, adjusting resources based on workload demand.
 
 Compared to traditional relational database options like MySQL or PostgreSQL running on EC2 instances, Aurora offers **significantly higher performance, automatic failover, and continuous backup and replication across multiple Availability Zones, ensuring data durability and high availability.**
 
+Up to 15 Aurora Read Replicas in a single Aurora DB Cluster.
+
 ## RDS: Relational Database Service
-A managed database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently.
-RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.
+A **managed** database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently. **RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.**
 
-Backup for better performance and avoid disaster.
-
-RDS Proxy vs multi-AZ in terms of re-connecting to DB.s
+RDS Proxy vs multi-AZ in terms of re-connecting to DB.
 
 - Read replica
 	- RDS database can have up to 15 Read Replicas.
@@ -184,27 +180,46 @@ RDS Proxy vs multi-AZ in terms of re-connecting to DB.s
 	- Multi-AZ keeps the same connection string regardless of which database is up.
 	- Multi-AZ won't help when a disaster happens at the AWS region level. Multi-AZ helps when a disaster happens at the AZ level.
 
+- Encryption
+	- Encrypt an unencrypted RDS DB instance: Create a snapshot of the unencrypted RDS DB instance, copy the snapshot and tick "Enable encryption", then restore the RDS DB instance from the encrypted snapshot.
+	- Can not create encrypted Read Replicas from an unencrypted RDS DB instance.
+	- Oracle does **NOT** support IAM Database Authentication
+
 ## **DynamoDB**: Fully managed NoSQL database.
-DynamoDB is serverless with no servers to provision, patch, or manage and no software to install, maintain or operate. It auto scales tables up and down to adjust for capacity and maintain performance. It provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes.
+- **serverless** with no servers to provision, patch, or manage and no software to install, maintain or operate. 
+- auto scales tables up and down to adjust for capacity and maintain performance. Also provides the on-demand backup capability to create full backups of tables for long-term retention and archival for regulatory compliance needs.
+- provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes. RCU = “Read Capacity Units,” and WCU = “Write Capacity Units." RCU and WCU are decoupled, so you can increase/decrease each value separately.
+- The maximum size of an item in a DynamoDB table is **400kb**.
 
-RCU stands for “Read Capacity Units,” and WCU stands for “Write Capacity Units." RCU and WCU are decoupled, so you can increase/decrease each value separately.
+- DAX: DynamoDB Accelerator
+	- A fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement without requiring developers to manage cache invalidation, data population, or cluster management. It caches the most frequently used data, thus offloading the heavy reads on hot keys off your DynamoDB table, hence preventing the `ProvisionedThroughputExceededException` exception.
 
-DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory **cache** for DynamoDB that delivers up to 10x performance improvement. It caches the most frequently used data, thus offloading the heavy reads on hot keys off your DynamoDB table, hence preventing the `ProvisionedThroughputExceededException` exception.
-
-Amazon DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement – from milliseconds to microseconds – even at millions of requests per second. DAX does all the heavy lifting required to add in-memory acceleration to your DynamoDB tables, without requiring developers to manage cache invalidation, data population, or cluster management.
-
-DynamoDB Streams allows you to capture a time-ordered sequence of item-level modifications in a DynamoDB table. It's integrated with AWS Lambda so that you create triggers that automatically respond to events in real-time.
-DynamoDB Streams enable DynamoDB to get a changelog and use that changelog to replicate data across replica tables in other AWS Regions.
+- DynamoDB Streams
+	- It allows you to capture a time-ordered sequence of item-level modifications in a DynamoDB table. It's integrated with AWS Lambda so that you create triggers that automatically respond to events in real-time.
+	- It enable DynamoDB to get a changelog and use that changelog to replicate data across replica tables in other AWS Regions.
 
 It has an out-of-the-box caching feature.
 
-The maximum size of an item in a DynamoDB table is 400kb.
-
-Amazon DynamoDB provides the on-demand backup capability to create full backups of your tables for long-term retention and archival for regulatory compliance needs.
 ## ElastiCache
-ElastiCache automatically scales the cache cluster size based on the workload, handling varying levels of demand without manual intervention.
+A fully managed, in-memory caching service. "elastic" refers to the service's ability to automatically scale resources based on demand, allowing apps to efficiently handle varying workloads. It provides managed **Redis** and **Memcached** solutions to help devs to easily deploy and scale caching infrastructure in the cloud.
+- Redis: offers advanced features and **data structures**, suitable for a wide range of use cases
+	- An open-source, in-memory data **structure** store that can be used as a database, cache, or message broker. It supports various data structures such as strings, hashes, lists, sets, and sorted sets, making it versatile for a wide range of use cases. 
+	- Known for its **advanced features such as persistence, replication, pub/sub messaging, and built-in Lua scripting capabilities.**
+	- Commonly used for caching frequently accessed data, session storage, real-time analytics, job queues, and more.
+- Memcached: **focuses primarily on high-performance caching.**
+	- Store data in memory as key-value pairs, allowing for fast retrieval of frequently accessed data.
+	- A high-performance, distributed memory object caching system, designed to speed up dynamic web applications by alleviating database load and reducing latency.
+	- Unlike Redis, Memcached is simpler in terms of functionality and data types supported. It primarily focuses on caching and does not offer persistence or advanced data structures.
+	- Memcached is commonly used for caching database query results, HTML fragments, and API responses in web applications.
 
 ## Storage Extras
-### Snowball Edge Storage Optimized device jobs
-- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations** without consuming excessive network bandwidth. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
+
+- Snow Family
+	- Snowball Edge Storage Optimized device jobs
+		- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations** without consuming excessive network bandwidth. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
+- Architecture: Snowball into Glacier
+- FSx
+- Storage Gateway
+- Transfer family
+- DataSync
 

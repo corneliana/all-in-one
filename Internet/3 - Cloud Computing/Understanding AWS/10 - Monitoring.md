@@ -4,7 +4,8 @@
 		- Events & Alerting  
 		- Log Aggregation & Analysis
 	- CloudTrail  
-		- Record API calls made within your Account by everyone
+		- Record **a history of AWS API calls** made within your Account by everyone
+			- Use the CloudTrail Console to view the last 90 days of recorded API activity. For events older than 90 days, use Athena to analyze CloudTrail logs stored in S3.
 		- Can define trails for specific resources  
 		- Global Service
 	- Config
@@ -23,13 +24,6 @@
 		- Ensure an SSL certificate is always assigned to the Load Balancer (compliance)
 	- CloudTrail:  
 		- Track who made any changes to the Load Balancer with API calls
-
-## CloudWatch
-Monitoring and observability service.
-
-## CloudTrail
-Record a history of AWS API calls.
-You can use the CloudTrail Console to view the last 90 days of recorded API activity. For events older than 90 days, use Athena to analyze CloudTrail logs stored in S3.
 
 ## Config
 - What is Config?

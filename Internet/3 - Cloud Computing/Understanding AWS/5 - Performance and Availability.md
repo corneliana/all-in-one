@@ -23,32 +23,58 @@ Server Name Indication (SNI) allows you to expose multiple HTTPS applications ea
 Automatically adjusts the number of EC2 instances in response to demand.
 
 ## CloudFront: AWS's Content Delivery Network (CDN)
-Amazon CloudFront is a content delivery network (CDN) service that accelerates the delivery of web content (static and dynamic) to end users by caching it at edge locations worldwide. It improves the performance of websites, APIs, and streaming media by serving cached content from the nearest edge location, reducing latency and offloading origin servers.
+It accelerates the delivery of websites, APIs, video content, and other web assets by caching them at edge locations around the world. When users request content, CloudFront delivers it from the nearest edge location, reducing latency and improving performance. 
+- Cache
+	- Improve read performance, content is cached at the edge(the outer reaches of the global network). When a user requests content, CloudFront checks its cache to see if the content is already stored at an edge location near the user. If the content is not in the cache or if it has expired, CloudFront retrieves the content from the origin server specified for that particular distribution.
+- 216 Point of Presence(PoP) globally => Global Edge network
+- DDoS protection(because worldwide), integration with Shield, AWS web app firewall.
 
-Edge Locations
-Edge Locations are strategically distributed around the world, often located in or near major cities and Internet exchange points.
+- Edge Locations
+	- Strategically distributed around the world, often located in or near major cities and Internet exchange points.
+	- Leverage Amazon's highly redundant and low-latency network infrastructure, allowing for efficient data transfer. 
+	- Cache frequently accessed content, further reducing latency for subsequent requests.
+	- Lambda@Edge is a feature of CloudFront that run code closer to users, which improves performance and reduces latency.
+- Origins
+	- The origin servers or locations where CloudFront retrieves content to serve to end users
+	- Can be various types of **servers or storage services**, such as S3 buckets, EC2 instances, ELB, or custom HTTP servers.
+		- S3
+			- distribute files and cache them at the edge
+			- Enhanced security with Origin Access Control(OAC), replacing OAI(Identity)
+			- CloudFront v.s. S3 Cross Region Replications
+				- CloudFront great for static content that must be available everywhere
+				- S3 Cross Region Replication: Great for dynamic content that needs to be available at low-latency in few regions.
+		- **Custom Origin(HTTP)
+			- ALB
+			- EC2 instance
+			- S3 website
+			- Any HTTP backend
+	- Cache and distribute content globally across its network of edge locations.
+	- Determines where CloudFront fetches content from and how it delivers that content to users efficiently.
+- **Geo Restrictions
+	- Allowlist & Blocklist
 
-**Edge Locations are optimized for fast content delivery. Why?**
-- They leverage Amazon's highly redundant and low-latency network infrastructure, allowing for efficient data transfer. 
-- Edge Locations cache frequently accessed content, further reducing latency for subsequent requests.
+Key features of CloudFront include:
+1. **Global Content Delivery**: operates from a network of edge locations around the world, enabling it to deliver content with low latency to users globally.
+2. **Caching**: caches copies of content at edge locations, reducing the need to fetch it from origin server for subsequent requests to lower latency and reduce the load on origin server.
+3. **Security**: provides various security features, including SSL/TLS encryption, AWS Shield protection against DDoS attacks, and integration with AWS WAF for web application firewall protection.
+4. **Customization**: customize content delivery through features like custom SSL certificates, custom domain names, and support for HTTP/2 and HTTP/3 protocols.
+5. **Integration**: seamlessly integrates with other AWS services, such as S3, EC2, Elastic Load Balancing, and Lambda. It can also be used in conjunction with AWS Elemental Media Services for video streaming.
+6. **Real-time Analytics**: provides detailed metrics and logs that give insights into your content delivery performance, including viewer demographics, traffic patterns, and cache utilization.
 
-Lambda@Edge is a feature of CloudFront that lets you run code closer to users, which improves performance and reduces latency.
+CloudFront is commonly used to accelerate the delivery of static and dynamic content, including websites, APIs, streaming media, and large file downloads. It's **particularly useful for applications with a global user base**, as it helps to ensure a consistent and high-quality user experience across different geographical regions.
 
-Amazon CloudFront is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency, high transfer speeds. Amazon CloudFront can be used in front of an Application Load Balancer.
+In an AWS architecture, CloudFront is often used in conjunction with other services like S3, EC2, and API Gateway to build scalable and performant web applications and APIs. It can sit in front of these services to cache and deliver content more efficiently to end users, thereby improving overall application performance and reducing latency.
 
-Origins
-The origin servers or locations where CloudFront retrieves the content to serve to end users, which can be various types of **servers or storage services**, such as S3 buckets, EC2 instances, Elastic Load Balancers, or custom HTTP servers.
-
-CloudFront uses origins to cache and distribute content globally across its network of edge locations. When a user requests content, CloudFront checks its cache to see if the content is already stored at an edge location near the user. If the content is not in the cache or if it has expired, CloudFront retrieves the content from the origin server specified for that particular distribution.
-
-Origins play a crucial role in determining where CloudFront fetches content from and how it delivers that content to users efficiently. By configuring origins appropriately, you can optimize performance, reduce latency, and ensure high availability for your distributed content.
+Amazon CloudFront can be used in front of an Application Load Balancer.
 
 ## Global Accelerator
--AWS Global Accelerator is a networking service designed to improve the availability and performance of applications by intelligently routing non-cacheable TCP and UDP traffic to the nearest healthy endpoint. It optimizes the delivery of dynamic content, such as gaming, IoT, and real-time communications applications, by leveraging the AWS global network infrastructure.
+- User => Anycast IP => Edge locations => ALB => application
+- A networking service to intelligently **route non-cacheable TCP and UDP traffic to the nearest healthy endpoint** so as to improve the availability and performance of applications. 
+- It optimizes the delivery of dynamic content, such as gaming, IoT, and real-time communications applications, by leveraging the AWS global network infrastructure.
 
 Improve global application availability and performance by directing traffic to the optimal endpoint based on AWS's global network infrastructure. This can potentially provide better performance compared to routing traffic solely through CloudFront.
-
-![![all-in-one/Internet/3 - Cloud Computing/Understanding AWS/#^Table2]]Global Accelerator focuses on optimizing the delivery of non-cacheable TCP and UDP traffic to applications, while CloudFront accelerates the delivery of web content by caching it at edge locations.
+![![all-in-one/Internet/3 - Cloud Computing/Understanding AWS/#^Table2]]
+**Global Accelerator focuses on optimizing the delivery of non-cacheable TCP and UDP traffic to applications, while CloudFront accelerates the delivery of web content by caching it at edge locations.**
 
 ## Disaster Recovery
 AWS provides various services and features to support disaster recovery strategies.

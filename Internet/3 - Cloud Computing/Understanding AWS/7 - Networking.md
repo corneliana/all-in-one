@@ -1,5 +1,6 @@
 ## VPC: Virtual Private Cloud
-Virtual network in the cloud.
+A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
+
 A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
 ![[VPC-components-diagram.png]]
 
@@ -123,10 +124,54 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 Referencing by security groups in rules is an extremely powerful rule and many questions at the exam rely on it. Make sure you fully master the concepts behind it!
 
 ## API Gateway
-API Gateway is a fully managed service that makes it easy to create, publish, maintain, monitor, and secure APIs at any scale
+- A **fully managed service** to create, publish, maintain, monitor, and secure APIs at any scale. 
+- A front door for applications to access data, business logic, or functionality hosted on backend services, such as Lambda functions, EC2 instances, or HTTP endpoints. 
+- provides features like API creation, versioning, deployment, security, monitoring, and throttling.
+- An Edge-Optimized API Gateway is best for geographically distributed clients. API requests are routed to the nearest CloudFront Edge Location which improves latency. The API Gateway still lives in one AWS Region.
 
-API Gateway is primarily designed for creating APIs to expose backend services or data to external clients, rather than for internal VPC-to-VPC communication.
+Key features of API Gateway include:
+- **API Creation and Management**: You can define APIs using API Gateway's RESTful interface or WebSocket APIs for real-time communication.
+- **Integration with Backend Services**: API Gateway can integrate with various backend services, including Lambda functions, EC2 instances, HTTP endpoints, and other AWS services.
+- **Security**: API Gateway supports authentication and authorization mechanisms such as AWS IAM, OAuth 2.0, and custom authorizers to control access to your APIs.
+- **Monitoring and Logging**: API Gateway provides detailed monitoring metrics, logging, and tracing capabilities to help you troubleshoot and optimize your APIs.
 
-An Edge-Optimized API Gateway is best for geographically distributed clients. API requests are routed to the nearest CloudFront Edge Location which improves latency. The API Gateway still lives in one AWS Region.
+API Gateway is commonly used for building RESTful APIs, GraphQL APIs, WebSocket APIs, and serverless applications, allowing developers to expose their backend services securely and efficiently to external clients.
 
 ## Route 53: Domain Name Service (DNS)
+Translate human-readable domain names into IP addresses, allowing users to access resources on the internet using familiar domain names.
+
+Key features of Route 53 include:
+- **Domain Registration**: You can register domain names directly through Route 53. Route 53 is DNS service, GoDaddy is Domain Registrar. We purchase the domain from GoDaddy and use Route 53 to manage DNS records.
+- **DNS Routing**: Route 53 allows you to route traffic based on various policies to different endpoints, such as Amazon EC2 instances, Elastic Load Balancers, Amazon S3 buckets, or even external resources.
+- **Health Checks**: Route 53 can monitor the health of your resources and route traffic away from unhealthy endpoints.
+- **Traffic Flow**: Route 53 Traffic Flow allows you to visually manage how traffic is routed to your resources, making it easier to implement complex routing configurations.
+
+Route 53 is commonly used for hosting public-facing websites, managing internal DNS for private resources, and implementing global load balancing and failover solutions.
+
+#### Routing policies: define a DNS record (key-value pair with attributes)
+- **DNS record types**
+	-  A
+	- AAAA
+	- CNAME
+	- NS
+	- Alias v.s. CNAME
+		- CNAME: points a hostname to any other hostnames
+		- Alias: points a hostname to an AWS resource. Free of charge. Native health check.
+- **Based on**
+	- Simple
+	- Weighted: redirect part of the traffic based on weight (e.g. percentage). It's a common use case to send part of traffic to a new version of application.
+	- Latency: evaluate the latency between users and AWS Regions, and help them get a DNS response that will minimize their latency (e.g. response time)
+	- Failover: instance 1 not healthy, route to instance 2
+	- Geolocation:
+	- Geoproximity: bias
+	- IP
+	- Multi-value
+- **TTL**
+	Each DNS record has a TTL (Time To Live) which orders clients for how long to cache these values and not overload the DNS Resolver with DNS requests. The TTL value should be set to strike a balance between how long the value should be cached vs. how many requests should go to the DNS Resolver.
+	- High TTL: Less traffic on Route 53; possibly outdated records
+	- Low TTL: More traffic on Route 53; records are outdated for less time; easy to change records so users will experience less downtime.
+
+#### Health checks
+- Monitor an endpoint
+- Calculated Health checks
+- Private Hosted Zones

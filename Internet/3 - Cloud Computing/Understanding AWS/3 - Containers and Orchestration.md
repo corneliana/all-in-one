@@ -33,6 +33,9 @@
 	
 - **ECS (Elastic Container Service)**: Manages containers using Docker.
 - **Fargate**: Serverless compute engine for containers.
-- **ECR (Elastic Container Registry)**: Docker container registry.
-- **EKS (Elastic Kubernetes Service)**: Managed Kubernetes service.
+
+- **ECR (Elastic Container Registry)**: A Docker container registry for storing, managing, and deploying container images, similar to a photo album for your container snapshots.
+
+- **EKS (Elastic Kubernetes Service)**: Managed Kubernetes service. Offers managed Kubernetes service for orchestrating containerized applications, acting as the event organizer for managing complex container setups.
+
 - **CloudFormation**: Infrastructure as Code (IaC) service for provisioning AWS resources.

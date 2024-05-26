@@ -45,7 +45,8 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 - **Versioning** files at bucket level. Must enable versioning in source and destination buckets.
 - **Replication** enables **automatic, asynchronous copying of objects across buckets.**
 	- Cross-region replication
-	
+- **Services provided: Static website hosting**
+	- S3 can host static websites and have them accessible on the Internet. If 403, makes sure the bucket policy allows public reads.
 - **Lifecycle**: move between storage classes or using S3 Lifecycle configurations
 	- ![[s3-storage-classes.png]]
 
@@ -60,7 +61,6 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 		- S3 Byte-Range Fetches
 		- S3 Select & Glacier Select
 	- **Batch Operations
-
 - **Security**
 	- Object Encryption
 		- Server-Side Encryption
@@ -107,8 +107,26 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 			- AND there’s no explicit DENY
 
 	- Using S3 as a secure transfer point: a location or service within a system where data can be transferred securely between different entities. It often involves a service or mechanism that ensures the confidentiality, integrity, and availability of data during its transfer. This can include encryption of data in transit, authentication mechanisms to verify the identity of parties involved in the transfer, and protection against unauthorized access or interception. 
-
-
+- **Encryption
+	- **Default Encryption v.s. Bucket polices
+		- Default Encryption is auto applied and bucket polices are added.
+		- Bucket policies are evaluated before Default Encryption
+	- **In objects
+		- **Server-Side Encryption(SSE)
+			- Using keys handled, managed and owned by AWS, using AES-256
+			- Enabled by default for new buckets / objects
+		- **SSE-KMS
+			- key is from KMS
+			- May be impacted by the KMS limits
+			- The encryption keys are managed by AWS but you have full control over the rotation policy of the encryption key.
+		- **SSE-C
+			- keys managed by the customer outside of AWS
+			- HTTPS is mandatory
+		- **[DSSE-KMS(Dual-Layer SSE with Keys Stored in Key Management Service)](https://aws.amazon.com/blogs/aws/new-amazon-s3-dual-layer-server-side-encryption-with-keys-stored-in-aws-key-management-service-dsse-kms/)
+		- **Client-Side Encryption(CSE)
+	- **In transit/flight: SSL/TLS
+		- HTTPS
+		- Force encryption => use the bucket policy of aws:SecureTransport
 - **CORS
 	- Cross-Origin Resource Sharing: defines a way for client web applications that are loaded in one domain to interact with resources in a different domain
 - **MFA Delete
@@ -131,9 +149,17 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 - **Access Points
 	- To avoid unmanageable policies and manage security at scale.
 	- Specific points to access corresponding resources.
-
+- Event notifications: CRUD operations on the objects in S3
+	- Events => S3 => SNS / SQS / Lambda
+	- Events => EventBridge (Advanced filtering options with JSON rules) => over 18 services as destinations
+	- IAM Permissions: Resource access policy
+- S3 lambda
+	- Use lambda to change the object before it is being retrieved.
+	- E.g. redact PII data, convert data format, resize and watermark images, etc.
 - **S3 File Gateway**: a type of AWS Storage Gateway that **extends on-premises file storage to the cloud**, i.e. access and store files in S3 using standard file protocols such as NFS (Network File System) and SMB (Server Message Block). With S3 File Gateway, the most recently accessed files can be cached locally for low-latency access, ensuring that users can quickly access frequently accessed files.
-
+- **Payment**
+	- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
+	- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.
 ## Aurora
 MySQL and PostgreSQL-compatible relational database that offers the performance and availability of commercial-grade databases at little cost.
 It is fully managed by AWS, meaning AWS handles administrative tasks such as provisioning, patching, and backups, allowing users to focus on apps rather than database management.

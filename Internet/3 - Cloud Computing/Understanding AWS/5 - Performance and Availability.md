@@ -1,11 +1,28 @@
 ## ELB: Elastic Load Balancing
 Distributes incoming application traffic across multiple targets.
+The `smart mail sorting center` for directing internet traffic to different servers.
+- Only NLB provides **both static DNS name and static IP**. 
+- ALB provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
+
+#### Stickiness / Session affinity
+ELB Sticky Session feature ensures traffic for the same client is always redirected to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
+
+The following cookie names are reserved by the ELB (AWSALB, AWSALBAPP, AWSALBTG).
+
+When using an ALB to distribute traffic to EC2 instances, the IP address that receives requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" contains the client's IP address.
+Application Load Balancers support HTTP, HTTPS and WebSocket.
+ALBs can route traffic to different Target Groups based on URL Path, Hostname, HTTP Headers, and Query Strings.
+
+NLB provides the highest performance and lowest latency if the app needs it.
+NLB has one static IP address per AZ and you can attach an Elastic IP address to it. ALB and Classic Load Balancers have a static DNS name.
+NLB supports HTTP health checks as well as TCP and HTTPS
+
+Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
 
 ## ASG: Auto Scaling Group
 Automatically adjusts the number of EC2 instances in response to demand.
 
 ## CloudFront: AWS's Content Delivery Network (CDN)
-
 Amazon CloudFront is a content delivery network (CDN) service that accelerates the delivery of web content (static and dynamic) to end users by caching it at edge locations worldwide. It improves the performance of websites, APIs, and streaming media by serving cached content from the nearest edge location, reducing latency and offloading origin servers.
 
 Edge Locations

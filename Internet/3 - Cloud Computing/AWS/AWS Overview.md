@@ -32,79 +32,6 @@ Here it involves the 7 layers of Internet.
 
 # The steps of building a remote network
 
-### S3: Simple Storage Service
-
-- **Encryption
-	- **Default Encryption v.s. Bucket polices
-		- Default Encryption is auto applied and bucket polices are added.
-		- Bucket policies are evaluated before Default Encryption
-	- **In objects
-		- **Server-Side Encryption(SSE)
-			- Using keys handled, managed and owned by AWS, using AES-256
-			- Enabled by default for new buckets / objects
-		- **SSE-KMS
-			- key is from KMS
-			- May be impacted by the KMS limits
-			- The encryption keys are managed by AWS but you have full control over the rotation policy of the encryption key.
-		- **SSE-C
-			- keys managed by the customer outside of AWS
-			- HTTPS is mandatory
-		- **[DSSE-KMS(Dual-Layer SSE with Keys Stored in Key Management Service)](https://aws.amazon.com/blogs/aws/new-amazon-s3-dual-layer-server-side-encryption-with-keys-stored-in-aws-key-management-service-dsse-kms/)
-		- **Client-Side Encryption(CSE)
-	- **In transit/flight: SSL/TLS
-		- HTTPS
-		- Force encryption => use the bucket policy of aws:SecureTransport
-
-#### Storage
-- **Services provided: Static website hosting**
-	- S3 can host static websites and have them accessible on the Internet. If 403, makes sure the bucket policy allows public reads.
-- **Storage classes: Durability and Availability
-	- **Types and Payment
-		- Standard
-		- Standard-Infrequent: but requires rapid access when needed.
-		- One Zone-Infrequent: High durability in a single AZ; data lost when AZ is destroyed.
-		- Glacier
-			- Instant Retrieval
-			- Flexible Retrieval: Expedited, Standard, Bulk => wait to retrieve data
-			- Deep Archive
-		- Intelligent-Tiering
-			- Frequent
-			- InFrequent
-			- Archive Instant Access
-			- Archive Access
-			- Deep Archive
-	- **Moving between storage classes: manually or use class lifecycle configuration
-		- Lifecycle rules
-		- Use S3 Analytics to analyze the optimal number of days to move objects between different storage tiers
-	- **Replications: CRR(Cross-Region) & SRR(Same-Region)
-		- Enable a one-time Batch Operations job from this replication configuration to replicate objects that already exist in the bucket and to synchronize the source and destination buckets.
-
-#### Payment
-- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
-- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.
-#### Event notifications
-- Event: CRUD operations on the objects in S3
-	- Events => S3 => SNS / SQS / Lambda
-	- Events => EventBridge (Advanced filtering options with JSON rules) => over 18 services as destinations
-	- IAM Permissions: Resource access policy
-	
-#### Storage Lens
-- Metrics
-	- Summary Metrics: general insights about storage, objects
-	- Cost-Optimization Metrics
-	- Data-Protection Metrics
-	- Access-management Metrics
-	- Event Metrics
-	- Performance Metrics: transfer acceleration
-	- Activity: how the storage is requested
-	- Detailed Status Code: HTTP status code
-- Payment
-	- Free Metrics: 28
-	- Advanced Metrics
-
-#### S3 lambda
-- Use lambda to change the object before it is being retrieved.
-- E.g. redact PII data, convert data format, resize and watermark images, etc.
 ### Aurora
 A high-end, self-managing filing system that keeps all the database safe, organized, and quickly accessible, even if one of the database instances has a problem.
 
@@ -233,24 +160,7 @@ Route 53 is DNS service, GoDaddy is Domain Registrar. We purchase the domain fro
 
 ### VPC: Virtual Private Cloud
 A private virtual network to control over the network environment, including IP address range, subnets, routing tables, and network gateways.
-### ELB: Elastic Load Balancing
-The `smart mail sorting center` for directing internet traffic to different servers.
-Only NLB(Network) provides **both static DNS name and static IP**. ALB(Application) provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
 
-#### Stickiness / Session affinity
-ELB Sticky Session feature ensures traffic for the same client is always redirected to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
-
-The following cookie names are reserved by the ELB (AWSALB, AWSALBAPP, AWSALBTG).
-
-When using an ALB to distribute traffic to EC2 instances, the IP address that receives requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called "X-Forwarded-For" contains the client's IP address.
-Application Load Balancers support HTTP, HTTPS and WebSocket.
-ALBs can route traffic to different Target Groups based on URL Path, Hostname, HTTP Headers, and Query Strings.
-
-NLB provides the highest performance and lowest latency if the app needs it.
-NLB has one static IP address per AZ and you can attach an Elastic IP address to it. ALB and Classic Load Balancers have a static DNS name.
-NLB supports HTTP health checks as well as TCP and HTTPS
-
-Server Name Indication (SNI) allows you to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
 
 ### ASG: Auto Scaling Group
 The Auto Scaling Group can't go over the maximum capacity (you configured) during scale-out events.

@@ -21,6 +21,8 @@ Server Name Indication (SNI) allows you to expose multiple HTTPS applications ea
 
 ## ASG: Auto Scaling Group
 Automatically adjusts the number of EC2 instances in response to demand.
+- Can't go over the maximum capacity (you configured) during scale-out events.
+- When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
 
 ## CloudFront: AWS's Content Delivery Network (CDN)
 It accelerates the delivery of websites, APIs, video content, and other web assets by caching them at edge locations around the world. When users request content, CloudFront delivers it from the nearest edge location, reducing latency and improving performance. 

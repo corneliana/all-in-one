@@ -1,4 +1,18 @@
 ## Serverless
+Serverless: don't need to manage/provision servers anymore, just deploy code and functions.
+- in AWS
+	- Lambda
+		- For tasks that don't need a dedicated computer running all the time. It's like having robots wake up, perform a task quickly, and go back to sleep without worrying about the electricity bill.
+	- DynamoDB
+	- Cognito
+	- API Gateway
+		- A centralized server that manages, secures, and optimizes communication between clients and backend services in a microservices architecture.
+	- S3
+	- SNS & SQS
+	- Kinesis Data Firehose
+	- Aurora Serverless
+	- Step Functions
+	- Fargate
 
 **Serverless Solution Architecture**
 - TODO APP

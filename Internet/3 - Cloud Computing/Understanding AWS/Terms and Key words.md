@@ -3,6 +3,8 @@
 
 - minimize operational overhead
 
+- [[State]]
+
 - fully managed
 	- E.g. Aurora, it means that AWS handles the heavy lifting of infrastructure management, but some level of user interaction and monitoring is still required to ensure the database operates effectively for the specific application needs.
 
@@ -18,4 +20,33 @@ AWS EventBridge events are like notifications about things happening in your AWS
 
 - Data warehouse: 让大量数据便于管理
 Think of data warehousing as a big organized storage unit for your data. In the context of AWS, data warehousing means storing and managing large volumes of data in a way that makes it easy to analyze and extract insights from.
+
+
+# [[OSI (Open Systems Interconnection) model]]
+Here it involves the 7 layers of Internet.
+1. **Physical Layer (OSI Layer 1)**: AWS Direct Connect, establishes a dedicated network connection between AWS and an on-premises data center, bypassing the public internet.
+2. **Data Link Layer (OSI Layer 2)**: N/A
+3. **Network Layer (OSI Layer 3)**: 
+	- VPC: provide a logically isolated section to launch AWS resources in a virtual network.
+	- Route 53: DNS web service for routing end users to Internet applications.
+4. **Transport Layer (OSI Layer 4)**:
+    - Global Accelerator: Improves availability and performance of apps with local and global traffic management.
+	- Network Load Balancer: Distributes incoming application traffic across multiple targets, such as EC2 instances.
+5. **Session Layer (OSI Layer 5)**: N/A
+6. **Presentation Layer (OSI Layer 6)**: N/A
+7. **Application Layer (OSI Layer 7)**:
+    - Compute Services:
+	    - EC2: Provides resizable compute capacity in the cloud.
+	    - Lambda: Runs code without provisioning or managing servers.
+	- Storage Services:
+	    - S3: Object storage service designed to store and retrieve any amount of data.
+	    - EBS: Provides block-level storage volumes for use with EC2 instances.
+	- Database Services:
+	    - RDS: Managed relational database service supporting various database engines like MySQL, PostgreSQL, etc.
+	    - DynamoDB: Fully managed NoSQL database service.
+	- Networking Services:
+	    - API Gateway: Fully managed service for creating, publishing, maintaining, monitoring, and securing APIs at any scale.
+	    - CloudFront: CDN for fast and secure delivery of data, videos, apps, and APIs.
+	    - ELB: Automatically distributes incoming application traffic across multiple targets.
+	    - Route 53: Scalable DNS web service for routing end users to Internet applications.
 

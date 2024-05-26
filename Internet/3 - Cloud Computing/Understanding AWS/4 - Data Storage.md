@@ -157,6 +157,7 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 - **Payment**
 	- In general, bucket owner pays for all the storage and data transfer costs associated with the bucket.
 	- With requester pays bucket, the requester pays the cost of the request and the data downloaded from the bucket. Helpful when share large datasets with other accounts.
+
 ## Aurora
 **MySQL and PostgreSQL-compatible relational database** that offers the performance and availability of commercial-grade databases at little cost.
 It is **fully managed** by AWS, meaning AWS handles administrative tasks such as provisioning, patching, and backups, allowing users to focus on apps rather than database management.
@@ -186,6 +187,7 @@ RDS Proxy vs multi-AZ in terms of re-connecting to DB.
 	- Oracle does **NOT** support IAM Database Authentication
 
 ## **DynamoDB**: Fully managed NoSQL database.
+- A NoSQL database service for unstructured data, like a magical notebook that instantly stores and retrieves notes no matter how many you have.
 - **serverless** with no servers to provision, patch, or manage and no software to install, maintain or operate. 
 - auto scales tables up and down to adjust for capacity and maintain performance. Also provides the on-demand backup capability to create full backups of tables for long-term retention and archival for regulatory compliance needs.
 - provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes. RCU = “Read Capacity Units,” and WCU = “Write Capacity Units." RCU and WCU are decoupled, so you can increase/decrease each value separately.

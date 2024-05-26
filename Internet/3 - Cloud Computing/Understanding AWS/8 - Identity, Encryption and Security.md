@@ -20,8 +20,6 @@
 - **IAM**: Identity and Access Management. Secure control access to AWS services and resources.
 - Resources: Services and infrastructure within each AWS account, such as EC2 instances, S3 buckets, and databases.
 
-
-
 - **Condition keys**
 	- `aws:PrincipalOrgID`: check if the requester is a member of an organization.
 	- `aws:PrincipalOrgPaths`: check if the requester's account in located within the OU path in the organization.
@@ -46,7 +44,9 @@
 	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
 
 ## Security groups
-Act as a virtual firewall for your EC2 instances.
+Act as a virtual firewall for your EC2 instances. Like setting up a security system for your home, deciding who can knock on the door (access your instances) and who can't.
+- Another layer of abstraction over IP so that don't need to think about IPs when using groups.
+- SSH
 
 ## Encryption
 - **In flight(SSL)**

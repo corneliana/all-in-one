@@ -27,7 +27,7 @@
 
 ## Config
 - What is Config?
-	- Assess, audit, and evaluate the compliances and configurations of the AWS resources.
+	- **Assess, audit, and evaluate the compliances and configurations of the AWS resources.**
 	- Questions that can be solved by AWS Config:  
 		- Is there unrestricted SSH access to my security groups?
 		- Do my buckets have any public access?  

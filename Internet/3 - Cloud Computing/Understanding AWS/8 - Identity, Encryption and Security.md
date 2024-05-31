@@ -5,16 +5,27 @@
      +-------------------+
      |       OU 1        |
      |    (Department)   |
-     |                    |
-+----+----+        +------+-----+
-| Account 1 |      | Account 2  |
-+-----------+      +------------+
-   |      |              |      |
-  IAM    Resources     IAM    Resources
+     |                   |
++----+----+        +-----+-----+
+| Account 1 |      | Account 2 |
++-----------+      +-----------+
+   |      |              |     |
+  IAM    Resources     IAM   Resources
 
 ```
 
+![[AWS-organization.png]]
 - Organization: Global service to manage multiple AWS accounts, representing your entire AWS environment.
+	- Advantages
+		- **Multi Account** vs One Account Multi VPC
+		- Use **tagging standards** for billing purposes  
+		- Enable **CloudTrail on all accounts**, send logs to central S3 account
+		- Send CloudWatch Logs to central logging account  
+		- Establish Cross Account Roles for Admin purposes
+	- Security: **Service Control Policies (SCP)**, policies that **offer central control over the maximum available permissions for all accounts in your organization**, allowing you to manage permissions across the organization. SCPs can whitelist or blacklist access to specific AWS services and actions for all accounts under the organizational unit. **This is a scalable solution because you maintain permissions from a single point at the organization level, and it automatically applies to all accounts under it.**
+		- IAM policies applied to OU or Accounts to restrict Users and Roles
+		- They do not apply to the management account (full admin power)
+		- Must have an explicit allow (does not allow anything by default – like IAM)
 - OU: Organization Unit. Logical groupings within the organization, such as departments or business units.
 - Accounts within the organization: Each account operates independently and can have its own resources and IAM users/groups/roles.
 - **IAM**: Identity and Access Management. Secure control access to AWS services and resources.

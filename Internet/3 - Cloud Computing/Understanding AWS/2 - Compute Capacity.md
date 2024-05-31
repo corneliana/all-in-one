@@ -31,4 +31,9 @@ An Amazon EC2 instance is like a virtual computer/server running in the cloud, s
 
 ElasticIP: static IP addresses assigned to instances or resources in VPC. They can be easily associated or disassociated with instances, providing flexibility in managing IP addresses.
 
+Spot Instances are indeed **less stable but cheaper** compared to On-Demand Instances. 
+- Spot instances take advantage of unused EC2 capacity in the AWS cloud at a significantly lower price than On-Demand rates. However, this cost saving comes with the trade-off of reduced stability; **your instances can be terminated by AWS with only a two-minute notice if the demand for capacity increases or if someone else is willing to pay more**. This makes **Spot Instances ideal for workloads that are tolerant of interruptions and do not require continuous availability.**
+
+**A fleet of EC2 instances**: refers to a collection or group of EC2 instances managed as a single entity to serve a specific purpose or workload. This term is often used in cloud computing to describe the way multiple virtual servers (instances) are used together to handle applications and services.
+
 - **Lambda**: Serverless compute service for running code without provisioning or managing servers.

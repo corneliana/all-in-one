@@ -62,6 +62,9 @@ Act as a virtual firewall for your EC2 instances. Like setting up a security sys
 - Another layer of abstraction over IP so that don't need to think about IPs when using groups.
 - SSH
 
+## ACL
+Access Control Lists (ACLs) are used to **manage permissions at a resource level within AWS services** like S3. ACLs are not used to control access across multiple AWS accounts at the organizational level.
+
 ## Encryption
 - **In flight(SSL)**
 	- Data is encrypted before sending and decrypted after receiving 

@@ -25,9 +25,8 @@ Automatically adjusts the number of EC2 instances in response to demand.
 - When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
 
 ## CloudFront: AWS's Content Delivery Network (CDN)
-It accelerates the delivery of websites, APIs, video content, and other web assets by caching them at edge locations around the world. When users request content, CloudFront delivers it from the nearest edge location, reducing latency and improving performance. 
-- Cache
-	- Improve read performance, content is cached at the edge(the outer reaches of the global network). When a user requests content, CloudFront checks its cache to see if the content is already stored at an edge location near the user. If the content is not in the cache or if it has expired, CloudFront retrieves the content from the origin server specified for that particular distribution.
+- Improves read performance, content is cached at the edge(the outer reaches of the global network). Improves user experience.
+	- When a user requests content, CloudFront checks its cache to see if the content is already stored at an edge location near the user. If the content is not in the cache or if it has expired, CloudFront retrieves the content from the origin server specified for that particular distribution.
 - 216 Point of Presence(PoP) globally => Global Edge network
 - DDoS protection(because worldwide), integration with Shield, AWS web app firewall.
 
@@ -39,11 +38,12 @@ It accelerates the delivery of websites, APIs, video content, and other web asse
 - Origins
 	- The origin servers or locations where CloudFront retrieves content to serve to end users
 	- Can be various types of **servers or storage services**, such as S3 buckets, EC2 instances, ELB, or custom HTTP servers.
-		- S3
+		- S3 bucket
+			- ![[CloudFront-at-a-high-level.png]]
 			- distribute files and cache them at the edge
-			- Enhanced security with Origin Access Control(OAC), replacing OAI(Identity)
+			- **Enhanced security with Origin Access Control(OAC), replacing OAI(Origin Access Identity)**
 			- CloudFront v.s. S3 Cross Region Replications
-				- CloudFront great for static content that must be available everywhere
+				- **CloudFront great for static content that must be available everywhere**
 				- S3 Cross Region Replication: Great for dynamic content that needs to be available at low-latency in few regions.
 		- **Custom Origin(HTTP)
 			- ALB

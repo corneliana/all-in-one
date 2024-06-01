@@ -79,6 +79,8 @@ Improve global application availability and performance by directing traffic to 
 **Global Accelerator focuses on optimizing the delivery of non-cacheable TCP and UDP traffic to applications, while CloudFront accelerates the delivery of web content by caching it at edge locations.**
 
 ## Disaster Recovery
+
+
 AWS provides various services and features to support disaster recovery strategies.
 - RPO: Recovery Point Objective
 - RTO: Recovery Time Objective

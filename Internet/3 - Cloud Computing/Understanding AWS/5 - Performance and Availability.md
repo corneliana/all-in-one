@@ -115,12 +115,107 @@ Improve global application availability and performance by directing traffic to 
 	- Advantages:  
 		- Provides Data Redundancy • Eliminates I/O freezes  
 		- Minimizes latency spikes
+- RDS & Aurora MySQL Migrations
+	- RDS MySQL to Aurora MySQL
+		- Option 1: DB Snapshots from RDS MySQL restored as MySQL Aurora DB
+		- Option 2: Create an Aurora Read Replica from your RDS MySQL, and when the replication lag is 0, promote it as its own DB cluster (can take time and cost $)
+    - External MySQL to Aurora MySQL
+	    - Option 1:
+		    - Use Percona XtraBackup to create a file backup in Amazon S3
+		    - Create an Aurora MySQL DB from Amazon S3
+        - Option 2:
+		    - Create an Aurora MySQL DB
+		    - Use the mysqldump utility to migrate MySQL into Aurora (slower than S3 method)
+    - Use DMS if both databases are up and running
+- RDS & Aurora PostgreSQL Migrations
+	- RDS PostgreSQL to Aurora PostgreSQL
+		- Option 1: DB Snapshots from RDS PostgreSQL restored as PostgreSQL Aurora DB
+		- Option 2: Create an Aurora Read Replica from your RDS PostgreSQL, and when the replication lag is 0, promote it as its own DB cluster (can take time and cost $)
+    - External PostgreSQL to Aurora PostgreSQL
+	    - Create a backup and put it in Amazon S3  
+	    - Import it using the aws_s3 Aurora extension
+	- Use DMS if both databases are up and running
+
+- On-Premise strategy with AWS
+	- Ability to download Amazon Linux 2 AMI as a VM (.iso format)
+		- VMWare, KVM,VirtualBox (Oracle VM), Microsoft Hyper-V
+	- VM Import / Export
+		- Migrate existing applications into EC2
+		- Create a DR repository strategy for your on-premisesVMs
+		- Can export back the VMs from EC2 to on-premises
+    - AWS Application Discovery Service
+		- Gather information about your on-premises servers to plan a migration
+		- Server utilization and dependency mappings
+		- Track with AWS Migration Hub
+    - AWS Database Migration Service (DMS)  
+	    - replicate On-premise => AWS , AWS => AWS, AWS => On-premise  
+	    - Works with various database technologies (Oracle, MySQL, DynamoDB, etc..)
+    - AWS Server Migration Service (SMS)
+	    - Incremental replication of on-premises live servers to AWS
 
 ### AWS Backup
+- Fully managed service  
+- Centrally manage and automate backups across AWS services
+- No need to create custom scripts and manual processes
+- Supported services:  
+	- Amazon EC2 / Amazon EBS  
+	- Amazon S3  
+	- Amazon RDS (all DBs engines) / Amazon Aurora / Amazon DynamoDB
+	- Amazon DocumentDB / Amazon Neptune  
+	- Amazon EFS / Amazon FSx (Lustre & Windows File Server)  
+	- AWS Storage Gateway (Volume Gateway)
+- Supports cross-region backups
+- Supports cross-account backups
+- Supports PITR for supported services
+- On-Demand and Scheduled backups
+- Tag-based backup policies
+- You create backup policies known as Backup Plans  
+	- Backup frequency (every 12 hours, daily, weekly, monthly, cron expression) • Backup window  
+	- Transition to Cold Storage (Never, Days,Weeks, Months,Years)  
+	- Retention Period (Always, Days,Weeks, Months,Years)
+![[AWS-Backup.png]]
+- Backup Vault Lock
+	- Enforce a WORM (Write Once Read Many) state for all the backups that you store in your AWS Backup Vault
+	- Additional layer of defense to protect your backups against:
+		- Inadvertent or malicious delete operations  
+		- Updates that shorten or alter retention periods
+	- Even the root user cannot delete backups when enabled
 
 ### AWS Application Migration Service (MGN)
-
+- AWS Application Discovery Service
+	- Plan migration projects by gathering information about on-premises data centers
+	- Server utilization data and dependency mapping are important for migrations
+	- Agentless Discovery (AWS Agentless Discovery Connector)
+		- VM inventory, configuration, and performance history such as CPU, memory, and disk usage
+	- Agent-based Discovery (AWS Application Discovery Agent)
+		- System configuration, system performance, running processes, and details of the network connections between systems
+	- Resulting data can be viewed within AWS Migration Hub
+- AWS Application Migration Service (MGN)
+	- The “AWS evolution” of CloudEndure Migration, replacing AWS Server Migration Service (SMS)
+	- Lift-and-shift (rehost) solution which simplify migrating applications to AWS
+	- Converts your physical, virtual, and cloud-based servers to run natively on AWS
+	- Supports wide range of platforms, Operating Systems, and databases
+	- Minimal downtime, reduced costs
+	
 ### VMware Cloud on AWS
+- Some customers use VMware Cloud to manage their **on-premises Data Center**  
+- They want to **extend the Data Center capacity to AWS, but keep using the VMware Cloud software**
+- ...EnterVMware Cloud on AWS
+- Use cases
+	- Migrate your VMware vSphere-based workloads to AWS
+	- Run production workloads across VMware vSphere-based private, public, and hybrid cloud environments
+	- Have a disaster recover strategy
+![[VMware-cloud-on-aws.png]]
 
-## Migration
-AWS offers services and tools to migrate workloads to the cloud.
+## Transfer large amount of data into AWS
+- Example: transfer 200 TB of data in the cloud. We have a 100 Mbps internet connection.
+- Over the internet / Site-to-Site VPN:  
+    • Immediate to setup  
+    • Will take 200(TB)*1000(GB)*1000(MB)*8(Mb)/100 Mbps = 16,000,000s = 185d
+- Over direct connect 1Gbps:  
+    • Long for the one-time setup (over a month)  
+    • Will take 200(TB)*1000(GB)*8(Gb)/1 Gbps = 1,600,000s = 18.5d
+- Over Snowball:
+    • Will take 2 to 3 snowballs in parallel  
+    • Takes about 1 week for the end-to-end transfer • Can be combined with DMS
+- For on-going replication / transfers: Site-to-SiteVPN or DX with DMS or DataSync

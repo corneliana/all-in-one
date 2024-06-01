@@ -1,7 +1,38 @@
+- CloudFormation: a declarative way of outlining your AWS Infrastructure, for any resources (most of them are supported).
+	- Auto create resources based on your need
+	- Infrastructure as code
+	- Efficient
+	- Don't re-invent the wheel
+	- Supports all AWS resources
 - **SES (Simple Email Service)**: Email sending and receiving service.
-- **Pinpoint**: Targeted user engagement service.
+- **Pinpoint**: Targeted user engagement service. Scalable 2-way (outbound/inbound) marketing communications service
+	- Supports email, SMS, push, voice, and in-app messaging
+	- Ability to segment and personalize messages with the right content to customers
+	- Possibility to receive replies
+	- Scales to billions of messages per day
+	- Use cases: run campaigns by sending marketing, bulk, transactional SMS messages
+	- Versus Amazon SNS or Amazon SES  
+		- In SNS & SES you managed each message's audience, content, and delivery schedule
+		- In Amazon Pinpoint, **create message templates, delivery schedules, highly-targeted segments, and full campaigns**
 - **SSM Session Manager**: Provides interactive shell access to instances in your VPC.
-- **Cost Explorer**: Analyze AWS costs and usage.
+	- Allows you to start a secure shell on your EC2 and on-premises servers
+	- Other services
+		- Run Command
+		- Patch Manager: Automates the process of patching managed instances
+		- Maintenance Windows: Defines a schedule for when to perform actions on your instances
+		- Automation: Simplifies common maintenance and deployment tasks of EC2 instances and other AWS resources
 - **Batch**: Run batch computing workloads.
+	- Dynamically launch EC2 instances or Spot Instances
+	- Batch jobs are defined as Docker images and run on ECS
+	- v.s. Lambda
+		- Lambda:  
+			- Time limit
+			- Limited runtimes  
+			- Limited temporary disk space • Serverless
+		- Batch:
+			- No time limit
+			- Any runtime as long as it’s packaged as a Docker image
+			- Rely on EBS / instance store for disk space
+			- Relies on EC2 (can be managed by AWS)
 - **AppFlow**: Securely transfer data between AWS services and SaaS applications.
 - **Amplify**: Platform for building scalable mobile and web applications.

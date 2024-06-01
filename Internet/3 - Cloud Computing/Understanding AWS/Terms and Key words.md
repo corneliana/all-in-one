@@ -7,6 +7,12 @@
 	- **Gateways** facilitate **general and controlled access between networks**, similar to border checkpoints managing entries and exits.
 	- **Endpoints** provide **a specific, secure, and direct line to a service**, akin to having a private mailbox or dedicated delivery route that bypasses public traffic.
 
+- compliance
+	- the **adherence to various laws, policies, and regulations** when using AWS services to store, process, or transmit data. Compliance is crucial because it ensures that data handled by AWS is protected and managed in a way that meets specific standards and legal requirements.
+
+- NFS or SMB protocol
+
+
 - [[State]]
 	- stateful v.s. stateless
 

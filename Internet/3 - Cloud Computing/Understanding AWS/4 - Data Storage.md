@@ -229,6 +229,7 @@ Highly-secure, portable devices to
 		- Can be sent back to AWS offline, or connect it to internet and use AWS DataSync to send data
 	- **Snowball Edge**
 		- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations** without consuming excessive network bandwidth. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
+		- Comes with **computing capabilities** and allows you to pre-process the data while it's being moved into Snowball.
 		- Use cases: large data cloud migrations, DC decommissions, disaster recovery 
 	- Snowmobile: an actual truck
 		- Better use case than Snowball if transfer more than 10PB
@@ -282,6 +283,7 @@ Highly-secure, portable devices to
 	- FSx for Windows is **a fully managed Windows file system share drive**
 	- Suppor ts SMB protocol & Windows NTFS  
 	- **Microsoft Active Directory integration, ACLs, userquotas**
+	- has integration with Microsoft **Active Directory**
 	- Can be mounted on Linux EC2 instances
 	- Supports Microsoft's Distributed File System (DFS) Namespaces (group files across multiple FS)
 	- Scale up to 10s of GB/s, millions of IOPS, 100s PB of data
@@ -300,8 +302,8 @@ Highly-secure, portable devices to
 	- Scales up to 100s GB/s, millions of IOPS, sub-ms latencies
 	- Storage Options:  
 		- SSD – low-latency, IOPS intensive workloads, small & random file operations • HDD – throughput-intensive workloads, large & sequential file operations
-	- Seamless integration with S3  
-	- Can “read S3” as a file system (through FSx)  
+	- Seamless integration with S3
+	- Can “read S3” as a file system (through FSx) 
 	- Can write the output of the computations back to S3 (through FSx)
 	- Can be used from on-premises servers (VPN or Direct Connect)
 	- File System Deployment Options
@@ -318,7 +320,7 @@ Highly-secure, portable devices to
 
 - FSx for NetApp ONTAP
 	- Managed NetApp ONTAP on AWS
-	- File System compatible with NFS, SMB, iSCSI protocol
+	- File System compatible with **NFS, SMB, iSCSI protocol**
 	- Move workloads running on ONTAP or NAS to AWS
 	- Works with: 
 		- Linux  
@@ -331,9 +333,9 @@ Highly-secure, portable devices to
 	- Snapshots, replication, low-cost, compression and data
 	- Point-in-time instantaneous cloning (helpful for testing new workloads)
 
-- Amazon FSx for NetApp ONTAP
+- Amazon FSx for Tape Gateway
 	- Managed NetApp ONTAP on AWS
-	- File System compatible with NFS, SMB, iSCSI protocol
+	- File System compatible with **NFS, SMB, iSCSI protocol**
 	- Move workloads running on ONTAP or NAS to AWS
 	- Works with:
 		- Linux
@@ -356,23 +358,83 @@ Highly-secure, portable devices to
 	    - Security requirements  
 	    - Compliance requirements
 	    - IT strategy
-    
-- S3 is a proprietary storage technology (unlike EFS / NFS), so how do you expose the S3 data on-premises?
-    
-- AWS Storage Gateway!
-- S3 File Gateway
-- Volume Gateway
-- Storage Gateway
-- 
+	- S3 is a **proprietary storage technology (unlike EFS / NFS)**, so how do you expose the S3 data on-premises?
+	- AWS Storage Gateway!
+![[AWS-strorage-cloud-native-options.png]]
+- AWS Storage Gateway
+	- Bridge between on-premises data and cloud data
+	- Use cases:  
+		- disaster recovery
+		- backup & restore  
+		- tiered storage  
+		- on-premises cache & low-latency files access
+	- Types of Storage Gateway:
+		- S3 File Gateway
+			- Configured S3 buckets are accessible using the NFS and SMB protocol  
+			- Most recently used data is cached in the file gateway  
+			- SupportsS3Standard, S3StandardIA, S3OneZoneA, S3IntelligentTiering  
+			- **Transition to S3 Glacier using a *Lifecycle Policy***
+			- Bucket access using IAM roles for each File Gateway  
+			- SMB Protocol has integration with **Active Directory (AD)** for user authentication
+		- FSx File Gateway
+			- Native access to Amazon FSx for Windows File Server  
+			- **Local cache** for frequently accessed data  
+			- Windows native compatibility (SMB, NTFS, Active Directory...)
+			- Useful for group file shares and home directories
+		- Volume Gateway
+			- Block storage using iSCSI protocol backed by S3  
+			- Backed by EBS snapshots which can help restore on-premises volumes!
+			- Cached volumes: low latency access to most recent data  
+			- Stored volumes: entire dataset is on premise, scheduled backups to S3
+		- Tape Gateway
+			- Some companies have backup processes using physical tapes (!)  
+			- With Tape Gateway, companies use the same processes but, in the cloud 
+			- VirtualTape Library (VTL) backed by Amazon S3 and Glacier  
+			- Back up data using existing tape-based processes (and iSCSI interface)  
+			- Works with leading backup software vendors
+
+Storage Gateway – Hardware appliance
+- Using Storage Gateway means you need on-premises virtualization
+- Otherwise, you can use a Storage Gateway Hardware Appliance
+- You can buy it on amazon.com
+- Works with File Gateway,Volume Gateway,
+- Has the required CPU, memory, network, SSD cache resources
+- Helpful for daily NFS backups in small data centers
+
+![[AWS-storage-gateway.png]]
+
 ### Transfer family
-- 
+- **A fully-managed service** for file transfers **into and out of S3 or EFS** using **FTP protocol**
+- Supported Protocols  
+    - AWS Transfer for **FTP (File Transfer Protocol (FTP)) ** 
+    - AWS Transfer for **FTPS (File Transfer Protocol over SSL (FTPS))**
+    - AWS Transfer for **SFTP (Secure File Transfer Protocol (SFTP))**
+- Managed infrastructure, Scalable, Reliable, Highly Available (multi-AZ)
+- Pay per provisioned endpoint per hour + data transfers in GB
+- Store and manage users’ credentials within the service
+- **Integrate with existing authentication systems (Microsoft Active Directory, LDAP, Okta, Amazon Cognito, custom)**
+- Usage: sharing files, public datasets, CRM, ERP, ...
+![[AWS-transfer-family.png]]
 
 ### DataSync
-
-
-### Storage Comparison
+- Move large amount of data to and from  
+	- On-premises / other cloud to AWS (NFS, SMB, HDFS, S3 API...) – **needs agent**
+	- AWS to AWS (different storage services) – no agent needed
+- Can synchronize to:  
+	- Amazon S3 (any storage classes – including Glacier)
+	- Amazon EFS  
+	- Amazon FSx (Windows, Lustre, NetApp, OpenZFS...)
+- Replication tasks can be scheduled hourly, daily, weekly  
+	- File permissions and metadata are preserved (NFS POSIX, SMB...)
+	- One agent task can use 10 Gbps, can setup a bandwidth limit
+	![[AWS-Datasync.png]]
+- Want to use DataSync, but don't have the network capacity to do so
+		=> use AWS Snowcone that comes with the DataSync agent pre-installed on it
+		=> So run Snowcone on-premises, pull the data, run DataSync agents, then it will be shipped back into AWS region
+	 ![[AWS-DataSync-between-aws-resources.png]]	
+## Storage Comparison
 - S3: Object Storage  
-- S3Glacier: ObjectArchival  
+- S3 Glacier: ObjectArchival  
 - EBS volumes: Network storage for one EC2 instance at a time  
 - Instance Storage: Physical storage for your EC2 instance (high IOPS)  
 - EFS: Network File System for Linux instances, POSIX filesystem  
@@ -381,7 +443,7 @@ Highly-secure, portable devices to
 - FSx for NetApp ONTAP: High OS Compatibility  
 - FSx for OpenZFS: Managed ZFS file system  
 - Storage Gateway: S3 & FSx File Gateway,Volume Gateway (cache & stored),Tape Gateway • Transfer Family: FTP, FTPS, SFTP interface on top of Amazon S3 or Amazon EFS  
-- DataSync:Scheduledatasyncfromon-premisestoAWS,orAWStoAWS  
+- DataSync: Schedule data sync from on-premises to AWS, or AWS to AWS  
 - Snowcone / Snowball / Snowmobile: to move large amount of data to the cloud, physically
 - Database: for specific workloads, usually with indexing and querying
 

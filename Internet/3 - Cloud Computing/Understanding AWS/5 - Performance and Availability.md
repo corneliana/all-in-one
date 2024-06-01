@@ -79,11 +79,48 @@ Improve global application availability and performance by directing traffic to 
 **Global Accelerator focuses on optimizing the delivery of non-cacheable TCP and UDP traffic to applications, while CloudFront accelerates the delivery of web content by caching it at edge locations.**
 
 ## Disaster Recovery
+- Disaster: any event that has a negative impact on a company’s business continuity or finances is a disaster.
+- Disaster recovery (DR) is about preparing for and recovering from a disaster
+- What kind of disaster recovery?  
+    - On-premise => On-premise: traditional DR, and very expensive
+    - On-premise => AWS Cloud: hybrid recovery  
+    - AWS Cloud Region A => AWS Cloud Region B
+- Two terms:
+	- RPO: Recovery Point Objective
+	- RTO: Recovery Time Objective
+- Disaster Recovery Strategies
+	- Backup and Restore: High RPO  
+	- Pilot Light: A small version of the app is always running in the cloud. 
+		- Useful for the critical core (pilot light). 
+		- Very similar to Backup and Restore. 
+		- Faster than Backup and Restore as critical systems are already up  
+	- Warm Standby: Full system is up and running, but at minimum size
+		- Upon disaster, we can scale to production load
+	- Hot Site / Multi Site Approach: Very low RTO (minutes or seconds) – very expensive
+		- Full Production Scale is running AWS and On Premise
+	- All AWS Multi Region
 
+### DMS: Database Migration Service
+- Quickly and securely migrate databases to AWS, resilient, self healing
+- The source database remains available during the migration
+- Supports:  
+    - Homogeneous migrations: ex Oracle to Oracle
+    - Heterogeneous migrations: ex Microsoft SQL Server to Aurora
+- Continuous Data Replication using CDC
+- You must create an EC2 instance to perform the replication tasks
+- sources => targets, use SCT(Schema Conversion Tool) if not migrating the same DB engine
+- Continuous Replication
+- Multi-AZ Deployment
+	- When Enabled, DMS provisions and maintains a synchronously stand replica in a different AZ
+	- Advantages:  
+		- Provides Data Redundancy • Eliminates I/O freezes  
+		- Minimizes latency spikes
 
-AWS provides various services and features to support disaster recovery strategies.
-- RPO: Recovery Point Objective
-- RTO: Recovery Time Objective
+### AWS Backup
+
+### AWS Application Migration Service (MGN)
+
+### VMware Cloud on AWS
 
 ## Migration
 AWS offers services and tools to migrate workloads to the cloud.

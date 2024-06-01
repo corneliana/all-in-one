@@ -9,7 +9,7 @@
 	- Managed **Elasticsearch** service for real-time search, log analytics, and visualization of data. Full-text search, log analysis, and monitoring.
 
 - EMR: Elastic MapReduce
-	- Managed Hadoop(分布式计算) framework for processing big data workloads. Run distributed processing frameworks like Apache Hadoop, Apache Spark, and Apache Hive on AWS infrastructure.
+	- Managed Hadoop(分布式计算) framework for processing big data workloads. Run distributed processing frameworks like Apache Hadoop, **Apache Spark,** and Apache Hive on AWS infrastructure.
 
 - QuickSight
 	- Business intelligence service for creating **interactive dashboards and visualizations** from various data sources. Gain insights from your data and share visualizations with stakeholders.

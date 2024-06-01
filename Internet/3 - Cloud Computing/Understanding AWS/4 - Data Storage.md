@@ -285,7 +285,7 @@ Highly-secure, portable devices to
 	- **Microsoft Active Directory integration, ACLs, userquotas**
 	- has integration with Microsoft **Active Directory**
 	- Can be mounted on Linux EC2 instances
-	- Supports Microsoft's Distributed File System (DFS) Namespaces (group files across multiple FS)
+	- Supports Microsoft's **Distributed File System (DFS)** Namespaces (group files across multiple FS)
 	- Scale up to 10s of GB/s, millions of IOPS, 100s PB of data
 	- Storage Options:  
 		- SSD – latency sensitive workloads (db, media processing, data analytics, ...) 

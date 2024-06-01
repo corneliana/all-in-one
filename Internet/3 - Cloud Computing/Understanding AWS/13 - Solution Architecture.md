@@ -163,3 +163,6 @@ Serverless: don't need to manage/provision servers anymore, just deploy code and
 **3. Creating a highly available EC2 instance With ASG + EBS**
 ![[Pasted image 20240601121718.png]]
 
+
+
+## Well Architecture

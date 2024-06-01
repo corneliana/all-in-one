@@ -96,9 +96,9 @@ To build it, we will need:
 - **AppFlow**: Securely transfer data between AWS services and SaaS applications.
 - **Amplify**: Platform for building scalable mobile and web applications.
 
-[[13 - Solution Architecture]]
+**[[13 - Solution Architecture]]**
 
-[[14 - Billing and Costs Management]]
+**[[14 - Billing and Costs Management]]**
 
 [[Terms and Key words]]
 

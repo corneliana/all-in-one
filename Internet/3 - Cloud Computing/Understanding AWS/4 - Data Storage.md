@@ -215,13 +215,173 @@ A fully managed, in-memory caching service. "elastic" refers to the service's ab
 	- Memcached is commonly used for caching database query results, HTML fragments, and API responses in web applications.
 
 ## Storage Extras
+### Snow Family: offline devices to process data at the edge and migrate data into and out of AWS
+If it takes more than a week to transfer over the network, use Snowball devices **(physical route, not network route)**.
 
-- Snow Family
-	- Snowball Edge Storage Optimized device jobs
+Highly-secure, portable devices to 
+- either collect and process data at the edge
+- or migrate data into and out of AWS
+
+- Data migration
+	- Snowcone
+		- Use Snowcone where Snowball doesn't fit (space-constrained env)
+		- Must provide your own battery / cables
+		- Can be sent back to AWS offline, or connect it to internet and use AWS DataSync to send data
+	- **Snowball Edge**
 		- AWS Snowball Edge is a **physical data transfer device** designed for **large-scale data migrations** without consuming excessive network bandwidth. It allows for the **offline transfer** of large amounts of data from on-premises locations to AWS.
-- Architecture: Snowball into Glacier
-- FSx
+		- Use cases: large data cloud migrations, DC decommissions, disaster recovery 
+	- Snowmobile: an actual truck
+		- Better use case than Snowball if transfer more than 10PB
+![[Snow-family-for-data-migrations.png]]
+
+- Usage process
+	- Request Snowball devices from the AWS console for delivery
+	- Install the snowball client / AWS OpsHub on your servers
+	- Connect the snowball to your servers and copy files using the client
+	- Ship back the device when you’re done (goes to the right AWS facility)
+	- Data will be loaded into an S3 bucket
+	- Snowball is completely wiped
+
+- Edge computing
+	- Process data while it’s being created on an edge location
+	- These locations may have
+		- **Limited / no internet access**
+		- **Limited / no easy access to computing power**
+	- We setup a **Snowball Edge / Snowcone device** to do edge computing
+		- Snowcone & Snowcone SSD (smaller)  
+			- 2 CPUs, 4 GB of memory, wired or wireless access • USB-C power using a cord or the optional battery
+		- Snowball Edge – **Compute Optimized**
+			- 104 vCPUs, 416 GiB of RAM
+			- Optional GPU **(useful for video processing or machine learning)**
+			- 28 TB NVMe or 42TB HDD usable storage  
+			- Storage Clustering available (up to 16 nodes)
+		- Snowball Edge – Storage Optimized  
+			- Up to 40 vCPUs, 80 GiB of RAM, 80TB storage
+		- All: **Can run EC2 Instances & AWS Lambda functions (using AWS IoT Greengrass)** 
+		- Long-term deployment options: **1 and 3 years discounted pricing**
+	- Use cases
+		- Preprocess data
+		- Machine learning at the edge
+		- Transcoding media streams
+	- Eventually (if need be) we can ship back the device to AWS (for transferring data for example)
+	- AWS OpsHub: a CLI (Command Line Interface tool) to use Snow Family devices
+		- Unlocking and configuring single or clustered devices
+		- Transferring files
+		- Launching and managing instances running on Snow Family Devices
+		- Monitor device metrics (storage capacity, active instances on your device)
+		- Launch compatible AWS services on your devices (ex: Amazon EC2 instances, AWS DataSync, Network File System (NFS))
+
+### Architecture: Snowball into Glacier
+- Snowball cannot import to Glacier directly  
+- You must **use Amazon S3 first**, in combination with an S3 lifecycle policy
+![[snowball-into-glacier.png]]
+
+### Amazon FSx
+**fully managed service** to launch 3rd party high-performance file systems on AWS
+- FSx for Windows
+	- FSx for Windows is **a fully managed Windows file system share drive**
+	- Suppor ts SMB protocol & Windows NTFS  
+	- **Microsoft Active Directory integration, ACLs, userquotas**
+	- Can be mounted on Linux EC2 instances
+	- Supports Microsoft's Distributed File System (DFS) Namespaces (group files across multiple FS)
+	- Scale up to 10s of GB/s, millions of IOPS, 100s PB of data
+	- Storage Options:  
+		- SSD – latency sensitive workloads (db, media processing, data analytics, ...) 
+		- HDD – broad spectrum of workloads (home directory, CMS, ...)
+	- **Can be accessed from your on-premises infrastructure (VPN or Direct Connect)**
+	- Can be configured to be **Multi-AZ (high availability) ** 
+	- **Data is backed-up daily to S3**
+
+- FSx for Lustre
+	- Lustre is a type of **parallel distributed file system, for large-scale computing**
+	- The name Lustre is derived from **“Linux” and “cluster"**
+	- **Machine Learning, High Performance Computing (HPC)**
+	- **Video Processing, Financial Modeling, Electronic Design Automation**
+	- Scales up to 100s GB/s, millions of IOPS, sub-ms latencies
+	- Storage Options:  
+		- SSD – low-latency, IOPS intensive workloads, small & random file operations • HDD – throughput-intensive workloads, large & sequential file operations
+	- Seamless integration with S3  
+	- Can “read S3” as a file system (through FSx)  
+	- Can write the output of the computations back to S3 (through FSx)
+	- Can be used from on-premises servers (VPN or Direct Connect)
+	- File System Deployment Options
+		- Scratch File System
+			- Temporary storage
+			- Data is not replicated (doesn’t persist if file server fails)
+			- High burst (6x faster, 200MBps per TiB)
+			- Usage: short-term processing, optimize costs
+		- Persistent File System
+			- Long-term storage
+			- Data is replicated within same AZ
+			- Replace failed files within minutes
+			- Usage: long-term processing, sensitive data
+
+- FSx for NetApp ONTAP
+	- Managed NetApp ONTAP on AWS
+	- File System compatible with NFS, SMB, iSCSI protocol
+	- Move workloads running on ONTAP or NAS to AWS
+	- Works with: 
+		- Linux  
+	    - Windows
+		- MacOS
+	    - VMware Cloud on AWS
+	    - Amazon Workspaces & AppStream 2.0
+	    - Amazon EC2, ECS and EKS
+	- Storage shrinks or grows automatically
+	- Snapshots, replication, low-cost, compression and data
+	- Point-in-time instantaneous cloning (helpful for testing new workloads)
+
+- Amazon FSx for NetApp ONTAP
+	- Managed NetApp ONTAP on AWS
+	- File System compatible with NFS, SMB, iSCSI protocol
+	- Move workloads running on ONTAP or NAS to AWS
+	- Works with:
+		- Linux
+	    - Windows
+	    - MacOS
+	    - VMware Cloud on AWS
+	    - Amazon Workspaces & AppStream 2.0
+	    - Amazon EC2, ECS and EKS
+	- Storage shrinks or grows automatically
+	- Snapshots, replication, low-cost, compression and data
+	- Point-in-time instantaneous cloning (helpful for testing new workloads)
+
+### Storage Gateway
+- Hybrid Cloud for Storage
+	- AWS is pushing for ”hybrid cloud”  
+	    - Part of your infrastructure is on the cloud
+	    - Part of your infrastructure is on-premises
+	- This can be due to  
+	    - Long cloud migrations  
+	    - Security requirements  
+	    - Compliance requirements
+	    - IT strategy
+    
+- S3 is a proprietary storage technology (unlike EFS / NFS), so how do you expose the S3 data on-premises?
+    
+- AWS Storage Gateway!
+- S3 File Gateway
+- Volume Gateway
 - Storage Gateway
-- Transfer family
-- DataSync
+- 
+### Transfer family
+- 
+
+### DataSync
+
+
+### Storage Comparison
+- S3: Object Storage  
+- S3Glacier: ObjectArchival  
+- EBS volumes: Network storage for one EC2 instance at a time  
+- Instance Storage: Physical storage for your EC2 instance (high IOPS)  
+- EFS: Network File System for Linux instances, POSIX filesystem  
+- FSx for Windows: Network File System for Windows servers  
+- FSx for Lustre: High Performance Computing Linux file system  
+- FSx for NetApp ONTAP: High OS Compatibility  
+- FSx for OpenZFS: Managed ZFS file system  
+- Storage Gateway: S3 & FSx File Gateway,Volume Gateway (cache & stored),Tape Gateway • Transfer Family: FTP, FTPS, SFTP interface on top of Amazon S3 or Amazon EFS  
+- DataSync:Scheduledatasyncfromon-premisestoAWS,orAWStoAWS  
+- Snowcone / Snowball / Snowmobile: to move large amount of data to the cloud, physically
+- Database: for specific workloads, usually with indexing and querying
 

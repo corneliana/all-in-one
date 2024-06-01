@@ -3,6 +3,10 @@
 
 - minimize operational overhead
 
+- Endpoints v.s. Gateways
+	- **Gateways** facilitate **general and controlled access between networks**, similar to border checkpoints managing entries and exits.
+	- **Endpoints** provide **a specific, secure, and direct line to a service**, akin to having a private mailbox or dedicated delivery route that bypasses public traffic.
+
 - [[State]]
 	- stateful v.s. stateless
 
@@ -26,6 +30,8 @@
 
 - SQS v.s. SNS
 	- both SQS and SNS facilitate messaging in distributed systems, SQS is suited for point-to-point communication and work distribution among consumers, whereas SNS is designed for broadcasting messages to multiple subscribers or endpoints.
+
+HDD v.s. SSD
 
 
 # [[OSI (Open Systems Interconnection) model]]

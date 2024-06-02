@@ -290,7 +290,7 @@ Highly-secure, portable devices to
 	- FSx for Windows is **a fully managed Windows file system share drive**
 	- Suppor ts SMB protocol & Windows NTFS  
 	- **Microsoft Active Directory integration, ACLs, userquotas**
-	- has integration with Microsoft **Active Directory**
+	- has integration with Microsoft **Active Directory** for access control
 	- Can be mounted on Linux EC2 instances
 	- Supports Microsoft's **Distributed File System (DFS)** Namespaces (group files across multiple FS)
 	- Scale up to 10s of GB/s, millions of IOPS, 100s PB of data
@@ -458,4 +458,4 @@ Storage Gateway – Hardware appliance
 - **Snowball**: Best for **large-scale data migration when limited by internet bandwidth**, such as moving an entire data center to AWS.
 - **Storage Gateway**: Ideal for **hybrid cloud storage solutions**, allowing organizations to **extend their existing on-premises storage to the cloud** for backup, disaster recovery, or additional capacity.
 - **Transfer Family**: Suitable for **businesses that need to maintain legacy file transfer protocols but want to leverage the cloud for storage**, such as media companies sending large files.
-- **DataSync**: Useful for **continuous, scheduled, or one-time data migration and sync needs**, particularly when speed and data verification are critical, such as daily backups or active data archiving.
+- **DataSync**: Useful for **continuous, scheduled, or one-time data migration and sync needs**, **particularly when speed and data verification are critical, such as daily backups or active data archiving**.

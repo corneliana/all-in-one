@@ -46,17 +46,18 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 - **Gateway v.s. Endpoints**
 	- While both facilitate connectivity in AWS networking, **gateways typically provide connectivity between your VPC and external networks**, while **endpoints provide access points for interacting with specific AWS services within your VPC.**
 
-- Internet Gateway(IGW) – at the VPC level, provide IPv4 & IPv6 Internet Access
-	- Allows resources (e.g., EC2 instances) in a VPC connect to the Internet
+- Internet Gateway(IGW) – **at the VPC level, provide IPv4 & IPv6 Internet Access**
+	- **Allows resources (e.g., EC2 instances) in a VPC connect to the Internet**
 	- It scales horizontally and is highly available and **redundant**  
 	- Must be created separately from a VPC  
-	- One VPC can only be attached to one IGW and vice versa
+	- **One VPC can only be attached to one IGW and vice versa**
 	- Internet Gateways on their own do not allow Internet access...
-	- Route tables must also be edited!
+	- **Route tables must also be edited!**
+	- Internet gateways provide direct access to the internet for both inbound and outbound traffic. Using this for private subnets violates the principle of keeping these resources secure from direct internet access. Moreover, only one internet gateway can be associated with a VPC.
 	
-- Route Tables – must be edited to add routes from subnets to the IGW,VPC Peering Connections,VPC Endpoints, ...
+- Route Tables – **must be edited to add routes from subnets to the IGW, VPC Peering Connections, VPC Endpoints, ...**
 
-- Bastion Host – public EC2 instance to SSH into, that has SSH connectivity to EC2 instances in private subnets
+- **Bastion Host – public EC2 instance to SSH into, that has SSH connectivity to EC2 instances in private subnets**
 	- Use a Bastion Host to SSH into our private EC2 instances
 	- The bastion is in the public subnet which is then connected to all other private subnets
 	- Bastion Host security group must allow inbound from the internet on port 22 from restricted CIDR, for example the public CIDR of your corporation
@@ -76,6 +77,8 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 	- Must create multiple NAT Gateways in multiple AZs for fault-tolerance
 	- There is no cross-AZ failover needed because if an AZ goes down it doesn't need NAT
 	![[Pasted image 20240517000631.png]]
+
+NAT instances can be used similarly to NAT gateways to enable internet access from private subnets. But they are less scalable and require more management compared to NAT gateways, such as ensuring high availability and scaling. Placing NAT instances in private subnets isn’t typical since they need to have internet access themselves; generally, they are placed in public subnets.
 
 - NACL – **stateless**, subnet rules for inbound and outbound, don’t forget Ephemeral Ports
 - Security Groups – **stateful**, operate at the EC2 instance level
@@ -114,7 +117,7 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 - Traffic Mirroring – copy network traffic from ENIs for further analysis
 	- Use cases include content inspection, threat monitoring, and troubleshooting.
 	
-- Egress-only Internet Gateway – like a NAT Gateway, but for IPv6
+- Egress-only Internet Gateway – **like a NAT Gateway, but for IPv6**
 	- Allows only outbound traffic
 ![[NAT-gateway-vs-Egress-only-Internet-gateway.png]]
 
@@ -133,7 +136,7 @@ An "inspection VPC" refers to a Virtual Private Cloud (VPC) configuration within
 - provides features like API creation, versioning, deployment, security, monitoring, and **throttling** => throttles requests to your API using the token bucket algorithm, where a token counts for a request. Specifically, API Gateway sets a limit on a steady-state rate and a burst of request submissions against all APIs in your account. In the token bucket algorithm, the burst is the maximum bucket size. 
 	- tokens in this model help to smooth out the handling of API requests during both normal and high-traffic conditions, ensuring a more reliable and consistent service experience.
 
-- Edge-Optimized(default): For global clients
+- **Edge-Optimized(default): For global clients**
 	- Requests are routed through the CloudFront Edge locations (improves latency)
 	- The API Gateway still lives in only one region
 - Regional

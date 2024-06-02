@@ -109,7 +109,7 @@ List of Ports to be familiar with:
 - SSH: 22
 - SFTP: 22 (same as SSH)
 - HTTP: 80
-- HTTPS: 443
+- **HTTPS: 443**
     
 **vs RDS Databases ports:**
 - PostgreSQL: 5432

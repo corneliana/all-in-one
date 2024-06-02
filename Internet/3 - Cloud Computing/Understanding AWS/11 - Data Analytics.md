@@ -10,6 +10,7 @@
 
 - EMR: Elastic MapReduce
 	- Managed Hadoop(分布式计算) framework for processing big data workloads. Run distributed processing frameworks like Apache Hadoop, **Apache Spark,** and Apache Hive on AWS infrastructure.
+	- Using an EMR cluster would imply managing the underlying infrastructure.
 
 - QuickSight
 	- Business intelligence service for creating **interactive dashboards and visualizations** from various data sources. Gain insights from your data and share visualizations with stakeholders.

@@ -88,17 +88,19 @@ Traffic Mirroring allows to copy network traffic from Elastic Network Interfaces
 	- **S3 and DynamoDB have a VPC Gateway Endpoint (remember it), all the other ones have an Interface endpoint (powered by Private Link - means a private IP).**
 	- Gateway Endpoint v.s. Interface Endpoint
 		- Both facilitate private connectivity to AWS services within a VPC, they have different implementations
-		- **Gateway endpoints** are specific to certain AWS services like S3 and DynamoDB. They are implemented using VPC route tables and provide a direct, targeted route for traffic destined to these services. A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection.
+		- **Gateway endpoints** are specific to certain AWS services like **S3 and DynamoDB**. They are implemented using VPC route tables and provide a direct, targeted route for traffic destined to these services. A gateway VPC endpoint privately connect VPC to supported AWS services without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect.
 		- **Interface endpoints** are powered by AWS PrivateLink and support a broader range of AWS services. They use Elastic Network Interfaces (ENIs) within your VPC to establish private connections to the service endpoints. They offer more flexibility and are integrated with AWS PrivateLink's service discovery and endpoint policies.
 	
 - VPC Flow Logs – can be setup at the VPC / Subnet / ENI Level, for ACCEPT and REJECT traffic, helps identifying attacks, analyze using Athena or CloudWatch Logs Insights
 	- VPC Flow Logs is a VPC feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC.
 
-- Site-to-Site VPN – setup a Customer Gateway on DC, a Virtual Private Gateway on VPC, and site-to-site VPN over public Internet
 - AWS VPN CloudHub – hub-and-spoke VPN model to connect your sites
 	- It allows you to securely communicate with multiple sites using AWS VPN. It operates on a simple hub-and-spoke model that you can use with or without a VPC.
-	
-- Direct Connect – setup a Virtual Private Gateway on VPC, and establish a direct private connection to an AWS Direct Connect Location
+- Site-to-Site VPN – A Site-to-Site VPN securely connects your on-premises network to your AWS infrastructure over the internet using encryption tunnels.
+	- **Site-to-Site VPN** is ideal for scenarios where **cost concerns are paramount, and the flexibility and quick setup are required**. It's also useful when **the variability in performance of internet-based connections is acceptable**, or when **encrypted data transmission is needed without the higher cost of a dedicated line**.
+
+- Direct Connect – setup a Virtual Private Gateway on VPC, and establish a direct private / dedicated connection to an AWS Direct Connect Location.
+	- **Direct Connect** is best utilized when there is a need for **high throughput, consistent performance, and perhaps lower data transfer costs at higher volumes**. It's also suitable when regulatory compliance dictates a direct connection.
 - Direct Connect Gateway – setup a Direct Connect to many VPCs in different AWS regions
 
 - AWS PrivateLink / VPC Endpoint Services:  
@@ -128,7 +130,9 @@ An "inspection VPC" refers to a Virtual Private Cloud (VPC) configuration within
 
 - A **fully managed service** to create, publish, maintain, monitor, and secure APIs at any scale. 
 - A front door for applications to access data, business logic, or functionality hosted on backend services, such as Lambda functions, EC2 instances, or HTTP endpoints. 
-- provides features like API creation, versioning, deployment, security, monitoring, and throttling.
+- provides features like API creation, versioning, deployment, security, monitoring, and **throttling** => throttles requests to your API using the token bucket algorithm, where a token counts for a request. Specifically, API Gateway sets a limit on a steady-state rate and a burst of request submissions against all APIs in your account. In the token bucket algorithm, the burst is the maximum bucket size. 
+	- tokens in this model help to smooth out the handling of API requests during both normal and high-traffic conditions, ensuring a more reliable and consistent service experience.
+
 - Edge-Optimized(default): For global clients
 	- Requests are routed through the CloudFront Edge locations (improves latency)
 	- The API Gateway still lives in only one region

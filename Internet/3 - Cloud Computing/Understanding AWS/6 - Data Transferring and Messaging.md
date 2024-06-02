@@ -86,6 +86,7 @@ A platform for collecting, processing, and analyzing real-time, streaming data, 
 			- AWS: Redshift / S3 / OpenSearch
 			- 3rd party partner: Splunk / MongoDB / DataDog / NewRelic
 			- Custom: send to any HTTP endpoint
+	- Firehose cannot directly write into a DynamoDB table
 - **Data streams v.s. Data firehose
 
 #### Ordering data 

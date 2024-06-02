@@ -38,8 +38,10 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 
 **Use cases:** Backup and storage, Disaster Recovery, Archive, Hybrid Cloud Storage, Application Hosting, Media Hosting, Data Lakes & big data analytics, Software delivery, Static website
 
+When you use bucket default settings, you don't specify a Retain Until Date. Instead, you specify a **duration**, in either days or years, for which every object version placed in the bucket should be protected.
+
 - **Buckets** (dictionaries) to store objects (files) **at regional level**.
-- **Versioning** files at bucket level. Must enable versioning in source and destination buckets.
+- **Versioning** files at bucket level. Must enable versioning in source and destination buckets. Once you version-enable a bucket, it can never return to an unversioned state. Versioning can only be suspended once it has been enabled.
 - **Replication** enables **automatic, asynchronous copying of objects across buckets.**
 	- Cross-region replication
 - **Services provided: Static website hosting**
@@ -49,8 +51,11 @@ An **infinitely scaling storage service** to store and retrieve any amount of da
 
 - **Performance:**
 	- **Store
-		- Baseline
-		- Multi-Part upload: big files divided into parts
+		- **Baseline**
+			- Amazon S3 automatically scales to high request rates, latency 100-200 ms
+			- Your app can **achieve at least 3,500 PUT/COPY/POST/DELETE or 5,500 GET/HEAD requests per second per prefix in a bucket.**
+			- There are no limits to the number of prefixes in a bucket. You can increase I/O performance by parallelizing reads. **For example, 10 prefixes in S3 bucket to parallelizing reads, can scale read performance to 55,000 read requests per second.**
+		- **Multi-Part upload: big files divided into parts**, if uploading more than 5GB.
 		- **Transfer acceleration** 
 			- **transfer files to AWS Edge Location(part of CloudFront)** that are are optimized for fast content delivery by leveraging AWS's global network infrastructure, routing data through Edge Locations closest to the uploader.
 			- then forward file to the S3 bucket in the target region within the AWS network backbone.
@@ -172,6 +177,8 @@ Up to 15 Aurora Read Replicas in a single Aurora DB Cluster.
 A **managed** database service, like having a specialized filing cabinet for the structured data that takes care of organizing, retrieving, and storing efficiently. **RDS supports MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, and Amazon Aurora.**
 
 RDS Proxy vs multi-AZ in terms of re-connecting to DB.
+
+Multi-AZ follows **synchronous** replication and spans at least two Availability Zones (AZs) within a single region. Read replicas follow **asynchronous** replication and can be within an Availability Zone (AZ), Cross-AZ, or Cross-Region
 
 - Read replica
 	- RDS database can have up to 15 Read Replicas.

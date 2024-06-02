@@ -39,6 +39,8 @@
 
 HDD v.s. SSD
 
+AWS Global Accelerator and Amazon CloudFront are separate services that use the AWS global network and its edge locations around the world. CloudFront improves performance for both cacheable content (such as images and videos) and dynamic content (such as API acceleration and dynamic site delivery), while Global Accelerator improves performance for a wide range of applications over TCP or UDP.
+
 
 # [[OSI (Open Systems Interconnection) model]]
 Here it involves the 7 layers of Internet.

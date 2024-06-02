@@ -27,7 +27,7 @@
 		- They do not apply to the management account (full admin power)
 		- Must have an explicit allow (does not allow anything by default – like IAM)
 - OU: Organization Unit. Logical groupings within the organization, such as departments or business units.
-- Accounts within the organization: Each account operates independently and can have its own resources and IAM users/groups/roles.
+- Accounts within the organization: Each account operates independently and can have its own resources and IAM users/groups/roles. **AWS recommends that user account credentials should not be shared between users.**
 - **IAM**: Identity and Access Management. Secure control access to AWS services and resources.
 - Resources: Services and infrastructure within each AWS account, such as EC2 instances, S3 buckets, and databases.
 
@@ -39,10 +39,10 @@
 - IAM roles v.s. Resource-based policies
 	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
 	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
-	- IAM role: the recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
-		- IAM group is typically used for managing permissions for multiple users
-		- IAM users are meant for individual human users or applications
-		- IAM policies are used in combination with IAM roles, users, and groups to define permissions within AWS environments. They allow for granular access control, centralized management of permissions, and flexibility in defining security policies.
+	- **IAM role: the recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
+	- IAM group is typically used for managing permissions for multiple users
+	- **IAM users are meant for individual human users or applications.** Users are people within your organization, and can be grouped. Users don’t have to belong to a group, and user can belong to multiple groups
+	- IAM policies are used in combination with IAM roles, users, and groups to define permissions within AWS environments. They allow for granular access control, centralized management of permissions, and flexibility in defining security policies.**
 
 - Permission boundaries
 	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
@@ -89,7 +89,7 @@ Access Control Lists (ACLs) are used to **manage permissions at a resource level
 		- Encrypted secrets can be stored in the code / environment variables
 	- Keys type
 		- Symmetric(AES-256 keys)
-			- AWS services that are integrated with KMS use Symmetric CMKs
+			- AWS services that are integrated with KMS use **Symmetric CMKs**
 			- You never get access to the KMS Key unencrypted (must call KMS API to use)
 		- Asymmetric
 			- Public (Encrypt) and Private Key (Decrypt) pair
@@ -213,7 +213,7 @@ Access Control Lists (ACLs) are used to **manage permissions at a resource level
 	- ![[Best-practice-for-DDoS-resiliency attach-surface-reduction.png]]
 
 - **Firewall Manager**
-	- A security management service that **centrally configure and manage firewall rules across multiple AWS accounts and resources**. But is not specifically designed for traffic inspection and filtering within a single VPC.
+	- A security management service that **centrally configure and manage AWS WAF rules across multiple AWS accounts and resources**. But is not specifically designed for traffic inspection and filtering within a single VPC.
 	- Rules are applied to new resources as they are created (good for compliance) across all and future accounts in your Organization
 	- **v.s. Network FireWall: AWS Network Firewall focuses on providing network traffic filtering and protection for individual VPCs, Firewall Manager is designed for centralized management and enforcement of firewall policies across multiple AWS accounts and resources, including Network Firewall.**
 
@@ -225,8 +225,8 @@ Access Control Lists (ACLs) are used to **manage permissions at a resource level
 		- CloudTrail Events Logs – unusual API calls, unauthorized deployments
 		- CloudTrailManagementEvents–create VPC subnet, create trail,...
 		- CloudTrailS3DataEvents–get object, list objects, delete object,...
-		- VPC Flow Logs – unusual internal traffic, unusual IP address  
-		- DNS Logs – compromised EC2 instances sending encoded data within DNS queries
+		- **VPC Flow Logs** – unusual internal traffic, unusual IP address  
+		- **DNS Logs** – compromised EC2 instances sending encoded data within DNS queries
 		- Optional Features – EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events...
 	- Then generate findings.
 	- Can setup EventBridge rules to be notified in case of findings
@@ -247,6 +247,7 @@ Access Control Lists (ACLs) are used to **manage permissions at a resource level
 
 - Macia
 	- A fully managed data security and data privacy service that **uses machine learning and pattern matching to discover and protect sensitive data** in AWS.
+	- A security service to help organizations discover, classify, and protect sensitive data stored in AWS. It uses machine learning and pattern matching techniques to automatically identify and classify sensitive data such as personally identifiable information (PII), intellectual property, and financial data. Macie can analyze data stored in various AWS services, including S3 buckets, Amazon RDS databases, and AWS Glue Data Catalogs.
 	- Identify and alert you to sensitive data, such as personally identifiable information (PII)
 
 ## Cognito
@@ -265,8 +266,7 @@ lly designed for managing secrets like database credentials. It provides additio
 storing and managing sensitive information such as database credentials.
 a versatile service primarily used for storing configuration data and secrets. While it does support automatic rotation of parameters, it's not specifically tailored for secret management like AWS Secrets Manager. Parameter Store may be suitable for managing other types of configuration data but may lack some of the advanced features and integrations provided by Secrets Manager for managing secrets like database credentials.
 
-### Macia
-A security service to help organizations discover, classify, and protect sensitive data stored in AWS. It uses machine learning and pattern matching techniques to automatically identify and classify sensitive data such as personally identifiable information (PII), intellectual property, and financial data. Macie can analyze data stored in various AWS services, including S3 buckets, Amazon RDS databases, and AWS Glue Data Catalogs.
+
 
 
 

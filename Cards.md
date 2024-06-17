@@ -1,3 +1,6 @@
+---
+sticker: emoji//1f4c7
+---
 Persist Owner Leads
 
 When persist data a new schema, think about how will affect old data?

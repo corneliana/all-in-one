@@ -15,11 +15,23 @@ sticker: emoji//1f916
 	- 如果是自己自己，怎么使用 => 怎么设计  
 
 - **自己**
-	- 自己学
+	- 学Backend
 		- AWS的服务不在AWS实现，如何实现。比如消息队列如何实现（通信协议）  
 		- 数据库（关系型/非关系型），SQL，表的设计。比如在数据库里设计数据模型  
 		- API CRUD  
 		- NodeJS
+	- 学Frontend
+		- Roadmap整理
+		- Road to React
+		- Juejin买的书
+		- Mosh买的课
+		- JS高级程序设计
+		- Understanding ES6
+	- 其他
+		- GTB
+		- 数据结构与算法分析
+		- 操作系统
+		- SICP: Structure and Interpretation of Computer Programs
 	- 自己做
 		- 只用一台EC2，上面所有的service都是自己实现的（前端，后端，数据库）
 		- 前后端分离，数据库的基础（种类、设计原则、三个。。。）

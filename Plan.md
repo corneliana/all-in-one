@@ -2,29 +2,30 @@
 sticker: emoji//1f916
 ---
 
-- **AWS**
+- **AWS —— 11.30**
 	- **AWS Certified Developer – Associate (DVA-C02) —— 2024.09.30** 
 		- This will build on your foundational knowledge and focus specifically on developing and maintaining applications using AWS services.
 	- **AWS Certified DevOps Engineer – Professional —— 2024.11.30**
 		- Once you have a solid understanding of developing applications on AWS, this certification will enhance your skills in automation and DevOps practices, which are crucial for modern software development and operations.
 
-- **项目**
+- **项目 —— 10.10**
 	- Draw a complete diagram of the project
 	- Know 90% details of the project
 	- AWS 在项目中的应用  
 	- 如果是自己自己，怎么使用 => 怎么设计  
 
-- **自己**
-	- 学Backend
+- **自己 —— 12.10**
+	- 学Backend —— 11.30
 		- AWS的服务不在AWS实现，如何实现。比如消息队列如何实现（通信协议）  
 		- 数据库（关系型/非关系型），SQL，表的设计。比如在数据库里设计数据模型  
 		- API CRUD  
 		- NodeJS
-	- 学Frontend
+	- 学Frontend —— 12.20
 		- Roadmap整理
 		- Road to React
 		- Juejin买的书
 		- Mosh买的课
+		- Udemy Courses
 		- JS高级程序设计
 		- Understanding ES6
 	- 其他
@@ -32,7 +33,7 @@ sticker: emoji//1f916
 		- 数据结构与算法分析
 		- 操作系统
 		- SICP: Structure and Interpretation of Computer Programs
-	- 自己做
+	- 自己做 —— 11.15
 		- 只用一台EC2，上面所有的service都是自己实现的（前端，后端，数据库）
 		- 前后端分离，数据库的基础（种类、设计原则、三个。。。）
 		- 从简单的开始（按钮+1，访问网站的浏览量等，翻译软件）

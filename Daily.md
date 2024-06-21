@@ -1,6 +1,11 @@
 ---
 sticker: emoji//1f469-200d-1f4bb
 ---
+3 hard things in coding
+- naming
+- caching: MVCC introduce version to cache
+- notification
+
 GraphQL
 两层query的设计
 

@@ -6,6 +6,8 @@ sticker: emoji//1f469-200d-1f4bb
 - caching: MVCC introduce version to cache
 - notification
 
+test
+
 GraphQL
 两层query的设计
 

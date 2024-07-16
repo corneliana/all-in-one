@@ -1,6 +1,16 @@
 ---
 sticker: emoji//1f469-200d-1f4bb
 ---
+
+rea.to
+- https://github.com/YOURLS/YOURLS
+- 
+
+shush
+
+Braze
+
+https://www.martinfowler.com/bliki/TwoHardThings.html
 3 hard things in coding
 - naming
 - caching: MVCC introduce version to cache

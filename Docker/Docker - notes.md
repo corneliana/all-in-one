@@ -1,6 +1,5 @@
----
-sticker: emoji//1f433
----
+
+
 ## What is Docker?
 
 - 定义

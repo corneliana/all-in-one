@@ -23,6 +23,8 @@ sticker: emoji//0037-fe0f-20e3
 - GRPC: a modern open source high performance Remote Procedure Call (RPC) **framework** that **can run in any environment**. It enables client and server applications to communicate transparently, and makes it easier to build connected systems.
 
 
+## Akamai
+Content Delivery Networks (CDNs) like CloudFront. Their essential purpose is to enhance the speed, reliability, and security of delivering content over the internet by caching content at multiple edge locations around the world.
 
 
 ## Reflection

@@ -155,7 +155,7 @@ Key features of API Gateway include:
 API Gateway is commonly used for building RESTful APIs, GraphQL APIs, WebSocket APIs, and serverless applications, allowing developers to expose their backend services securely and efficiently to external clients.
 
 ## Route 53: Domain Name Service (DNS)
-Translate human-readable domain names into IP addresses, allowing users to access resources on the internet using familiar domain names.
+Domain Name Service (DNS): Translate human-readable domain names into IP addresses.
 
 Key features of Route 53 include:
 - **Domain Registration**: You can register domain names directly through Route 53. Route 53 is DNS service, GoDaddy is Domain Registrar. We purchase the domain from GoDaddy and use Route 53 to manage DNS records.

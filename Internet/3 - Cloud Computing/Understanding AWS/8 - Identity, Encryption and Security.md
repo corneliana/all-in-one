@@ -1,34 +1,49 @@
-## Identity
-```
-         AWS Organization
-              |
-     +-------------------+
-     |       OU 1        |
-     |    (Department)   |
-     |                   |
-+----+----+        +-----+-----+
-| Account 1 |      | Account 2 |
-+-----------+      +-----------+
-   |      |              |     |
-  IAM    Resources     IAM   Resources
 
+## IAM: Identity and Access Management. 
+Secure control access to AWS services and resources.
+```mermaid
+graph TD
+    AWS[AWS Account] --> RU[Root User]
+    AWS --> O[Organization]
+    O --> SCP[Service Control Policies]
+    O --> A1[AWS Account 1]
+    O --> A2[AWS Account 2]
+	A1 --> R[Roles]
+    A1 --> G[Groups]
+    A1 --> U[Users]
+    U --> P[Policies]
+    G --> P
+    R --> TP[Trust Policy]
+    R --> FU[Federated Users]
+    R --> P
+    U --> AK[Access Keys]
+    U --> MFA[Multi-Factor Authentication]
+    G --> U
+    P --> Pe[Permissions]
+    A1 --> Re[Resources]
+    Re --> RBP[Resource-Based Policies]
+    P --> IBP[Identity-Based Policies]
+    Re --> ARN[Amazon Resource Name]
 ```
 
-![[AWS-organization.png]]
-- Organization: Global service to manage multiple AWS accounts, representing your entire AWS environment.
+- The AWS Account is the top-level container. Each account is a root user and can be part of the organization.
+
+- Organization: global service to provide a comprehensive view and management across all the AWS accounts. Each account operates independently and can have its own resources and IAM users/groups/roles. **AWS recommends that user account credentials should not be shared between users.**
 	- Advantages
 		- **Multi Account** vs One Account Multi VPC
 		- Use **tagging standards** for billing purposes  
 		- Enable **CloudTrail on all accounts**, send logs to central S3 account
 		- Send CloudWatch Logs to central logging account  
 		- Establish Cross Account Roles for Admin purposes
-	- Security: **Service Control Policies (SCP)**, policies that **offer central control over the maximum available permissions for all accounts in your organization**, allowing you to manage permissions across the organization. SCPs can whitelist or blacklist access to specific AWS services and actions for all accounts under the organizational unit. **This is a scalable solution because you maintain permissions from a single point at the organization level, and it automatically applies to all accounts under it.**
+	- Security: **Service Control Policies (SCP)**, policies that **offer central control over the maximum available permissions for all accounts in your organization**, allowing you to manage permissions across the organization. 
+		- SCPs can whitelist or blacklist access to specific AWS services and actions for all accounts under the organizational unit. **This is a scalable solution because you maintain permissions from a single point at the organization level, and it automatically applies to all accounts under it.**
 		- IAM policies applied to OU or Accounts to restrict Users and Roles
 		- They do not apply to the management account (full admin power)
 		- Must have an explicit allow (does not allow anything by default – like IAM)
-- OU: Organization Unit. Logical groupings within the organization, such as departments or business units.
-- Accounts within the organization: Each account operates independently and can have its own resources and IAM users/groups/roles. **AWS recommends that user account credentials should not be shared between users.**
-- **IAM**: Identity and Access Management. Secure control access to AWS services and resources.
+	
+- Organization Unit(OU): logical groupings within the organization.
+	- ![[AWS-organization.png]]
+
 - Resources: Services and infrastructure within each AWS account, such as EC2 instances, S3 buckets, and databases.
 
 - **Condition keys**
@@ -37,7 +52,7 @@
 	- `aws:PrincipalTag`: check tags attached to the principal making the request.
 
 - IAM roles v.s. Resource-based policies
-	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
+	- When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role.
 	- Resource-based policy: Lambda, SNS, SQS, CloudWatch Logs, API Rule Gateway...
 	- **IAM role: the recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
 	- IAM group is typically used for managing permissions for multiple users

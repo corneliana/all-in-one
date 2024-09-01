@@ -1,5 +1,8 @@
+---
+sticker: ui//mk-mark-blocklink
+---
 
-Microservices architecture is a method of developing software systems that structures an application as a collection of loosely coupled services, organized around business capabilities. Each service is a small, independent piece of the overall system that performs a specific function. This approach enables individual services to be developed, deployed, and scaled independently.
+Microservices architecture is a method of developing software systems that structures an application as **a collection of loosely coupled services**, organized around business capabilities. Each service is a small, independent piece of the overall system that performs a specific function. This approach enables individual services to be developed, deployed, and scaled independently.
 
 The "micro" aspect emphasizes not just the size (the granularity of the services) but the scope and bounded context of each service, aiming for simplicity and focus in service design and functionality. The key is that each service is as small as necessary but as large as required to fulfill its designated functionality effectively.
 

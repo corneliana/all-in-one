@@ -4,35 +4,6 @@
 
 Amazon Kinesis Data Streams (KDS) is a massively scalable and durable real-time data streaming service. It can continuously capture gigabytes of data per second from hundreds of sources such as website clickstreams, database event streams, financial transactions, social media feeds, IT logs, and location-tracking events.
 
-### SQS: Simple Queue Service => queue model
-A **fully managed message** queuing service. Producer sends messages to SQS queue, and Consumers poll messages from the queue.
-Amazon SQS allows you to retain messages for days and process them later.
-- **Mechanism
-	- **Produce and send**: The message will be sent again if not processed in time.
-	- **Consume, process and delete**: consumers can be run on EC2/servers/lambda... Consumers can be scaled to handle higher throughput.
-		- ASG: to handle big load
-			- requests => ASG(enqueue) => SQS => ASG(dequeue) => DB
-		- WaitTimeSeconds to start Long Polling: consumers wait for messages to arrive if there is none in the queue.
-		- Message Visibility Timeout: Message that being polled will be invisible to other consumers for a period of time. If not deleted, the same message will back to the queue after being timeout is elapsed.
-		- ChangeMessageVisibility API to get more time for processing.
-	- **Ordering of messages**: FIFO
-		- The order in which messages are sent and received are strictly preserved and a message is delivered once and remains available until a consumer process and deletes it. 
-		- Duplicated messages are not introduced into the queue.
-	
-- **Use cases
-	- Decouple applications
-	- A buffer to DB writes
-
-- **Security
-	- Encryption
-		- In-flight: HTTPS
-		- At-rest: KMS
-		- Client-side
-	- Access Controls: IAM
-	- Access Policies: similar to S3
-
-- **Dead Letter Queue
-
 ### SNS: Simple Notification Service => pub/sub model
  The "town crier" for broadcasting messages or alerts, i.e. send messages to many receivers. SNS is a fully managed pub/sub (publish/subscribe) messaging service, enabling publish messages to topics, which are logical channels or categories.
 - **Mechanism

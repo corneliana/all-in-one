@@ -18,9 +18,26 @@
 		- IAM roles 
 			- EC2 instance profile
 			- ECS task role: IAM Role used by the ECS task itself. Use when container wants to call other AWS services like S3, SQS, etc.
+			- Why different roles for different ECS services:
+
+1. Separation of Concerns:
+    - Different services often require access to different AWS resources.
+    - Keeping roles separate ensures each service only has the permissions it needs.
+2. Security:
+    - Minimizes the blast radius if a service is compromised.
+    - Adheres to the principle of least privilege.
+3. Auditing and Compliance:
+    - Easier to track which services have access to which resources.
+    - Simplifies compliance with security standards.
+4. Flexibility:
+    - Allows for easy updates to permissions as service requirements change.
+    - Enables different environments (dev, staging, prod) to have different permissions.
+5. Scalability:
+    - As your application grows, role separation allows for easier management of complex permission structures.
 		- LB integrations: ALB, NLB
 		- Data Volumes(EFS): Fargate + EFS = Serverless
 			- EFS volume can be shared between different EC2 instances and different ECS Tasks. It can be used as a persistent multi-AZ shared storage for containers.
+	
 	- Fargate: A serverless compute engine for containers, running containers without managing servers or clusters.
 	- ECR Elastic Container Registry: Store and manage Docker images on AWS
 		- A fully managed container registry that makes it easy to store, manage, share, and deploy container images. ECR is fully integrated with ECS, allowing easy retrieval of container images from ECR while managing and running containers using ECS.

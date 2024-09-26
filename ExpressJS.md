@@ -1,0 +1,1 @@
+Middleware in Express.js is used to handle various aspects of the request-response cycle.

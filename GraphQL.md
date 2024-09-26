@@ -3,3 +3,5 @@ In GraphQL, each field in a query is resolved in the context of a specific objec
 graphQL nested query
 POST same as HTTP POST?
 client platform
+
+

@@ -1,7 +1,7 @@
 ---
 sticker: emoji//2763-fe0f
 ---
-
+https://www.nytimes.com/games/wordle/index.html made a program to decode this
 ## 3.19-4.6
 - Blog
 	- Apply a handy theme and post the first blog 👀

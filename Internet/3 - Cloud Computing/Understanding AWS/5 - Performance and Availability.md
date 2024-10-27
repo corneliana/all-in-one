@@ -4,6 +4,10 @@ The `smart mail sorting center` for directing internet traffic to different serv
 - Only NLB provides **both static DNS name and static IP**. 
 - ALB provides a static DNS name but it does NOT provide a static IP. The reason being that AWS wants ELB to be accessible using a static endpoint, even if the underlying infrastructure that AWS manages changes.
 
+Network Load Balancer has one static IP address per AZ and you can attach an Elastic IP address to it. Application Load Balancers and Classic Load Balancers as a static DNS name.
+
+When using an Application Load Balancer to distribute traffic to your EC2 instances, the IP address you'll receive requests from will be the ALB's private IP addresses. To get the client's IP address, ALB adds an additional header called X-Forwarded-For contains the client's IP address.
+
 #### Stickiness / Session affinity
 ELB Sticky Session feature ensures traffic for the same client is always redirected to the same target (e.g., EC2 instance). This helps that the client does not lose his session data.
 
@@ -23,6 +27,8 @@ Server Name Indication (SNI) allows you to expose multiple HTTPS applications ea
 Automatically adjusts the number of EC2 instances in response to demand.
 - Can't go over the maximum capacity (you configured) during scale-out events.
 - When an EC2 instance fails the ALB Health Checks, it is marked unhealthy and will be terminated while the ASG launches a new EC2 instance.
+
+For each Auto Scaling Group, there's a Cooldown Period after each scaling activity. In this period, the ASG doesn't launch or terminate EC2 instances. This gives time to metrics to stabilize. The default value for the Cooldown Period is 300 seconds (5 minutes).
 
 ## CloudFront: AWS's Content Delivery Network (CDN)
 - Improves read performance, content is cached at the edge(the outer reaches of the global network). Improves user experience.

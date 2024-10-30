@@ -183,6 +183,7 @@ Multi-AZ follows **synchronous** replication and spans at least two Availability
 - Read replica
 	- RDS database can have up to 15 Read Replicas.
 	- Read Replicas have Asynchronous Replication, therefore it's likely users will only read Eventual Consistency.
+	- A Read Replica in a different AWS Region than the source database can be used as a standby database and promoted to become the new production database in case of a regional disruption. So, we'll have a highly available (because of Multi-AZ) RDS DB Instance in the destination AWS Region with both read and write available.
 
 - RDS in multi-AZ
 	- Multi-AZ keeps the same connection string regardless of which database is up.

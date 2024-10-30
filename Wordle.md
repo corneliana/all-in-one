@@ -7,3 +7,7 @@
 - v: ~ on sth | ~ yourself. to provide or use only a small amount of sth 节省，吝惜
 	- She never stints on the food at her parties. 她在聚会食物上从不吝惜。
 	- We don't need to stint ourselves——have some more! 我们没必要节省——再吃点！
+
+tunic
+- a loose piece of clothing covering the body down to the knees, usually without sleeves, as worn in ancient Greece and Rome （古希腊、古罗马时期及膝的）短袍
+- a piece of women's clothing like a tunic, that reaches to the hips and is worn over trousers/pants or a skirt （长至臀部，罩于裤或裙外的）女用短上衣

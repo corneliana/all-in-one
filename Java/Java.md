@@ -1,5 +1,6 @@
 ---
 sticker: emoji//2615
+_links: []
 ---
 Question:
 1. 闭包和对象共享的区别？

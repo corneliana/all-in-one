@@ -178,6 +178,8 @@ A **managed** database service, like having a specialized filing cabinet for the
 
 RDS Proxy vs multi-AZ in terms of re-connecting to DB.
 
+You can not create encrypted Read Replicas from an unencrypted RDS DB instance.
+
 Multi-AZ follows **synchronous** replication and spans at least two Availability Zones (AZs) within a single region. Read replicas follow **asynchronous** replication and can be within an Availability Zone (AZ), Cross-AZ, or Cross-Region
 
 - Read replica

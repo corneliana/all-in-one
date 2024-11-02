@@ -2,4 +2,4 @@ history campaign no Routingsourcesuburb
 
 CNAME
 
-King and queen record in LEXA
+King and queen record

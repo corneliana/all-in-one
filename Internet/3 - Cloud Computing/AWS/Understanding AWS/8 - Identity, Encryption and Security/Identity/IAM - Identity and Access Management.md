@@ -63,6 +63,7 @@ graph TD
 	- Users are people within the organization, and can be grouped. 
 	- Users don’t have to belong to a group, and user can belong to multiple groups
 - **Role:** 
+	- to enable performing actions on some AWS services on my behalf
 	- recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
 	- If assume a role (user, application or service), you give up the original permissions.
 - **Policies:** JSON document that outlines permissions for users or groups.

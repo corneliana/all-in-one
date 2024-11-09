@@ -65,6 +65,20 @@ graph TD
 	- If assume a role (user, application or service), you give up the original permissions.
 - **Policies:** used with roles, users, and groups to define permissions within AWS environments. They allow for granular access control, centralized management of permissions, and flexibility in defining security policies.
 
+
+- Permission boundaries
+	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
+
+- Identity Center(successor to AWS single sign-on): Fine grained Permissions and Assignments
+	- One login (single sign-on) for all your  
+		- AWS accounts in AWS Organizations  
+		- Business cloud applications (e.g., Salesforce, Box, Microsoft 365, ...) 
+		- SAML2.0-enabled applications  
+		- EC2 Windows Instances
+
+- Control Tower
+	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+
 ## AWS Policies and Permissions
 ```mermaid
 graph LR
@@ -202,15 +216,25 @@ graph TD
     - Analysis tools like IAM Access Analyzer
     - Reporting capabilities
 
-- Permission boundaries
-	- IAM permission boundaries complement IAM users or roles by setting a limit on the maximum permissions that can be assigned to them.
+## IAM Security Tools
 
-- Identity Center(successor to AWS single sign-on): Fine grained Permissions and Assignments
-	- One login (single sign-on) for all your  
-		- AWS accounts in AWS Organizations  
-		- Business cloud applications (e.g., Salesforce, Box, Microsoft 365, ...) 
-		- SAML2.0-enabled applications  
-		- EC2 Windows Instances
+### Credentials Report
 
-- Control Tower
-	- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+### Access Advisor
+
+
+## IAM Guidelines & Best Practices
+- Don't use the root account except for AWS account setup
+
+## Shared Responsibility Model for IAM
+### AWS
+- Infrastructure (global network security)
+- Configuration and vulnerability analysis
+- Compliance validation
+
+### User
+- Users, Groups, Roles, Policies management and monitoring
+- Enable MFA on all accounts
+- Rotate all the keys often
+- Use IAM tools to apply appropriate permissions
+- Analyze access patterns & review permissions

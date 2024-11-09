@@ -57,13 +57,17 @@ graph TD
 - **Member accounts exist within OUs**
 	- IAM Principals (Users, Groups, Roles) exist within each account
 	- Resources are created and managed within accounts
-- **Groups:** typically used for managing permissions for multiple users
-- **Users:** meant for individual human users or applications. Users are people within the organization, and can be grouped. 
+- **Groups:** contains users only, typically used for managing permissions for multiple users
+- **Users:** mapped to a physical user with a password for AWS console.
+	- Meant for individual human users or applications. 
+	- Users are people within the organization, and can be grouped. 
 	- Users don’t have to belong to a group, and user can belong to multiple groups
 - **Role:** 
 	- recommended approach for granting permissions to AWS resources like EC2 instances, S3 buckets, Kinesis stream, Systems Manager Run Command, ECS task...
 	- If assume a role (user, application or service), you give up the original permissions.
-- **Policies:** used with roles, users, and groups to define permissions within AWS environments. They allow for granular access control, centralized management of permissions, and flexibility in defining security policies.
+- **Policies:** JSON document that outlines permissions for users or groups.
+	- Define permissions within AWS environments.
+	- Allow for granular access control, centralized management of permissions, and flexibility in defining security policies.
 
 
 - Permission boundaries
@@ -216,13 +220,6 @@ graph TD
     - Analysis tools like IAM Access Analyzer
     - Reporting capabilities
 
-## IAM Security Tools
-
-### Credentials Report
-
-### Access Advisor
-
-
 ## IAM Guidelines & Best Practices
 - Don't use the root account except for AWS account setup
 
@@ -231,10 +228,13 @@ graph TD
 - Infrastructure (global network security)
 - Configuration and vulnerability analysis
 - Compliance validation
-
 ### User
 - Users, Groups, Roles, Policies management and monitoring
 - Enable MFA on all accounts
 - Rotate all the keys often
 - Use IAM tools to apply appropriate permissions
 - Analyze access patterns & review permissions
+
+## Audit: IAM Security Tools
+- Credentials Report
+- Access Advisor

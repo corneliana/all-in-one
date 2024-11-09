@@ -5,8 +5,9 @@ sticker: emoji//2764-fe0f
 AWS: Amazon Web Services, a cloud computing platform. 
 
 **Cloud computing** is a new layer of abstraction over physical computing resources, which transforms computer resources into **scalable, on-demand services** that can be used without managing the underlying hardware directly.
+
 - **Microservices:** an architectural approach where a software application is composed of **small, independently deployable services** that are organized around specific business capabilities and communicate with each other through well-defined APIs.
-- **Serverless:** no need to manage/provision servers anymore, just deploy code and functions.
+- **Serverless:** from the perspective of devs, there is no need to manage/provision servers anymore, just deploy code and functions.
 
 The platform is used in a specific region => **Availability Zones (AZ)**
 - global services: IAM, Route 53(DNS Service), CloudFront(Content Delivery Network), WAF(Web Application Firewall)

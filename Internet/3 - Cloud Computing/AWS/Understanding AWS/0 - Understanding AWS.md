@@ -71,7 +71,7 @@ To build it, we will need:
 - **Elastic Beanstalk**: Deploy and manage applications in the cloud without worrying about the infrastructure.
 - **AWS App Runner**: Fully managed service to deploy containerized web applications and APIs.
 
-**[[10 - Monitoring]]**
+**[[10 - Monitoring, Troubleshooting & Audit]]**
 - **CloudWatch**: Monitoring and observability service.
 - **CloudTrail**: Record AWS API calls for your account.
 - **Config**: Assess, audit, and evaluate the configurations of your AWS resources.

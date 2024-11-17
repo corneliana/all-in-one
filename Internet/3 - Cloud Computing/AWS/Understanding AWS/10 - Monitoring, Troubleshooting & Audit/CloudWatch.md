@@ -7,6 +7,9 @@
 - Metrics have timestamps
 - Can create CloudWatch dashboards of metrics
 
+- High-Resolution Custom Metrics can have a minimum resolution of 1 second.
+- If you set an alarm on a high-resolution metric, specify a high-resolution alarm with a period of 10 or 30 seconds, or set a regular alarm with a period of any multiple of 60 seconds.
+
 ### Custom Metrics
 - API call: PutMetricData
 - Accepts metric data points two weeks in the past and two hours in the future
@@ -14,9 +17,10 @@
 ## Logs
 - Log groups: representing an application
 - Log stream: instances within application / log files / containers
-- Log expiration policies
+- Log expiration policies. By default, the logs never expire.
 - Logs are encrypted by default
 - Can setup KMS-based encryption with your own keys
+- EC2 Detailed Monitoring: EC2 instance's metrics are available in 1-minute periods.
 
 ### Insights
 - Search logs and get logs visualization by log groups and timeframe
@@ -73,4 +77,4 @@
 - Alarms can be created based on CloudWatch Logs Metrics Filter
 
 ### Synthetics Canary
-
+?

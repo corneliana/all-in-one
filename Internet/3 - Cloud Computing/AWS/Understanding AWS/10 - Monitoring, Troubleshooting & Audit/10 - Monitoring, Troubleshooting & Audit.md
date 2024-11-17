@@ -46,10 +46,12 @@
 - CloudTrail:
 	- Audit API calls made by users / services / AWS console
 	- Useful to detect unauthorized calls or root cause of changes
+	- CloudTrail allows you to log, continuously monitor, and retain account activity related to actions across AWS infrastructure. It provides the event history of AWS account activity, audit API calls made through the AWS Management Console, SDKs, CLI. So, the EC2 instance termination API call will appear here. You can use CloudTrail to detect unusual activity in your AWS accounts.
 - CloudWatch:
 	- CloudWatch Metrics over time for monitoring
 	- CloudWatch Logs for storing application log
 	- CloudWatch Alarms to send notifications in case of unexpected metrics
+	- A monitoring service that allows you to monitor applications, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health. It is used to monitor applications' performance and metrics.
 - X-Ray:
 	- Automated Trace Analysis & Central Service Map Visualization
 	- Latency, Errors and Fault analysis

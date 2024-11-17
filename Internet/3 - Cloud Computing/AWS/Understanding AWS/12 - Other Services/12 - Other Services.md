@@ -1,19 +1,12 @@
-- CloudFormation: a declarative way of outlining your AWS Infrastructure, for any resources (most of them are supported).
-	- Auto create resources based on your need
-	- Infrastructure as code
-	- Efficient
-	- Don't re-invent the wheel
-	- Supports all AWS resources
-- **SES (Simple Email Service)**: Email sending and receiving service.
-- **Pinpoint**: Targeted user engagement service. Scalable 2-way (outbound/inbound) marketing communications service
-	- Supports email, SMS, push, voice, and in-app messaging
-	- Ability to segment and personalize messages with the right content to customers
-	- Possibility to receive replies
-	- Scales to billions of messages per day
-	- Use cases: run campaigns by sending marketing, bulk, transactional SMS messages
-	- Versus Amazon SNS or Amazon SES  
-		- In SNS & SES you managed each message's audience, content, and delivery schedule
-		- In Amazon Pinpoint, **create message templates, delivery schedules, highly-targeted segments, and full campaigns**
+[[12.1 - SES]]
+[[12.2 - OpenSearch]]
+[[12.3 - Athena]]
+[[12.4 - MSK]]
+[[12.5 - ACM]]
+[[12.6 - Macie]]
+[[12.7 - AppConfig]]
+[[12.8 - CloudWatch Evidently]]
+
 - **SSM Session Manager**: Provides interactive shell access to instances in your VPC.
 	- Allows you to start a secure shell on your EC2 and on-premises servers
 	- Other services

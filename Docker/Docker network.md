@@ -1,3 +1,9 @@
+Containers communication
+- port mapping
+- shared volume
+
+ECS 
+task
 
 LEXA
 

@@ -13,4 +13,3 @@
 ## AppAsync
 
 ## AWS Amplify
-

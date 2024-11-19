@@ -1,5 +1,5 @@
 - SAM = Serverless Application Model
-- Framework for developing and deploying serverless applications
+- Framework for **developing and deploying serverless applications**
 - All the configuration is **YAML code**
 - Generate complex CloudFormation from simple SAM YAML file
 - Supports anything from CloudFormation: Outputs, Mappings, Parameters, Resources…

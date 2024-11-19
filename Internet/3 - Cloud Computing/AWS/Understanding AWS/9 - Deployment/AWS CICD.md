@@ -108,6 +108,7 @@ Visual Workflow to orchestrate the CICD, automating the pipeline from code to El
 
 - **CodeBuild containers are deleted at the end of their execution (success or failure). You can't SSH into them, even while they're running.**
 - **CodeBuild can run any commands, so you can use it to run commands including build a static website and copy your static web files to an S3 bucket.**
+- You can configure CodeBuild to run its build containers in a VPC, so they can access private resources in a VPC such as databases, internal load balancers, ...
 
 - `buildspec.yml` file must be at the root of your code
 - env – define environment variables

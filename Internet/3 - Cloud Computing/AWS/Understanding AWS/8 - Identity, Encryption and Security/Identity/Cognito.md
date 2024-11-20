@@ -19,8 +19,13 @@
 ![[Cognito User Pools.png]]
 
 ![[CUP with API Gateway and ALB.png]]
-## ALB - User Authentication
+### Lambda Triggers
+![[CUP lambda triggers.png]]
 
+### Hosted UI 
+- Custom logo
+- Custom Domain: must create an ACM Certificate
+- Adaptive Authentication
 
 ## Cognito Identity Pools (Federated Identities)
 - Get identities for “users” so they obtain temporary AWS credentials

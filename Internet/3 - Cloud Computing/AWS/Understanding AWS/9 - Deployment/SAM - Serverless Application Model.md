@@ -48,9 +48,22 @@
 	- DynamoDBCrudPolicy: CRUD = create read update delete
 
 ## SAM and CodeDeploy
-- SAM framework natively uses CodeDeploy to update Lambda functions
+- SAM framework **natively uses CodeDeploy to update Lambda functions**
+- Traffic Shifting feature with alias
 - Pre and Post traffic hooks features to validate deployment (before the traffic shift starts and after it ends)
 - Easy & automated rollback using CloudWatch Alarms
+
+- yml
+	- AutoPublishAlias: live
+		- Detects when new code is being deployed
+		- Creates and publishes an updated version of that function with the latest code
+		- Points the alias to the updated version of the lambda function
+	- DeploymentPreference
+		- Canary, Linear, AllAtOnce
+	- Alarms
+		- Alarms that can trigger a rollback
+	- Hooks
+		- Pre and post traffic shifting Lambda functions to test your deployment
 
 ## Local Capabilities
 - Locally start AWS Lambda 

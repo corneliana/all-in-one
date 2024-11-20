@@ -65,7 +65,7 @@
 	- Hooks
 		- Pre and post traffic shifting Lambda functions to test your deployment
 
-## Local Capabilities
+## Local Capabilities: SAM CLI + AWS Toolkits
 - Locally start AWS Lambda 
 	- _sam local start-lambda_
 	- Starts a local endpoint that emulates AWS Lambda
@@ -83,3 +83,6 @@
 	- _sam local generate-event_
 	- Generate sample payloads for event sources
 	- S3, API Gateway, SNS, Kinesis, DynamoDB…
+
+## Multi-environments
+![[SAM - Multi-envs.png]]

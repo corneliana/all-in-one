@@ -17,7 +17,10 @@
 - Feature: block users if their credentials are compromised elsewhere
 - Login sends back a JSON Web Token (JWT)
 ![[Cognito User Pools.png]]
+
+![[CUP with API Gateway and ALB.png]]
 ## ALB - User Authentication
+
 
 ## Cognito Identity Pools (Federated Identities)
 - Get identities for “users” so they obtain temporary AWS credentials

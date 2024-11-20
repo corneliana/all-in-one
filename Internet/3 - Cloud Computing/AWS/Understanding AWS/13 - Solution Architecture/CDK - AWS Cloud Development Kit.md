@@ -68,7 +68,23 @@
 	- _aws-apigateway.LambdaRestApi_ represents an API Gateway backed by a Lambda function
 	- _aws-ecs-patterns.ApplicationLoadBalancerFargateService_ which represents an architecture that includes a Fargate cluster with Application Load Balancer
 
+## Commands
+![[CDK commands.png]]
+ 
+ 
 ## Bootstraping
-
+- The process of provisioning resources for CDK before you can deploy CDK apps into an AWS environment
+- AWS Environment = account & region
+- CloudFormation Stack called CDKToolkit is created and contains:
+	- S3 Bucket – to store files
+	- IAM Roles – to grant permissions to perform deployments
+- You must run the following command for each new environment:
+	- _cdk bootstrap aws://<aws_account>/<aws_region>_
+- Otherwise, you will get an error “Policy contains a statement with one or more invalid principle"
 
 ## Testing
+- Use CDK Assertions Module combined with popular test frameworks such as Jest or Pytest
+- Test types:
+	- Fine-grained Assertions(common) - – test specific aspects of the CloudFormation template (e.g., check if a resource has this property with this value)
+	- Snapshot Tests - test the synthesized CloudFormation template against a previously stored baseline template
+	

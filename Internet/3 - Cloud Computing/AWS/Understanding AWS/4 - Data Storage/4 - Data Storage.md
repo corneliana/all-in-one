@@ -1,3 +1,11 @@
+[[4.1 - EFS]]
+[[4.2 - S3 Simple Storage Service]]
+[[4.3 - Aurora]]
+[[4.4 - RDS Relational Database Service]]
+[[4.5 - DynamoDB]]
+[[4.6 - ElastiCache]]
+[[4.7 - Storage Extras]]
+
 **Keys:**
 - Storage: how much data and for how long? Will it grow? Average object size? How are they accessed? Data durability? Source of truth for the data?
 - Performance: I/O and throughput needs? Will it change, does it need to scale or fluctuate during the day?
@@ -14,14 +22,6 @@
 	- Non-relational databases, also known as NoSQL databases, store and retrieve data in formats other than traditional row-column tables used in relational databases. They are designed for scalability, flexibility, and performance, and they are suitable for applications with large volumes of unstructured or semi-structured data, such as social media platforms, IoT (Internet of Things) systems, and real-time analytics.
 	    - DynamoDB, a fully managed NoSQL database service offering low-latency, high-throughput storage for applications that require single-digit millisecond latency at any scale
 	    - Amazon DocumentDB (with MongoDB compatibility), a fully managed document database service compatible with MongoDB workloads.
-
-[[4.1 - EFS]]
-[[4.2 - S3 Simple Storage Service]]
-[[4.3 - Aurora]]
-[[4.4 - RDS Relational Database Service]]
-[[4.5 - DynamoDB]]
-[[4.6 - ElastiCache]]
-[[4.7 - Storage Extras]]
 
 ## Storage Comparison
 - S3: Object Storage  

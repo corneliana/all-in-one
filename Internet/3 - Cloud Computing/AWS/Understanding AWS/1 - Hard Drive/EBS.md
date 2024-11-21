@@ -36,3 +36,9 @@
 	- data inside the volume
 	- data in flight between the instance and volume
 	- All snapshots and volumes created from the snapshot. So to encrypt an unencrypted volume, create a snapshot of the volume, encrypt the snapshot and create new volume from the snapshot. Now can attach the encrypted volume to the original instance.
+
+EBS works with KMS to encrypt and decrypt EBS volume. You can encrypt both the boot and data volumes of an EC2 instance. When create an encrypted EBS volume and attach it to a supported instance type, the following types of data are encrypted:
+1. Data at rest inside the volume
+2. All data moving between the volume and the instance
+3. All snapshots created from the volume
+4. All volumes created from those snapshots

@@ -259,6 +259,15 @@ graph TD
 - Blue Green: create a new environment and switch over when ready
 - Traffic Splitting: canary testing – send a small % of traffic to new deployment
 
+**Immutable deployments perform an immutable update to launch a full set of new instances running the new version of the application in a separate Auto Scaling group, alongside the instances running the old version. Immutable deployments can prevent issues caused by partially completed rolling deployments.**
+
+Traffic-splitting deployments let you perform canary testing as part of application deployment. In a traffic-splitting deployment, Elastic Beanstalk launches a full set of new instances just like during an immutable deployment. It then forwards a specified percentage of incoming client traffic to the new application version for a specified evaluation period.
+
+Some policies replace all instances during the deployment or update. This causes all accumulated Amazon EC2 burst balances to be lost. It happens in the following cases:
+1. Managed platform updates with instance replacement enabled
+2. Immutable updates
+3. Deployments with immutable updates or traffic splitting enabled
+
 ## Deployment Process
 - Describe dependencies
 - Package code as zip, and describe dependencies

@@ -24,8 +24,18 @@
 
 ### Hosted UI 
 - Custom logo
-- Custom Domain: must create an ACM Certificate
-- Adaptive Authentication
+
+### Custom Domain
+- must create an ACM Certificate
+
+### Adaptive Authentication
+- blocks sign-ins or require MFA if login appears suspicious
+
+### Decoding a ID Token; JWT - JSON web token
+- The signature must be verified to ensure the JWT can be trusted
+
+## ALB - User Authentication
+
 
 ## Cognito Identity Pools (Federated Identities)
 - Get identities for “users” so they obtain temporary AWS credentials
@@ -56,7 +66,7 @@
 	- Users can be unauthenticated (guests)
 	- Users are mapped to IAM roles & policies, can leverage policy variables
 	
-- CUP + CIP = authentication + authorization
+- CUP + CIP = **authentication + authorization**
 
 Amazon Cognito can be used to federate mobile user accounts and provide them with their own IAM permissions, so they can be able to access their own personal space in the S3 bucket.
 

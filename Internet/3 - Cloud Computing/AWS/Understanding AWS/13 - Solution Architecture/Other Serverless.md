@@ -1,12 +1,12 @@
 ## Step Functions
-
+- Define a workflow of what to do and each step
 - Model your workflows as state machines (one per workflow)
 	- Order fulfillment, Data processing
 	- Web applications, Any workflow
 - Written in JSON
 - Visualization of the workflow and the execution of the workflow, as well as history
 - Start workflow with SDK call, API Gateway, EventBridge(CloudWatch Event)
-
+![[Visual workflows in step function.png]]
 ### Task States
 - Do some work in your state machine
 - Invoke one AWS service

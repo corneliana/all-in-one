@@ -1,4 +1,4 @@
-- AppSync is a managed service that uses GraphQL
+- AppSync is a managed service that uses GraphQL, making it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like DynamoDB, Lambda, and more.
 - GraphQL makes it easy for applications to get exactly the data they need.
 - This includes combining data from one or more sources
 	- NoSQL data stores, Relational databases, HTTP APIs…

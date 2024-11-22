@@ -1,5 +1,5 @@
 ## Step Functions
-- Define a workflow of what to do and each step
+- Define a low-code visual workflow of what to do and each step
 - Model your workflows as state machines (one per workflow)
 	- Order fulfillment, Data processing
 	- Web applications, Any workflow

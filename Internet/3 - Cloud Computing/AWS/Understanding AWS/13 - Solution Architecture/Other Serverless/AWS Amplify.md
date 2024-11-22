@@ -18,7 +18,7 @@
 	- Pre-built UI components
 	- Fine-grained authorization
 - DataStore
-	- Leverages Amazon AppSync and Amazon DynamoDB
+	- Leverages Amazon AppSync and Amazon ***DynamoDB***
 	- Work with local data and have auto sync to the cloud without complex code
 	- Powered by GraphQL
 	- Offline and real-time capabilities

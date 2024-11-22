@@ -1,25 +1,6 @@
 
-- **In flight(SSL)**
-	- Data is encrypted before sending and decrypted after receiving 
-	- SSL certificates help with encryption **(HTTPS)**
-	- Encryption in flight ensures no MITM (man in the middle attack) can happen
-- SSE at rest
-	- Data is exncrypted after being received by the server, and decrypted before sent
-	- The encryption / decryption keys must be managed somewhere and the server must have access to it
-- CSE
-	- Data is encrypted by client and never decrypted by the server but by a receiving client
-	- Could leverage Envelope Encryption
-	- With Client-Side Encryption, the server doesn't need to know any information about the encryption scheme being used, as the server will not perform any encryption or decryption operations.
 
-- **Secrets Manager**
-	- Newer service to store secrets(encrypted using KMS)
-	- **Force rotation of secrets every X days** and automate generating secrets on rotation using **lambda**
-	- **Integration with RDS(MySQL, PostgreSQL, Aurora)** and **mostly meant for RDS and Aurora integration**
-	- Multi-Region Secrets
-		- **Replicate Secrets across multiple AWS Regions**
-		- Secrets Manager keeps read replicas in sync with the primary Secret
-		- Ability to promote a read replica Secret to a standalone Secret
-		- Use cases: multi-region apps, disaster recovery strategies, multi-region DB...
+
 
 - **Certificate Manager(ACM)**
 	- If run my app on AWS or use AWS services to serve the app, and configure ACM to validate SSL/TLS certificates for my domains, then I can use ACM's benefits: simplify certificate management, improve security, and ensure seamless HTTPS connections for users.

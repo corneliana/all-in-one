@@ -25,6 +25,7 @@
 	- Visual data modeling w/ Amplify Studio
 
 ### Amplify Hosting
+When start deploying the application
 - Build and Host Modern Web Apps
 - CICD (build, test, deploy)
 - Pull Request Previews
@@ -32,9 +33,9 @@
 - Monitoring
 - Redirect and Custom Headers
 - Password protection
-
+![[Amplify Hosting.png]]
 ### End-to-End (E2E) Testing
-- Run end-to-end (E2E) tests in the test phase in Amplify
+- Run end-to-end (E2E) tests in **the test phase in Amplify**
 - Catch regressions before pushing code to production
 - Use the test step to run any test commands at build time (amplify.yml)
 - Integrated with Cypress testing framework

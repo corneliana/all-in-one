@@ -61,7 +61,7 @@ Isn't this just like TE.left? Or try-catch?
 - ResultPath- A path that determines what input is sent to the state specified in the Next field.
 
 ### ResultPath
-- Include the error in the input
+- Include the error in the input by adding a $ to the `ResultPath` so as to pass the error from the current task to the next task
 
 ### Wait for Task Token
 - Allows you to pause Step Functions during a Task until a Task Token is returned

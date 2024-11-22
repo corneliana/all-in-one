@@ -66,20 +66,25 @@ Isn't this just like TE.left? Or try-catch?
 ### Wait for Task Token
 - Allows you to pause Step Functions during a Task until a Task Token is returned
 - Task might wait for other AWS services, human approval, 3rd party integration, call legacy systems…
-- Append .waitForTaskToken to the Resource field to tell Step Functions to wait for the Task Token to be returned
-- Task will pause until it receives that Task Token back with a SendTaskSuccess or SendTaskFailure API call
+- Append *.waitForTaskToken* to the Resource field to tell Step Functions to wait for the Task Token to be returned
+- Task will pause until it receives that Task Token back with a **SendTaskSuccess** or **SendTaskFailure** API call
+
+- The task token is like AN external dependency sends a signal
 ![[wait for task token.png]]
+
 
 ### Activity Tasks
 - Task work performed by an Activity Worker which can be running on EC2, lambda, mobile device
-- Activity Worker poll for a Task using GetActivityTask API
+- Activity Worker ***poll for a Task using GetActivityTask API***
 - After Activity Worker completes its work, it sends a response of its success/failure using SendTaskSuccess or SendTaskFailure
 - To keep the Task active:
 	- Configure how long a task can wait by setting TimeoutSeconds
 	- Periodically send a heartbeat from Activity Worker using SendTaskHeartBeat within the time set in HeartBeatSeconds
-- By configuring a long TimeoutSeconds and actively sending a heartbeat, Activity Task can wait up to 1 year
+- By configuring a long TimeoutSeconds and actively sending a **heartbeat**, Activity Task can wait up to 1 year
 
-### Standard vs. Express
+- activity tasks is like AN external dependency helps poll and finish some task and returns the result
+
+### Standard workflow vs. Express workflow
 ![[Step function Standard vs. Express.png]]
 
 

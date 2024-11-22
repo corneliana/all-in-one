@@ -28,6 +28,7 @@
 - Wait State- Provide a delay for a certain amount of time or until a specified time/date.
 - Map State- Dynamically iterate steps.’
 - _Parallel State__- Begin parallel branches of execution._
+- Use amazon state language
 
 ### Error handling
 - Any state can encounter runtime errors for various reasons:

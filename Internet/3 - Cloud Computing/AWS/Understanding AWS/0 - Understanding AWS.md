@@ -16,7 +16,7 @@ The platform is used in a specific region => **Availability Zones (AZ)**
 In a sense, the whole idea of AWS is like customizing a remote computer and its network.
 To build it, we will need:
 
-**[[1 - Hard Drive]]**
+**[[1 - Hard Drive (EC2 Data Management)]]**
 - **EBS (Elastic Block Store)**: Provides block storage volumes for EC2 instances.
 - **EC2 Instance Store**: Provides temporary block-level storage for EC2 instances.
 

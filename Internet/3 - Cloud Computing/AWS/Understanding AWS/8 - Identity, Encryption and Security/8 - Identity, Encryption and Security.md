@@ -13,9 +13,8 @@ Access Control Lists (ACLs) are used to **manage permissions at a resource level
 ## Data Security
 
 ### AWS Secrets Manager
-storing and managing sensitive information such as database credentials.
-specifica
-lly designed for managing secrets like database credentials. It provides additional features tailored for secret management, such as integration with RDS for automatic rotation, and it's generally considered the best practice for managing credentials securely.
+storing and managing sensitive information such as database credential. 
+specifically designed for managing secrets like database credentials. It provides additional features tailored for secret management, such as integration with RDS for automatic rotation, and it's generally considered the best practice for managing credentials securely.
 
 ### AWS Systems Manager Parameter Store
 storing and managing sensitive information such as database credentials.

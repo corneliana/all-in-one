@@ -1,10 +1,10 @@
-[[4.1 - EFS]]
-[[4.2 - S3 Simple Storage Service]]
-[[4.3 - Aurora]]
-[[4.4 - RDS Relational Database Service]]
-[[4.5 - DynamoDB]]
-[[4.6 - ElastiCache]]
-[[4.7 - Storage Extras]]
+
+[[4.1 - S3 Simple Storage Service]]
+[[4.2 - Aurora]]
+[[4.3 - RDS Relational Database Service]]
+[[4.4 - DynamoDB]]
+[[4.5 - ElastiCache]]
+[[4.6 - Storage Extras]]
 
 **Keys:**
 - Storage: how much data and for how long? Will it grow? Average object size? How are they accessed? Data durability? Source of truth for the data?

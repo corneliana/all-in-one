@@ -1,3 +1,8 @@
+[[1.1 - EBS - Elastic Block Store]]
+[[1.2 - EC2 Instance Store]]
+[[1.3 - AMI - Amazon Machine Image]]
+[[1.4 - EFS - Elastic File System]]
+
 Like a physical computer needs a hard drive to **store its operating system, applications, and data**, an EC2 instance requires a **virtual hard drive**. This is where EBS volumes come into play to provide **block storage volumes** for EC2 instances.
 
 **Block-level storage**
@@ -6,8 +11,5 @@ Like a physical computer needs a hard drive to **store its operating system, app
 - **What's good about block-level storage? v.s. DataBase** 
 	- It offers **fine-grained control over data storage and retrieval** at the expense of requiring more low-level management, while DB tools operate at a higher level of abstraction, providing built-in optimizations for common data operations.
 
-[[EBS]]
-
-[[EC2 Instance Store]]
 
 

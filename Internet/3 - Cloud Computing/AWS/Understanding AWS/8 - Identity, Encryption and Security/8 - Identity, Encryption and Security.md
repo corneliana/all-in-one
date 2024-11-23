@@ -1,11 +1,11 @@
 ## Identity
-- [[IAM Identity and Access Management]]
-- [[Cognito]]
+- [[8.6 - IAM Identity and Access Management]]
+- [[8.9 - Cognito]]
 
 ## Encryption & Security
-- [[Security Groups]]
-- [[SSM Parameter Store v.s. Secrets Manager]]
-- [[KMS - Key Management Service|KMS - Key Management Service]]
+- [[8.4 - Security Groups]]
+- [[8.3 - SSM Parameter Store v.s. Secrets Manager]]
+- [[8.2 - KMS - Key Management Service|8.2 - KMS - Key Management Service]]
 
 ## ACL
 Access Control Lists (ACLs) are used to **manage permissions at a resource level within AWS services** like S3. ACLs are not used to control access across multiple AWS accounts at the organizational level.

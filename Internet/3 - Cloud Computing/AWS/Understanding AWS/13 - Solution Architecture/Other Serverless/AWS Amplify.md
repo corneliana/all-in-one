@@ -12,7 +12,7 @@
 
 ### Important features
 - Authentication
-	-  Leverages Amazon Cognito
+	- Leverages Amazon Cognito
 	- User registration, authentication, account recovery & other operations
 	- Support MFA, Social Sign-in, etc…
 	- Pre-built UI components
